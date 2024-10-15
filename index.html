@@ -20,8 +20,10 @@
         }
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 </head>
-<body class="bg-gray-100 font-sans cursor-default">
+<body class="bg-gray-100 font-sans cursor-default text-gray-800">
     <header class="bg-accent-red text-white py-20">
         <div class="container max-w-4xl mx-auto px-4">
             <h1 class="text-4xl md:text-6xl font-bold mb-4 ml-8">Felix Gröner</h1>
@@ -70,8 +72,8 @@
                 <!-- Ongoing Project 1 -->
                 <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-200 hover:scale-105">
                     <div class="p-4">
-                        <h3 class="text-lg font-semibold mb-2">Faithfulness of LLM Explanations</h3>
-                        <p class="text-gray-600 text-sm">How accurate are the explanations of different approaches (e.g., self-explanation, XAI, mechanistic interpretability)?</p>
+                        <h3 class="text-lg font-semibold mb-2">AI Images for Cognitive Psychology Research</h3>
+                        <p class="text-gray-600 text-sm">What computational metrics explain people's internal representations of abstract art? And can we use synthetic AI-generated mixes of original artworks?</p>
                     </div>
                 </div>
 
@@ -94,11 +96,24 @@
         </section>
 
         <section class="mb-16">
-            <h2 class="text-center text-3xl font-bold mb-8 text-accent-red">Other Work</h2>
+            <h2 class="text-center text-3xl font-bold mb-8 text-accent-red">Work and Education</h2>
+
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8 transform transition duration-200 hover:scale-105">
+                <h3 class="text-xl font-semibold mb-4">Education</h3>
+                <ul class="list-disc list-inside">
+                    
+                    <li><strong class = "text-gray-600">Ph.D. in Human Systems Engineering</strong>, Arizona State University (2023 - Present)</li>
+                    <li><strong class = "text-gray-600">M.Sc. in Cognitive Systems</strong>, Ulm University, Germany (2023)</li>
+                    <li><strong class = "text-gray-600">M.A. in International Politics & Law</strong>, Kiel University, Germany (2022)</li>
+                    <li><strong class = "text-gray-600">B.A. in Political Science</strong>, Kiel University, Germany (2020)</li>
+                    <li><strong class = "text-gray-600">B.Sc. in Business IT</strong>, Kiel University, Germany (2019)</li>
+                </ul>
+            </div>
+
             <div class="bg-white rounded-lg shadow-md p-6 transform transition duration-200 hover:scale-105">
                 <h3 class="text-xl font-semibold mb-4">Professional Experience</h3>
                 <ul class="list-disc list-inside text-gray-600">
-                    <li>Graduate Research Assistant, Center of Accelerating Excellence (2023 - Present)</li>
+                    <li>Graduate Research Assistant, Center for Accelerating Operational Efficiency (2023 - Present)</li>
                     <li>Graduate Teaching Assistant, Information Technology at Arizona State University (2023)</li>
                     <li>Graduate Research Assistant, Human Factors at Ulm University (2022 - 2023)</li>
                     <li>Undergraduate Research Assistant, Web Science at Kiel University (2019)</li>
@@ -106,30 +121,20 @@
             </div>
         </section>
 
-        <section class="mb-16">
-            <h2 class="text-center text-3xl font-bold mb-8 text-accent-red">Education</h2>
-            <div class="bg-white rounded-lg shadow-md p-6 transform transition duration-200 hover:scale-105">
-                <ul class="list-disc list-inside text-gray-600">
-                    <li><strong>M.Sc. in Cognitive Systems</strong>, Ulm University, Germany (2023)</li>
-                    <li><strong>M.A. in International Politics & Law</strong>, Kiel University, Germany (2022)</li>
-                    <li><strong>B.A. in Political Science</strong>, Kiel University, Germany (2020)</li>
-                    <li><strong>B.Sc. in Business IT</strong>, Kiel University, Germany (2019)</li>
-                </ul>
-            </div>
-        </section>
-
         <section>
             <h2 class="text-center text-3xl font-bold mb-8 text-accent-red">Contact</h2>
             <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="flex items-center justify-around">
+                <div class="flex items-center justify-around font-bold text-gray-600">
                     <div class="flex items-center transform transition duration-200 hover:text-accent-red hover:scale-105">
-                        <a href="mailto:fgroener@asu.edu"><i class="fas fa-envelope mr-2 text-accent-red"></i>fgroener@asu.edu</a>
+                        <a href="mailto:fgroener@asu.edu">
+                            <i class="fas fa-envelope mr-2 text-accent-red"></i>fgroener@asu.edu
+                        </a>
                     </div>
                     <div class="flex items-center transform transition duration-200 hover:text-accent-red hover:scale-105">
                         <a href="linkedin.com/in/felix-gröner-195a08280"><i class="fab fa-linkedin mr-2 text-accent-red"></i>Felix Gröner</a>
                     </div>
                     <div class="flex items-center transform transition duration-200 hover:text-accent-red hover:scale-105">
-                        <a href="https://scholar.google.com/citations?user=NfGdPT0AAAAJ"><i class="fas fa-link mr-2 text-accent-red"></i>Google Scholar</a>  
+                        <a href="scholar.google.com/citations?user=NfGdPT0AAAAJ"><i class="fas fa-link mr-2 text-accent-red"></i>Google Scholar</a>  
                     </div>
                 </div>
             </div>
@@ -138,8 +143,53 @@
 
     <footer class="bg-accent-red text-white py-8">
         <div class="container mx-auto px-4 text-center">
-            <p>Last updated in September 2024</p>
+            <a href="cv_felix_groener_october_2024.pdf" class="mb-2">
+                <p class="transform transition duration-200 hover:scale-105 font-bold">
+                    <i class="fa-solid fa-download"></i> Download my standarized CV printout
+                </p>
+            </a>
+            <p>Last updated in October 2024</p>
         </div>
     </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        const sections = gsap.utils.toArray('section');
+        const totalSections = sections.length;
+
+        gsap.set(sections, { opacity: 0, scale: 0.8 });
+
+        sections.forEach((section, index) => {
+            const direction = index % 2 === 0 ? -1 : 1;
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 100%",
+                    end: "top 80%",
+                    scrub: 0.5,
+                }
+            });
+
+            tl.to(section, {
+                opacity: 1,
+                scale: 1,
+                x: 0,
+                duration: 0.5,
+            });
+
+            if (index < totalSections - 1) {
+                const progress = index / (totalSections - 1);
+                const curve = Math.sin(progress * Math.PI) * direction * 50;
+                
+                tl.to(".story-line", {
+                    morphSVG: `M0,${index * 100} Q50,${index * 100 + 50} ${50 + curve},${(index + 1) * 100}`,
+                    ease: "none",
+                }, 0);
+            }
+        });
+
+    </script>
+
 </body>
 </html>
