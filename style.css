@@ -118,6 +118,22 @@ a:hover {
     color: #FFFFFF;
 }
 
+a.card i {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: var(--text-secondary);
+    transition: color 0.3s;
+}
+
+a.card:hover i {
+    color: var(--text-primary);
+}
+
+a i {
+    font-size: 0.9rem;
+}
+
 /* --- Hero Section --- */
 .hero-section {
     min-height: 75vh;
