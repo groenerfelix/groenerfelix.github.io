@@ -17,25 +17,88 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // --- Fade-in on Scroll Animation ---
-    const sections = document.querySelectorAll('.content-section, .hero-section');
+    // const sections = document.querySelectorAll('.content-section');
 
-    const observerOptions = {
-        root: null, // observes intersections relative to the viewport
-        rootMargin: '0px',
-        threshold: 0.1 // trigger when 10% of the element is visible
-    };
+    // const observerOptions = {
+    //     root: null, // observes intersections relative to the viewport
+    //     rootMargin: '0px',
+    //     threshold: 0.1 // trigger when 10% of the element is visible
+    // };
 
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // stop observing once it's visible
+    // const observer = new IntersectionObserver((entries, observer) => {
+    //     entries.forEach(entry => {
+    //         if (entry.isIntersecting) {
+    //             entry.target.classList.add('visible');
+    //             observer.unobserve(entry.target); // stop observing once it's visible
+    //         }
+    //     });
+    // }, observerOptions);
+
+    // sections.forEach(section => {
+    //     observer.observe(section);
+    // });
+
+    // --- Highlighted project selector logic ---
+    const highlightedTitle = document.getElementById('highlighted-title');
+    const highlightedDescription = document.getElementById('highlighted-description');
+    const highlightedImage = document.getElementById('highlighted-image');
+
+    const smallCards = Array.from(document.querySelectorAll('.project-selector .small-card'));
+
+    if (smallCards.length) {
+        const setSelected = (card) => {
+            smallCards.forEach(c => {
+                c.classList.toggle('selected', c === card);
+                c.setAttribute('aria-checked', c === card ? 'true' : 'false');
+            });
+
+            // Update big highlighted card
+            const title = card.dataset.title || '';
+            const description = card.dataset.description || '';
+            const badge = card.dataset.badge || '';
+            const image = card.dataset.image || '';
+
+            highlightedTitle.textContent = title;
+            highlightedDescription.textContent = description;
+            highlightedDescription.innerHTML = description;
+
+            if (image) {
+                highlightedImage.src = image;
+                highlightedImage.alt = title;
+                highlightedImage.style.display = '';
+            } else {
+                highlightedImage.src = '';
+                highlightedImage.alt = '';
+                highlightedImage.style.display = 'none';
             }
-        });
-    }, observerOptions);
+        };
 
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+        // Click and keyboard handling
+        smallCards.forEach((card, idx) => {
+            card.addEventListener('click', () => setSelected(card));
+            card.addEventListener('keydown', (ev) => {
+                if (ev.key === 'Enter' || ev.key === ' ') {
+                    ev.preventDefault();
+                    setSelected(card);
+                }
+                // left/right arrow navigation for the group
+                if (ev.key === 'ArrowRight' || ev.key === 'ArrowDown') {
+                    ev.preventDefault();
+                    const next = smallCards[(idx + 1) % smallCards.length];
+                    next.focus();
+                    setSelected(next);
+                }
+                if (ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') {
+                    ev.preventDefault();
+                    const prev = smallCards[(idx - 1 + smallCards.length) % smallCards.length];
+                    prev.focus();
+                    setSelected(prev);
+                }
+            });
+        });
+
+        // Default select first
+        setSelected(smallCards[0]);
+    }
 
 });
