@@ -48,7 +48,7 @@ export function ProjectRow({ project }: ProjectRowProps) {
           {project.links.map((link) => (
             <a
               key={link.label}
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
+              className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
               href={link.href}
             >
               {link.label}

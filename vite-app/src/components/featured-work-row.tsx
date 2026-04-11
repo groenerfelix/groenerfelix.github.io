@@ -30,7 +30,7 @@ export function FeaturedWorkRow({ project }: FeaturedWorkRowProps) {
           {project.links.map((link) => (
             <a
               key={link.label}
-              className="inline-flex items-center gap-2 border-b border-primary pb-1 text-sm font-medium text-primary transition-colors hover:border-foreground hover:text-foreground"
+              className="inline-flex cursor-pointer items-center gap-2 border-b border-primary pb-1 text-sm font-medium text-primary transition-colors hover:border-foreground hover:text-foreground"
               href={link.href}
               target={ link.href.includes(".") ? "_blank" : "_self"}
             >

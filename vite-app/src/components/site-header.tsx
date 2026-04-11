@@ -40,8 +40,8 @@ export function SiteHeader({
             <button
               key={link.route}
               className={cn(
-                "text-sm transition-colors hover:text-primary",
-                activeRoute === link.route ? "text-primary" : "text-muted-foreground cursor-pointer"
+                "cursor-pointer text-sm transition-colors hover:text-primary",
+                activeRoute === link.route ? "text-primary" : "text-muted-foreground"
               )}
               onClick={() => onNavigate(link.route)}
               type="button"
@@ -53,7 +53,7 @@ export function SiteHeader({
 
         <Button
           aria-label="Toggle navigation"
-          className="inline-flex size-10 items-center justify-center border border-white/10 text-foreground transition-colors hover:border-primary/50 hover:text-primary md:hidden"
+          className="inline-flex size-10 cursor-pointer items-center justify-center border border-white/10 text-foreground transition-colors hover:border-primary/50 hover:text-primary md:hidden"
           onClick={onToggleMenu}
           variant={"ghost"}
         >
@@ -68,7 +68,7 @@ export function SiteHeader({
               <button
                 key={link.route}
                 className={cn(
-                  "border-b border-white/6 py-3 text-left text-sm transition-colors hover:text-primary",
+                  "cursor-pointer border-b border-white/6 py-3 text-left text-sm transition-colors hover:text-primary",
                   activeRoute === link.route ? "text-primary" : "text-muted-foreground"
                 )}
                 onClick={() => onNavigate(link.route)}

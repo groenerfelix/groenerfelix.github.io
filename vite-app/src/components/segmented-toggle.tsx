@@ -43,10 +43,10 @@ export function SegmentedToggle<T extends string>({
               <button
                 key={option.value}
                 className={cn(
-                  "group rounded-full px-3 py-3 text-center text-base font-medium transition-all duration-300 sm:text-xl",
+                  "group cursor-pointer rounded-full px-3 py-3 text-center text-base font-medium transition-all duration-300 sm:text-xl",
                   isActive
                     ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground cursor-pointer"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
                 onClick={() => onChange(option.value)}
                 type="button"

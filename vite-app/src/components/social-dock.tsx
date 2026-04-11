@@ -18,7 +18,7 @@ export function SocialDock() {
         return (
           <a
             key={link.label}
-            className="group flex flex-col items-center justify-center gap-2 py-3 text-center transition-colors hover:text-primary"
+            className="group flex cursor-pointer flex-col items-center justify-center gap-2 py-3 text-center transition-colors hover:text-primary"
             href={link.href}
           >
             <span
