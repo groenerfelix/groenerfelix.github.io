@@ -37,20 +37,17 @@ jobs:
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Setup Node
+      - name: Set up Node
         uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          cache: pnpm
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 10
-          run_install: true
-
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
       - name: Build
-        run: pnpm build
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
