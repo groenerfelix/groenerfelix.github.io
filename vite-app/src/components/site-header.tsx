@@ -26,14 +26,19 @@ export function SiteHeader({
   return (
     <header className="sticky top-0 z-40 border-b border-white/8 bg-background/80 backdrop-blur-xl select-none">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-        <div>
+        <button
+              
+              className="cursor-pointer text-left"
+              onClick={() => onNavigate("home")}
+              type="button"
+            >
           <div className="text-[0.7rem] uppercase tracking-[0.32em] text-primary">
             Felix Gr&ouml;ner
           </div>
           <div className="text-sm text-muted-foreground">
             Human-LLM Interaction Researcher
           </div>
-        </div>
+        </button>
 
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (

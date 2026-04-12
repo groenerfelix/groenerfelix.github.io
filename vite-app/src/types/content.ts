@@ -1,7 +1,9 @@
 export type RouteId = "home" | "projects" | "cv"
 
 export type SocialLink = {
+  download?: string
   href: string
+  iconSrc?: string
   label: string
 }
 
@@ -43,8 +45,7 @@ export type TimelineEntry = {
   id: string
   title: string
   org: string
-  timespan: string
+  timespan: [string, string]
   bullets: string[]
   keywords: string[]
-  current?: boolean
 }

@@ -1,64 +1,132 @@
-import type { TimelineEntry } from "@/types/content"
+import type { TimelineEntry, SocialLink } from "@/types/content"
+
+export const cvDownloadLink: SocialLink = {
+  label: "CV PDF",
+  href: "/cv_felix_groener_2026_04.pdf",
+  iconSrc: "/logos/download-icon.svg",
+}
 
 export const educationEntries: TimelineEntry[] = [
   {
-    id: "msc",
-    title: "M.Sc. Human-Computer Interaction",
-    org: "Example University",
-    timespan: "2022 - 2024",
+    id: "phd-human-systems-engineering",
+    title: "Ph.D. Human Systems Engineering",
+    org: "Arizona State University, USA",
+    timespan: ["2023", "Fall 2026 (expected graduation)"],
     bullets: [
-      "Thesis on designing language-model interfaces for appropriate expectations.",
-      "Focused on human-AI interaction, experimental design, and cognitive ergonomics.",
+      "Status: Ph.D. candidate | GPA: 4.0",
+      "Committee: Erin K. Chiou (advisor), D. Vaughn Becker, Nancy J. Cooke",
+      "Dissertation: Validating LLM-simulated synthetic participants for Human Factors research",
     ],
-    keywords: ["hci", "human-ai interaction", "research methods"],
+    keywords: ["User-Centered Design", "AI Safety", "Human-Computer Interaction"],
   },
   {
-    id: "bsc",
-    title: "B.Sc. Cognitive Science",
-    org: "Example University",
-    timespan: "2018 - 2022",
+    id: "msc-cognitive-systems",
+    title: "M.Sc. Cognitive Systems",
+    org: "Ulm University, Germany",
+    timespan: ["2021", "2023"],
     bullets: [
-      "Combined psychology, computation, and philosophy of mind.",
-      "Built a strong base for interdisciplinary AI interaction research.",
+      "Thesis: The role of explainable AI in trust and adherence to recommendations",
     ],
-    keywords: ["cognitive science", "psychology", "computation"],
+    keywords: ["Explainable AI (XAI)", "Neuroscience", "Cognitive Psychology"],
+  },
+  {
+    id: "ma-international-politics-law",
+    title: "M.A. International Politics & International Law",
+    org: "Kiel University, Germany",
+    timespan: ["2020", "2021"],
+    bullets: [
+      "Thesis: Necessity of adapting International Humanitarian Law to cyber warfare",
+    ],
+    keywords: ["International Relations", "European Law", "Cyber Warfare"],
+  },
+  {
+    id: "ba-political-science",
+    title: "B.A. Political Science",
+    org: "Kiel University, Germany",
+    timespan: ["2019", "2020"],
+    bullets: [
+      "Thesis: NATO's strategy to deter cyber attacks",
+    ],
+    keywords: ["Political Theory", "Comparative Politics", "NATO"],
+  },
+  {
+    id: "bsc-business-it",
+    title: "B.Sc. Business IT",
+    org: "Kiel University, Germany",
+    timespan: ["2017", "2019"],
+    bullets: [
+      "Thesis: Choosing the right project management technique for software development",
+    ],
+    keywords: ["Programming", "Algorithms", "Project Management", "System Modeling"],
   },
 ]
 
 export const workEntries: TimelineEntry[] = [
   {
-    id: "current-research",
-    title: "Human-LLM Interaction Researcher",
-    org: "Independent / collaborative research",
-    timespan: "2024 - Present",
+    id: "graduate-teaching-assistant-2026",
+    title: "Graduate Teaching Assistant",
+    org: "Arizona State University Polytechnic School",
+    timespan: ["2026", "2026"],
     bullets: [
-      "Researching how to design language-model products for better calibrated user expectations.",
-      "Developing methods for using LLM simulations as synthetic participants in early-stage studies.",
-      "Turning research findings into product-ready recommendations and prototypes.",
+      "Developed a capstone class on full-stack web development",
+      "Co-authored a handbook for students",
     ],
-    keywords: ["llms", "ux research", "prototyping"],
-    current: true,
+    keywords: ["Full-Stack Web Development", "Curriculum Design", "Student Mentoring"],
   },
   {
-    id: "research-assistant",
-    title: "Research Assistant",
-    org: "Human-AI Interaction Lab",
-    timespan: "2022 - 2024",
+    id: "graduate-research-assistant-2025",
+    title: "Graduate Research Assistant",
+    org: "Arizona State University Polytechnic School",
+    timespan: ["2025", "2025"],
     bullets: [
-      "Supported experimental studies, literature reviews, and publication drafting.",
-      "Built internal tools for organizing papers, studies, and iterative findings.",
+      "Conducted literature reviews",
+      "Wrote and submitted journal articles",
     ],
-    keywords: ["experiments", "literature review", "tooling"],
+    keywords: ["Literature Reviews", "Journal Writing", "Academic Research"],
   },
   {
-    id: "design-engineering",
-    title: "Design Technologist",
-    org: "Product studio collaborations",
-    timespan: "2020 - 2022",
+    id: "graduate-research-assistant-caoe",
+    title: "Graduate Research Assistant",
+    org: "Center for Accelerating Operational Efficiency",
+    timespan: ["2023", "2025"],
     bullets: [
-      "Designed and shipped front-end prototypes for research-heavy product teams.",
-      "Bridged design concepts with production-ready implementation detail.",
+      "Developed and programmed a LLM-powered chatbot web application study paradigm with behavioral data recording",
+      "Planned and prepared a study with human participants (IRB, Qualtrics, Prolific)",
+      "Presented at conferences and meetings with stakeholders from CAOE, DHS, and USAF",
+      "Wrote conference and journal submissions from research insights",
+      "Planned and wrote project proposals for grant applications",
     ],
-    keywords: ["frontend", "prototyping", "product design"],
+    keywords: ["LLM Applications", "Human Subjects Research", "Conference Presentations", "Grant Writing"],
+  },
+  {
+    id: "graduate-teaching-assistant-2023",
+    title: "Graduate Teaching Assistant",
+    org: "Arizona State University Polytechnic School",
+    timespan: ["2023", "2023"],
+    bullets: [
+      "Taught Information Technology 101: Python programming, Raspberry Pi",
+    ],
+    keywords: ["Python", "Raspberry Pi", "Teaching"],
+  },
+  {
+    id: "graduate-research-assistant-ulm",
+    title: "Graduate Research Assistant",
+    org: "Human Factors at Ulm University",
+    timespan: ["2022", "2023"],
+    bullets: [
+      "Co-authored a research paper on the effects of trust repair strategies for robots",
+      "Assisted in managing a large project studying passersby's perception of autonomous robots in public spaces",
+    ],
+    keywords: ["Human Factors", "Robotics", "Trust Repair"],
+  },
+  {
+    id: "undergraduate-research-assistant-kiel",
+    title: "Undergraduate Research Assistant",
+    org: "Web Science at Kiel University",
+    timespan: ["2019", "2019"],
+    bullets: [
+      "Set up an online survey for a research project investigating people's classification of political tweets",
+    ],
+    keywords: ["Survey Design", "Political Communication", "Web Science"],
   },
 ]

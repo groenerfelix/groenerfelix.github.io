@@ -178,7 +178,7 @@ export function ProjectsPage() {
 
           <FilterGroup
             label="Keywords"
-            options={availableKeywords.slice(0, 12).map((keyword) => ({
+            options={availableKeywords.map((keyword) => ({
               active: selectedKeywords.includes(keyword),
               label: keyword,
               onClick: () => toggleKeyword(keyword),

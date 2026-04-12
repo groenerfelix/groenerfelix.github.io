@@ -6,20 +6,21 @@ const iconSrcMap: Partial<Record<SocialLink["label"], string>> = {
   LinkedIn: "linkedin-logo.svg",
   Email: "envelope.svg",
   Scholar: "graduation-cap.svg",
-  Twitter: "twitter-logo.svg"
+  Twitter: "twitter-logo.svg",
 }
 
 export function SocialDock() {
   return (
-    <div className="flex flex-row justify-around w-125 mx-auto">
+    <div className="mx-auto flex w-125 flex-row justify-around">
       {socialLinks.map((link) => {
-        const iconSrc = `/logos/${iconSrcMap[link.label]}`
+        const iconSrc = link.iconSrc ?? `/logos/${iconSrcMap[link.label]}`
 
         return (
           <a
             key={link.label}
             className="group flex cursor-pointer flex-col items-center justify-center gap-2 py-3 text-center transition-colors hover:text-primary"
             href={link.href}
+            target="_blank"
           >
             <span
               aria-hidden="true"
