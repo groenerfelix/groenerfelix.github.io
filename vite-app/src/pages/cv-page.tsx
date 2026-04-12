@@ -3,7 +3,6 @@ import { useState } from "react"
 import { SectionHeading } from "@/components/section-heading"
 import { SegmentedToggle } from "@/components/segmented-toggle"
 import { TimelineRow } from "@/components/timeline-row"
-import { Button } from "@/components/ui/button"
 import { educationEntries, workEntries, cvDownloadLink } from "@/data/cv"
 
 type CvTrack = "degrees" | "work"
