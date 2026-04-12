@@ -9,25 +9,26 @@ import {
 import { ProjectRow } from "@/components/project-row"
 import { SectionHeading } from "@/components/section-heading"
 import { projects } from "@/data/projects"
-import type { ProjectEntry, PublicationType } from "@/types/content"
-
-const publicationTypes = Array.from(
-  new Set(
-    projects
-      .map((project) => project.publicationType)
-      .filter((value): value is PublicationType => Boolean(value))
-  )
-)
+import type { ProjectEntry, ProjectSubType } from "@/types/content"
 
 export function ProjectsPage() {
   const [query, setQuery] = useState("")
   const deferredQuery = useDeferredValue(query)
   const [typeFilters, setTypeFilters] = useState(initialProjectTypeFilters)
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([])
-  const [selectedPublicationTypes, setSelectedPublicationTypes] = useState<
-    PublicationType[]
-  >([])
+  const [selectedProjectTypes, setSelectedProjectTypes] = useState<ProjectSubType[]>([])
   const [firstAuthorOnly, setFirstAuthorOnly] = useState(false)
+
+  const availableProjectTypes = useMemo(() => {
+    return Array.from(
+      new Set(
+        projects
+          .filter((project) => typeFilters[project.type])
+          .map((project) => project.projectType)
+          .filter((value): value is ProjectSubType => Boolean(value))
+      )
+    ).sort()
+  }, [typeFilters])
 
   const availableKeywords = useMemo(() => {
     return Array.from(
@@ -45,6 +46,12 @@ export function ProjectsPage() {
     )
   }, [availableKeywords])
 
+  useEffect(() => {
+    setSelectedProjectTypes((current) =>
+      current.filter((projectType) => availableProjectTypes.includes(projectType))
+    )
+  }, [availableProjectTypes])
+
   const filteredProjects = useMemo(() => {
     const normalizedQuery = deferredQuery.trim().toLowerCase()
 
@@ -61,11 +68,8 @@ export function ProjectsPage() {
       }
 
       if (
-        typeFilters.publication &&
-        selectedPublicationTypes.length > 0 &&
-        (project.type !== "publication" ||
-          !project.publicationType ||
-          !selectedPublicationTypes.includes(project.publicationType))
+        selectedProjectTypes.length > 0 &&
+        (!project.projectType || !selectedProjectTypes.includes(project.projectType))
       ) {
         return false
       }
@@ -86,9 +90,8 @@ export function ProjectsPage() {
         project.title,
         project.summary,
         project.authors,
-        project.authorRole,
-        project.publicationType,
-        project.status,
+        project.projectType,
+        project.publication_info,
         ...project.keywords,
       ]
         .filter(Boolean)
@@ -101,7 +104,7 @@ export function ProjectsPage() {
     deferredQuery,
     firstAuthorOnly,
     selectedKeywords,
-    selectedPublicationTypes,
+    selectedProjectTypes,
     typeFilters,
   ])
 
@@ -126,11 +129,11 @@ export function ProjectsPage() {
     )
   }
 
-  const togglePublicationType = (publicationType: PublicationType) => {
-    setSelectedPublicationTypes((current) =>
-      current.includes(publicationType)
-        ? current.filter((item) => item !== publicationType)
-        : [...current, publicationType]
+  const toggleProjectType = (projectType: ProjectSubType) => {
+    setSelectedProjectTypes((current) =>
+      current.includes(projectType)
+        ? current.filter((item) => item !== projectType)
+        : [...current, projectType]
     )
   }
 
@@ -151,25 +154,27 @@ export function ProjectsPage() {
         value={typeFilters}
       />
 
-      <section className="border-y border-white/8 py-8">
+      <section className=" py-8">
         <div className="space-y-6">
-          {typeFilters.publication ? (
-            <FilterGroup
-              label="Publication type"
-              options={[
-                ...publicationTypes.map((publicationType) => ({
-                  active: selectedPublicationTypes.includes(publicationType),
-                  label: publicationType,
-                  onClick: () => togglePublicationType(publicationType),
-                })),
-                {
-                  active: firstAuthorOnly,
-                  label: "first-author",
-                  onClick: () => setFirstAuthorOnly((value) => !value),
-                },
-              ]}
-            />
-          ) : null}
+          <FilterGroup
+            label="Project type"
+            options={[
+              ...availableProjectTypes.map((projectType) => ({
+                active: selectedProjectTypes.includes(projectType),
+                label: projectType,
+                onClick: () => toggleProjectType(projectType),
+              })),
+              ...(typeFilters.publication
+                ? [
+                    {
+                      active: firstAuthorOnly,
+                      label: "First Author",
+                      onClick: () => setFirstAuthorOnly((value) => !value),
+                    },
+                  ]
+                : []),
+            ]}
+          />
 
           <FilterGroup
             label="Keywords"
@@ -183,7 +188,7 @@ export function ProjectsPage() {
           <label className="block space-y-3 rounded-4xl border border-primary/50 focus:border-primary p-3">
 
             <span className="relative block">
-              <Search className="pointer-events-none absolute left-0 top-1/2 size-4 -translate-y-1/2 text-primary" />
+              <Search className="pointer-events-none absolute left-0 top-1/2 size-4 -translate-y-1/2 text-primary/75" />
               <input
                 className="w-full pl-7 pr-10 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground"
                 onChange={(event) => setQuery(event.target.value)}
@@ -206,12 +211,14 @@ export function ProjectsPage() {
       </section>
 
       <section>
-        <div className="border-b border-white/8 pb-4 text-sm text-foreground/45">
-          {filteredProjects.length} matching entries
-        </div>
+        { filteredProjects.length === 0 && 
+          <div className="pb-4 text-sm text-foreground/45">
+            No matching entries; try adjusting the filters.
+          </div>
+        }
         {years.map((year) => (
           <div key={year}>
-            <div className="pt-10 text-xs uppercase tracking-[0.32em] text-muted-foreground">
+            <div className="pt-10 text-lg uppercase text-primary border-b border-primary/50">
               {year}
             </div>
             <div>

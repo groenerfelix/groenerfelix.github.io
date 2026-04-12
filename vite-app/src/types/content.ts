@@ -23,12 +23,7 @@ export type FeaturedProject = {
 }
 
 export type ProjectType = "publication" | "coding" | "other"
-export type PublicationType =
-  | "conference"
-  | "journal"
-  | "preprint"
-  | "workshop"
-  | "book chapter"
+export type ProjectSubType = string
 
 export type ProjectEntry = {
   id: string
@@ -38,12 +33,10 @@ export type ProjectEntry = {
   summary: string
   keywords: string[]
   links: ProjectLink[]
-  sourceCategory: "selected" | "archive"
-  publicationType?: PublicationType
+  projectType?: ProjectSubType
   authors?: string
-  authorRole?: string
   firstAuthor?: boolean
-  status?: string
+  publication_info?: string
 }
 
 export type TimelineEntry = {
