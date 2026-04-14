@@ -10,12 +10,12 @@ export function TimelineRow({ entry }: TimelineRowProps) {
 
   return (
     <article className="grid gap-4 border-t border-border py-6 md:grid-cols-[180px_1fr] md:gap-8">
-      <div className="flex min-h-full flex-col items-center self-stretch text-center text-sm text-primary">
+      <div className="flex min-h-full flex-row-reverse md:flex-col items-center justify-center self-stretch text-center text-sm text-primary">
         <span>{end}</span>
-        <span className="mt-3 h-2 w-2 rounded-full bg-primary" />
-        <span className="my-2 w-px flex-1 bg-border" />
+        <span className="mr-3 md:mr-0 md:mt-3 h-2 w-2 rounded-full bg-primary" />
+        <span className="mx-2 h-px max-w-10 md:mx-0 md:h-auto md:my-2 md:w-px flex-1 bg-border" />
         <span className="h-2 w-2 rounded-full bg-primary" />
-        <span className="mt-3">{start}</span>
+        <span className="mr-3 md:mr-0 md:mt-3">{start}</span>
       </div>
 
       <div className="space-y-3">

@@ -14,7 +14,7 @@ type LandingTrack = "researcher" | "coder"
 function HeroSection() {
   return (
     <section className="min-h-[65vh] w-full flex flex-col gap-12 justify-center select-none">
-      <div className="flex justify-center items-center gap-12">
+      <div className="flex flex-col pt-5 md:pt-0 md:flex-row justify-center items-center gap-12">
         <img
           alt="portrait"
           className="w-82.5 aspect-square rounded-full border-[3px] border-primary -scale-x-100"
@@ -55,7 +55,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
     <div className="mx-auto flex max-w-7xl flex-col px-5">
       <HeroSection />
 
-      <section className="space-y-8">
+      <section className="space-y-8 mt-8 md:mt-0">
         <SegmentedToggle
           label="I'm interested in"
           onChange={setTrack}

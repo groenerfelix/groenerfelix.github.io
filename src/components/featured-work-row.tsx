@@ -7,7 +7,7 @@ type FeaturedWorkRowProps = {
 
 export function FeaturedWorkRow({ project }: FeaturedWorkRowProps) {
   return (
-    <article className="grid gap-10 border-t border-border py-35 md:grid-cols-[1.6fr_0.6fr] md:items-center">
+    <article className="grid gap-10 border-t border-border py-10 md:py-35 md:grid-cols-[1.6fr_0.6fr] md:items-center">
       <div className="order-2 space-y-6 md:order-1">
         <div className="text-xs uppercase tracking-[0.28em] text-primary">
           {project.eyebrow}
@@ -43,7 +43,7 @@ export function FeaturedWorkRow({ project }: FeaturedWorkRowProps) {
       </div>
 
       <div className="order-1 md:order-2">
-        <div className="group relative mx-auto max-w-md perspective-distant">
+        <div className="group relative mx-auto max-w-65 md:max-w-md perspective-distant">
           <div className="absolute inset-0 bg-primary/12 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
           <img
             alt={project.imageAlt}

@@ -33,7 +33,7 @@ export function SegmentedToggle<T extends string>({
         {label}
       </div>
 
-      <div className="mx-auto w-full max-w-4xl rounded-full border border-border bg-card p-2 shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
+      <div className="mx-auto w-full max-w-4xl rounded-[30px] sm:rounded-full border border-border bg-card p-2 shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {options.map((option) => {
             const isActive = option.value === value

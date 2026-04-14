@@ -19,7 +19,7 @@ export function SocialDock() {
 
   return (
     <div
-      className="mx-auto flex w-125 flex-row justify-around"
+      className="mx-auto flex w-125 max-w-[90vw] flex-row justify-around"
       onMouseLeave={() => setPointerX(null)}
       onMouseMove={(event) => setPointerX(event.clientX)}
     >
