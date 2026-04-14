@@ -22,12 +22,7 @@ export const projects: ProjectEntry[] = [
     type: "coding",
     summary:
       "An LLM agent that writes its own workflows and data in markdown files, which are mirrored in a discord server for transparency.",
-    keywords: [
-      "LLMs",
-      "Agent",
-      "Python",
-      "API",
-    ],
+    keywords: ["LLMs", "Agents", "Python", "API", "Generative AI"],
     projectType: "Backend",
     links: [{ label: "Code", href: "https://github.com/groenerfelix/discord-assistant" }],
   },
@@ -72,7 +67,7 @@ export const projects: ProjectEntry[] = [
     type: "publication",
     summary:
       "Results from an empirical study of AI-assisted intelligence analysis reporting.",
-    keywords: ["LLMs", "Transparency", "Verification", "Intelligence Analysis"],
+    keywords: ["LLMs", "Transparency", "Verification", "Intelligence Analysis", "Generative AI"],
     projectType: "In Preparation",
     authors: "F. Gröner, M.V. Mancenido, N. Kim, E. Summers, and E.K. Chiou",
     firstAuthor: true,
@@ -85,7 +80,7 @@ export const projects: ProjectEntry[] = [
     type: "publication",
     summary:
       "Comparing the results of the same experiment with human and synthetic participants produced useful qualitative insights.",
-    keywords: ["LLMs", "Simulations", "Synthetic Participants"],
+    keywords: ["LLMs", "Simulations", "Synthetic Participants", "Generative AI"],
     projectType: "Under Review",
     authors: "F. Gröner and E.K. Chiou",
     firstAuthor: true,
@@ -113,7 +108,7 @@ export const projects: ProjectEntry[] = [
     type: "publication",
     summary:
       "A catalogue of computational metrics to model people's perception of AI-generated art.",
-    keywords: ["AI Images", "Cognitive Psychology"],
+    keywords: ["AI Images", "Cognitive Psychology", "Generative AI"],
     projectType: "Preprint",
     authors: "F. Gröner and D.V. Becker",
     firstAuthor: true,
@@ -126,7 +121,7 @@ export const projects: ProjectEntry[] = [
     type: "coding",
     summary:
       "Developed a pipeline from topic to tutorial website, with prompt engineering informed by learning science.",
-    keywords: ["LLMs", "Learning Engineering", "UI Design", "Prompt Engineering"],
+    keywords: ["LLMs", "Learning Engineering", "UI Design", "Prompt Engineering", "Generative AI", "Full Stack", "Python", "Typescript"],
     projectType: "Full Stack Web App",
     authors: "F. Gröner, A. Verma, and J. Bronowitz",
     firstAuthor: true,
@@ -146,7 +141,7 @@ export const projects: ProjectEntry[] = [
     type: "publication",
     summary:
       "Examines the theoretical obstacles that arise when using LLM agents to simulate synthetic participants.",
-    keywords: ["LLMs", "Simulations", "Agents", "Synthetic Participants"],
+    keywords: ["LLMs", "Simulations", "Agents", "Synthetic Participants", "Generative AI"],
     projectType: "In Preparation",
     authors: "F. Gröner and E.K. Chiou",
     firstAuthor: true,
@@ -159,7 +154,7 @@ export const projects: ProjectEntry[] = [
     type: "publication",
     summary:
       "A taxonomy of engineering approaches that categorizes 39 empirical studies and surfaces under-explored intervention strategies and reporting gaps.",
-    keywords: ["LLMs", "Human-AI", "Literature Review"],
+    keywords: ["LLMs", "Human-AI", "Literature Review", "Generative AI"],
     projectType: "Preprint",
     authors: "F. Gröner and E.K. Chiou",
     firstAuthor: true,
@@ -225,12 +220,12 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "generative-ai-cognitive-psychology-poster",
-    title: "Potential uses of generative AI in cognitive psychology research",
+    title: "Two dimensions describe how we perceive original and AI generated abstract art",
     year: 2026,
     type: "other",
     summary:
       "Discussing chances and risks of using AI to generate stimuli for research.",
-    keywords: ["Cognitive Psychology"],
+    keywords: ["Cognitive Psychology", "Generative AI"],
     projectType: "Poster",
     links: [],
     publication_info: "Cognitive Science Conclave at the University of Arizona, April 25, Tuscan, AZ"
@@ -278,7 +273,7 @@ export const projects: ProjectEntry[] = [
     type: "other",
     summary:
       "Project update presented to stakeholders at the Center for Accelerating Operational Efficiency (CAOE).",
-    keywords: ["LLMs"],
+    keywords: ["LLMs", "Generative AI"],
     projectType: "Talk",
     links: [],
     publication_info: "CAOE Annual Meeting, April 8-9, Washington, DC"
