@@ -111,3 +111,8 @@
 @utility perspective-distant {
   perspective: 1800px;
 }
+
+
+b {
+  color: var(--primary)
+}

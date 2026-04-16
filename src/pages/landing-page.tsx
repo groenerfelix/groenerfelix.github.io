@@ -2,7 +2,6 @@ import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 
 import { FeaturedWorkRow } from "@/components/featured-work-row"
-import { SectionHeading } from "@/components/section-heading"
 import { SegmentedToggle } from "@/components/segmented-toggle"
 import { SocialDock } from "@/components/social-dock"
 import { Button } from "@/components/ui/button"
@@ -25,16 +24,11 @@ function HeroSection() {
             Felix Gr&ouml;ner
           </h1>
           <div className="max-w-3xl space-y-3 text-lg">
-            <p className="text-primary">Human-LLM Interaction Researcher</p>
+            <p className="text-primary mb-0">Human-LLM Interaction Researcher,</p>
+            <p className="text-primary">LLM Product Designer & Developer</p>
             <p className="text-xs uppercase text-muted-foreground">
               Open to work in the US, UK, and EU
             </p>
-            <p>currently researching:</p>
-            <ul className="list-disc pl-6">
-              <li>Designing LLMs for appropriate use</li>
-              <li>Providing transparency and control</li>
-              <li>Synthetic research participants</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -55,27 +49,46 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
     <div className="mx-auto flex max-w-7xl flex-col px-5">
       <HeroSection />
 
-      <section className="space-y-8 mt-8 md:mt-0">
+      <section className="space-y-8 mt-8">
         <SegmentedToggle
           label="I'm interested in"
           onChange={setTrack}
           options={[
-            { label: "Felix the researcher", value: "researcher" },
+            { label: "Felix the scientist", value: "researcher" },
             { label: "Felix the coder", value: "coder" },
           ]}
           value={track}
         />
-        {track === "researcher" ? (
-          <SectionHeading
-            description="Featured work that best captures the breadth and variety of my research interests."
-            title="Highlighted Publications"
-          />
-        ) : (
-          <SectionHeading
-            description="A selection of projects to showcase my skillset. I mostly create LLM applications with Python FastAPI backends and Typescript React frontends."
-            title="Highlighted Coding Projects"
-          />
-        )}
+        <div className="flex flex-col gap-6 pt-24 pb-8 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-3xl space-y-4">
+            <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              {track === "researcher" ? "Human-LLM Interaction Researcher" : "Full Stack Web Applications Featuring LLMs"}
+            </h2>
+            <p className="text-base leading-8 text-foreground/72 sm:text-lg">
+              {track === "researcher" ? 
+              <div>
+                <p>Quantitative and qualitative science at the intersection of Human Factors and AI, currently researching:</p>
+                <ul className="list-disc pl-6 pt-1 space-y-1 text-md">
+                  <li>What <b>expectations</b> do people have for LLM applications?</li>
+                  <li>What <b>transparency</b> measures guide people to appropriate use?</li>
+                  <li>Can we use <b>synthetic participants</b> in our research?</li>
+                </ul>
+              </div>
+                :
+              <div>
+                <p>Building prototypes for research and shipping web apps for production:</p>
+                <ul className="list-disc pl-6 pt-1 space-y-1 text-md">
+                  <li><b>Python</b> backends: FastAPI</li>
+                  <li><b>TypeScript</b> frontends: <b>React</b>, Vite, Tailwind, Shadcn</li>
+                  <li><b>OpenAI, Discord, and other API</b> integrations</li>
+                  <li>Hosted on VPS or Vercel</li>
+                </ul>
+              </div>
+              }
+            </p>
+          </div>
+        </div>
+
         <div>
           {trackProjects.map((project) => (
             <FeaturedWorkRow key={project.id} project={project} />

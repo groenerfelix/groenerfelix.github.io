@@ -7,7 +7,6 @@ import {
   InterestCheckboxGroup,
 } from "@/components/interest-checkbox-group"
 import { ProjectRow } from "@/components/project-row"
-import { SectionHeading } from "@/components/section-heading"
 import { projects } from "@/data/projects"
 import type { ProjectEntry, ProjectSubType } from "@/types/content"
 
@@ -139,10 +138,14 @@ export function ProjectsPage() {
 
   return (
     <div className="mx-auto flex max-w-7xl flex-col gap-12 px-5 pb-20 pt-12 md:px-8 md:pb-28 md:pt-16">
-      <SectionHeading
-        title="All my projects"
-        description="Search through all my publications, talks, coding projects, and other experiments."
-      />
+      <div className="max-w-3xl space-y-4">
+        <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+          All my projects
+        </h2>
+        <p className="text-base leading-8 text-foreground/72 sm:text-lg">
+          Search through all my publications, talks, coding projects, and other experiments.
+        </p>
+      </div>
 
       <InterestCheckboxGroup
         onToggle={(type) =>
