@@ -33,7 +33,7 @@ export function InterestCheckboxGroup({
 }: InterestCheckboxGroupProps) {
   return (
     <div className="space-y-5">
-      <div className="text-center text-md uppercase tracking-[0.32em] text-muted-foreground">
+      <div className="text-center text-md uppercase tracking-[0.2em] text-muted-foreground">
         I&apos;m interested in
       </div>
 

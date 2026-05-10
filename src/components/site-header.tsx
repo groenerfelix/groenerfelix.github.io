@@ -24,18 +24,18 @@ export function SiteHeader({
   onNavigate,
 }: SiteHeaderProps) {
   return (
-    <header className="sticky top-0 z-40 border-b border-white/8 bg-background/80 backdrop-blur-xl select-none">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-xl select-none">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-12 py-4">
         <button
               
-              className="cursor-pointer text-left"
+              className="cursor-pointer text-left group"
               onClick={() => onNavigate("home")}
               type="button"
             >
-          <div className="text-[0.7rem] uppercase tracking-[0.32em] text-primary">
+          <div className="text-sm uppercase tracking-[0.2em] text-primary transition-all duration-300 group-hover:text-foreground leading-3">
             Felix Gr&ouml;ner
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-muted-foreground transition-all duration-300 group-hover:brightness-120">
             Human-LLM Interaction Researcher
           </div>
         </button>
@@ -45,8 +45,8 @@ export function SiteHeader({
             <button
               key={link.route}
               className={cn(
-                "cursor-pointer text-sm transition-colors hover:text-primary",
-                activeRoute === link.route ? "text-primary" : "text-muted-foreground"
+                "text-sm transition-colors hover:text-primary",
+                activeRoute === link.route ? "cursor-default text-primary" : "cursor-pointer text-muted-foreground"
               )}
               onClick={() => onNavigate(link.route)}
               type="button"
@@ -73,8 +73,8 @@ export function SiteHeader({
               <button
                 key={link.route}
                 className={cn(
-                  "cursor-pointer border-b border-white/6 py-3 text-left text-sm transition-colors hover:text-primary",
-                  activeRoute === link.route ? "text-primary" : "text-muted-foreground"
+                  "border-b border-white/6 py-3 text-left text-sm transition-colors hover:text-primary",
+                  activeRoute === link.route ? "text-primary cursor-default" : "cursor-pointer text-muted-foreground"
                 )}
                 onClick={() => onNavigate(link.route)}
                 type="button"

@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, GraduationCap, Code, type LucideIcon } from "lucide-react"
+import { BriefcaseBusiness, GraduationCap, CodeXml, type LucideIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
@@ -8,7 +8,7 @@ export type SegmentedOption<T extends string> = {
 }
 
 const optionIcons: Record<string, LucideIcon> = {
-  coder: Code,
+  developer: CodeXml,
   degrees: GraduationCap,
   researcher: GraduationCap,
   work: BriefcaseBusiness,
@@ -29,11 +29,11 @@ export function SegmentedToggle<T extends string>({
 }: SegmentedToggleProps<T>) {
   return (
     <div className="space-y-5">
-      <div className="text-center text-md uppercase tracking-[0.32em] text-muted-foreground">
+      <div className="text-center uppercase tracking-[0.2em] text-muted-foreground">
         {label}
       </div>
 
-      <div className="mx-auto w-full max-w-4xl rounded-[30px] sm:rounded-full border border-border bg-card p-2 shadow-[0_18px_48px_rgba(0,0,0,0.24)]">
+      <div className="mx-auto w-full max-w-4xl rounded-[30px] sm:rounded-full border border-border bg-card p-2">
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {options.map((option) => {
             const isActive = option.value === value
@@ -43,7 +43,7 @@ export function SegmentedToggle<T extends string>({
               <button
                 key={option.value}
                 className={cn(
-                  "group cursor-pointer rounded-full px-3 py-3 text-center text-base font-medium transition-all duration-300 sm:text-xl",
+                  "group cursor-pointer rounded-full px-3 py-3 text-center font-medium transition-all duration-300 sm:text-xl",
                   isActive
                     ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"

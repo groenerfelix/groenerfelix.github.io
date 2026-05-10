@@ -8,7 +8,7 @@ type FilterGroupProps = {
 export function FilterGroup({ label, options }: FilterGroupProps) {
   return (
     <div className="space-y-3">
-      <div className="text-xs uppercase tracking-[0.28em] text-muted-foreground">
+      <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
         Filter by {label}
       </div>
       <div className="flex flex-wrap gap-x-5 gap-y-3">

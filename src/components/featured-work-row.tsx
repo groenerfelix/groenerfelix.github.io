@@ -7,11 +7,8 @@ type FeaturedWorkRowProps = {
 
 export function FeaturedWorkRow({ project }: FeaturedWorkRowProps) {
   return (
-    <article className="grid gap-10 border-t border-border py-10 md:py-35 md:grid-cols-[1.6fr_0.6fr] md:items-center">
+    <article className="grid gap-10 border-t border-border py-10 md:py-34 md:grid-cols-[1.6fr_0.6fr] md:items-center">
       <div className="order-2 space-y-6 md:order-1">
-        <div className="text-xs uppercase tracking-[0.28em] text-primary">
-          {project.eyebrow}
-        </div>
         <h3 className="max-w-2xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           {project.title}
         </h3>
@@ -45,11 +42,14 @@ export function FeaturedWorkRow({ project }: FeaturedWorkRowProps) {
       <div className="order-1 md:order-2">
         <div className="group relative mx-auto max-w-65 md:max-w-md perspective-distant">
           <div className="absolute inset-0 bg-primary/12 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
-          <img
-            alt={project.imageAlt}
-            className="relative w-full origin-center object-cover shadow-[0_40px_80px_rgba(0,0,0,0.45)] transition-transform duration-500 ease-out transform-[rotateY(-12deg)_rotateX(0deg)_rotateZ(2deg)] group-hover:transform-[rotateY(0deg)_rotateX(0deg)_rotateZ(0deg)]"
-            src={project.image}
-          />
+          <picture>
+            <source srcSet={`${project.image.split('.')[0]}.avif`} type="image/avif" />
+            <img
+              alt={project.imageAlt}
+              className="relative w-full origin-center object-cover shadow-[0_40px_80px_rgba(0,0,0,0.45)] transition-transform duration-500 ease-out transform-[rotateY(-12deg)_rotateX(0deg)_rotateZ(2deg)] group-hover:transform-[rotateY(0deg)_rotateX(0deg)_rotateZ(0deg)]"
+              src={project.image}
+            />
+          </picture>
         </div>
       </div>
     </article>

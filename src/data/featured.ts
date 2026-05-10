@@ -1,5 +1,21 @@
 import type { FeaturedProject } from "@/types/content"
 
+export type StackLogo = {
+  label: string
+  imageName: string
+}
+
+export const stackLogos: StackLogo[] = [
+  { label: "Python", imageName: "python" },
+  // { label: "FastAPI", imageName: "fastapi" },
+  { label: "TypeScript", imageName: "typescript" },
+  // { label: "Vite", imageName: "vite" },
+  { label: "React", imageName: "react" },
+  { label: "TailwindCSS", imageName: "tailwindcss" },
+  { label: "Shadcn/ui", imageName: "shadcnui" },
+  { label: "LangGraph", imageName: "langgraph" },
+]
+
 export const featuredProjects: FeaturedProject[] = [
   {
     id: "paper-synth-2025",
@@ -57,7 +73,7 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     id: "project-lern-2026",
-    track: "coder",
+    track: "developer",
     title: "LLM Pipeline to Generate Interactive Tutorial Websites",
     eyebrow: "LangChain",
     summary:
@@ -77,7 +93,7 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     id: "project-next-2026",
-    track: "coder",
+    track: "developer",
     title: "Human-LLM Interaction Experimentation Platform with NextJS",
     eyebrow: "Chatbot",
     summary:
@@ -93,7 +109,7 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     id: "project-mcsr-2026",
-    track: "coder",
+    track: "developer",
     title: "Data Analysis and Player Comparison App",
     eyebrow: "Data Science",
     summary:

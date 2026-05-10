@@ -1,4 +1,6 @@
 export type RouteId = "home" | "projects" | "cv"
+export type LandingTrack = "researcher" | "developer"
+
 
 export type SocialLink = {
   download?: string
@@ -14,7 +16,7 @@ export type ProjectLink = {
 
 export type FeaturedProject = {
   id: string
-  track: "researcher" | "coder"
+  track: LandingTrack
   title: string
   eyebrow: string
   summary: string

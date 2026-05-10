@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 TODO.md
+
+# avif files are generated automatically on build
+*.avif

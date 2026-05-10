@@ -1,4 +1,5 @@
 import { useRef, useState } from "react"
+import { useReducedMotion } from "@/lib/utils"
 
 import { socialLinks } from "@/data/social"
 import type { SocialLink } from "@/types/content"
@@ -14,6 +15,7 @@ const iconSrcMap: Partial<Record<SocialLink["label"], string>> = {
 export function SocialDock() {
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([])
   const [pointerX, setPointerX] = useState<number | null>(null)
+  const reducedMotion = useReducedMotion()
 
   const influenceRadius = 75
 
@@ -31,7 +33,7 @@ export function SocialDock() {
           pointerX !== null && itemCenter !== null
             ? Math.abs(pointerX - itemCenter)
             : influenceRadius
-        const intensity = Math.max(0, 1 - distance / influenceRadius)
+        const intensity = reducedMotion ? 0 : Math.max(0, 1 - distance / influenceRadius)
         const iconScale = 1 + intensity * 0.9
         const labelScale = 1 + intensity * 0.12
         const lift = intensity * -8
