@@ -49,19 +49,20 @@
 }
 
 :root {
-    --primary: oklch(0.89 0.19 95.86);
-    --background: oklch(0.11 0.02 95.86);
-    --foreground: oklch(0.96 0.02 95.86);
+    --primary: oklch(0.86 0.175 88.5);
+    --background: oklch(0.14 0.0025 88.5);  
+    --foreground: oklch(0.96 0.01 88.5);
     --primary-foreground: var(--background);
-    --card: oklch(0.12 0.02 95.86);
+    --card: oklch(from var(--background) calc(l + 0.05) c h);
     --card-foreground: var(--foreground);
     --popover: var(--card);
     --popover-foreground: var(--card-foreground);
-    --muted: oklch(0.28 0.02 95.86);
-    --muted-foreground: oklch(0.7 0.02 95.86);
-    --secondary: oklch(0.24 0.05 95.86);
-    --secondary-foreground: var(--muted-foreground);
-    --accent: oklch(0.4 0.02 95.86);
+    --muted: oklch(0.28 0.02 88.5);
+    --muted-foreground: oklch(0.7 0.01 88.5);
+    --secondary: oklch(0.24 0.05 250);
+    --secondary-foreground: var(--foreground);
+    /* --accent: rgb(255 213 0 / 0.2); */
+    --accent: #3a2f08;
     --accent-foreground: var(--foreground);
     --destructive: oklch(0.7 0.15 36.5);
     --border: rgba(from var(--foreground) r g b / 0.12);
@@ -98,7 +99,7 @@
   }
 
   ::selection {
-    background: rgb(255 213 0 / 0.2);
+    background: var(--accent)
   }
 
   a,

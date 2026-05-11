@@ -68,7 +68,7 @@ export const projects: ProjectEntry[] = [
     summary:
       "Results from an empirical study of AI-assisted intelligence analysis reporting.",
     keywords: ["LLMs", "Transparency", "Verification", "Intelligence Analysis", "Generative AI"],
-    projectType: "In Preparation",
+    projectType: "Under Review",
     authors: "F. Gröner, M.V. Mancenido, N. Kim, E. Summers, and E.K. Chiou",
     firstAuthor: true,
     links: [],
@@ -97,8 +97,6 @@ export const projects: ProjectEntry[] = [
     projectType: "In Preparation",
     authors: "F. Gröner, M.V. Mancenido, and E.K. Chiou",
     firstAuthor: true,
-    publication_info:
-      "In preparation for Advancements in Human-Agent Teaming Research Infrastructure: Testbeds, metrics, and concepts. CRC Press.",
     links: [],
   },
   {
@@ -109,10 +107,13 @@ export const projects: ProjectEntry[] = [
     summary:
       "A catalogue of computational metrics to model people's perception of AI-generated art.",
     keywords: ["AI Images", "Cognitive Psychology", "Generative AI"],
-    projectType: "Preprint",
+    projectType: "Under Review",
     authors: "F. Gröner and D.V. Becker",
     firstAuthor: true,
-    links: [{ label: "Preprint", href: "https://ssrn.com/abstract=6482420" }],
+    links: [
+      {label: "Preprint", href: "https://ssrn.com/abstract=6482420"},
+      {label: "Interactive exploration", href: "https://felixgroener.de/abstract-art"}
+    ],
   },
   {
     id: "interactive-learning-experiences-agentic-pipeline",

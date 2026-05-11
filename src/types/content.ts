@@ -1,11 +1,10 @@
 export type RouteId = "home" | "projects" | "cv"
 export type LandingTrack = "researcher" | "developer"
 
-
 export type SocialLink = {
   download?: string
   href: string
-  iconSrc?: string
+  logo: React.FC<React.SVGProps<SVGSVGElement>>
   label: string
 }
 
@@ -14,16 +13,18 @@ export type ProjectLink = {
   href: string
 }
 
+export type FeaturedProjectMedia = {
+  image: string
+  imageAlt: string
+  paragraph: string
+  link?: ProjectLink
+}
+
 export type FeaturedProject = {
   id: string
   track: LandingTrack
   title: string
-  eyebrow: string
-  summary: string
-  bullets: string[]
-  image: string
-  imageAlt: string
-  links: ProjectLink[]
+  media: FeaturedProjectMedia[]
 }
 
 export type ProjectType = "publication" | "coding" | "other"

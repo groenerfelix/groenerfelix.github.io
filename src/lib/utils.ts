@@ -23,3 +23,14 @@ export const useReducedMotion = (): boolean => {
 
     return reduced
 }
+
+
+export function getAvifSource(image: string) {
+  const extensionStart = image.lastIndexOf(".")
+
+  if (extensionStart === -1) {
+    return undefined
+  }
+
+  return `${image.slice(0, extensionStart)}.avif`
+}

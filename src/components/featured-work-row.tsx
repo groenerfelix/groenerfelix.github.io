@@ -1,57 +1,169 @@
+import type { CSSProperties } from "react"
+import { useEffect, useState } from "react"
 import { ArrowUpRight } from "lucide-react"
-import type { FeaturedProject } from "@/types/content"
 
-type FeaturedWorkRowProps = {
-  project: FeaturedProject
+import {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel"
+import { cn, getAvifSource } from "@/lib/utils"
+import type { FeaturedProject, FeaturedProjectMedia } from "@/types/content"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
+
+
+const mediaGradient = `
+  linear-gradient(to bottom, #000 0%, #000 78%, rgba(0,0,0,0.58) 90%, transparent 100%), 
+  linear-gradient(110deg, #000 80%, rgba(0,0,0,0.68) 95%, transparent 100%),
+  linear-gradient(250deg, #000 80%, rgba(0,0,0,0.68) 95%, transparent 100%)
+  `
+
+const mediaFadeMaskStyle = {
+  WebkitMaskImage: mediaGradient,
+  maskImage: mediaGradient,
+  WebkitMaskComposite: "source-in",
+  maskComposite: "intersect",
+} as CSSProperties
+
+function FeaturedMediaImage({ item }: { item: FeaturedProjectMedia }) {
+
+  if(item.image.endsWith(".mp4")) {
+
+    return (
+      <video
+        className="aspect-video w-full object-cover object-top"
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={mediaFadeMaskStyle}
+    >
+        <source src={item.image} type="video/mp4" />
+    </video>
+    )
+
+  }
+
+
+  const avifSource = getAvifSource(item.image)
+
+  return (
+    <picture className="select-none">
+      {avifSource ? <source srcSet={avifSource} type="image/avif" /> : null}
+      <img
+        alt={item.imageAlt}
+        className="aspect-video w-full object-cover object-top"
+        src={item.image}
+        style={mediaFadeMaskStyle}
+      />
+    </picture>
+  )
 }
 
-export function FeaturedWorkRow({ project }: FeaturedWorkRowProps) {
+export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
+  const [api, setApi] = useState<CarouselApi>()
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const activeMedia = project.media[selectedIndex] ?? project.media[0]
+
+  useEffect(() => {
+    setSelectedIndex(0)
+  }, [project.id])
+
+  useEffect(() => {
+    if (!api) return
+
+    const updateSelectedIndex = () => {
+      setSelectedIndex(api.selectedScrollSnap())
+    }
+
+    updateSelectedIndex()
+    api.on("select", updateSelectedIndex)
+    api.on("reInit", updateSelectedIndex)
+
+    return () => {
+      api.off("select", updateSelectedIndex)
+      api.off("reInit", updateSelectedIndex)
+    }
+  }, [api])
+
+  if (!activeMedia) {
+    return null
+  }
+
+  const activeLink = activeMedia.link
+  const isExternalLink = activeLink?.href.startsWith("http")
+
   return (
-    <article className="grid gap-10 border-t border-border py-10 md:py-34 md:grid-cols-[1.6fr_0.6fr] md:items-center">
-      <div className="order-2 space-y-6 md:order-1">
-        <h3 className="max-w-2xl text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+    <article className="space-y-16 border-t border-border py-10 md:py-34">
+      <div className="grid gap-x-8 gap-y-8 md:grid-cols-2">
+        <h3 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
           {project.title}
         </h3>
-        <p className="max-w-2xl text-lg leading-8 text-secondary-foreground">
-          {project.summary}
-        </p>
-        <ul className="space-y-3 text-md leading-7 text-secondary-foreground">
-          {project.bullets.map((bullet) => (
-            <li key={bullet} className="flex gap-3">
-              <span className="mt-3 h-px w-3 shrink-0 bg-primary/70" />
-              <span>{bullet}</span>
-            </li>
-          ))}
-        </ul>
-        <div className="flex flex-wrap gap-6 pt-2">
-          {project.links.map((link) => (
-            <a
-              key={link.label}
-              className="inline-flex cursor-pointer items-center gap-2 border-b border-primary pb-1 text-sm font-medium text-primary transition-colors hover:border-foreground hover:text-foreground"
-              href={link.href}
-              target={ link.href.includes(".") ? "_blank" : "_self"}
-            >
-              {link.label}
-              { link.href.includes(".") && <ArrowUpRight className="size-4" /> }
-              
-            </a>
-          ))}
+
+        <div className="flex h-48 flex-col justify-between overflow-hidden">
+          <p className="max-w-2xl text-xl leading-8 text-muted-foreground text-balance">
+            {activeMedia.paragraph}
+          </p>
+
+          <div>
+            {activeLink ? (
+              <a
+                className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary underline"
+                href={activeLink.href}
+                rel={isExternalLink ? "noreferrer" : undefined}
+                target={isExternalLink ? "_blank" : "_self"}
+              >
+                {activeLink.label}
+                {isExternalLink ? <ArrowUpRight className="size-4" /> : null}
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
 
-      <div className="order-1 md:order-2">
-        <div className="group relative mx-auto max-w-65 md:max-w-md perspective-distant">
-          <div className="absolute inset-0 bg-primary/12 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
-          <picture>
-            <source srcSet={`${project.image.split('.')[0]}.avif`} type="image/avif" />
-            <img
-              alt={project.imageAlt}
-              className="relative w-full origin-center object-cover shadow-[0_40px_80px_rgba(0,0,0,0.45)] transition-transform duration-500 ease-out transform-[rotateY(-12deg)_rotateX(0deg)_rotateZ(2deg)] group-hover:transform-[rotateY(0deg)_rotateX(0deg)_rotateZ(0deg)]"
-              src={project.image}
-            />
-          </picture>
-        </div>
-      </div>
+      <Carousel
+        className="w-full"
+        opts={{ align: "start", loop: project.media.length > 1 }}
+        setApi={setApi}
+      >
+        <CarouselContent>
+          {project.media.map((item, index) => (
+            <CarouselItem key={`${project.id}-${index}`}>
+              <Separator orientation={"horizontal"} className="my-2 max-w-[90%] mx-auto"/>
+              <FeaturedMediaImage item={item} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+
+        {project.media.length > 1 ? (
+          <>
+            <CarouselPrevious/>
+            <CarouselNext/>
+
+
+            <div className="absolute left-1/2 flex -translate-x-1/2 gap-2 rounded-full px-3 py-4">
+              {project.media.map((_, index) => (
+                <Button
+                  aria-current={selectedIndex === index}
+                  className={cn(
+                    "cursor-pointer size-2 rounded-full bg-muted transition-colors duration-300 hover:bg-muted-foreground",
+                    selectedIndex === index && "bg-primary hover:bg-primary cursor-default"
+                  )}
+                  key={`${project.id}-media-dot-${index}`}
+                  onClick={() => api?.scrollTo(index)}
+                  type="button"
+                >
+                  <span className="sr-only">Show media {index + 1}</span>
+                </Button>
+              ))}
+            </div>
+          </>
+        ) : null}
+      </Carousel>
     </article>
   )
 }

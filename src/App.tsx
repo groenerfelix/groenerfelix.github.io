@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import { BackgroundField } from "@/components/background-field"
+// import { BackgroundField } from "@/components/background-field"
 import { SiteHeader } from "@/components/site-header"
 import { useHashRoute } from "@/hooks/use-hash-route"
 import { CvPage } from "@/pages/cv-page"
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="min-h-svh bg-background text-foreground">
-      <BackgroundField />
+      {/* <BackgroundField /> */}
       <SiteHeader
         activeRoute={route}
         mobileMenuOpen={mobileMenuOpen}
@@ -36,7 +36,7 @@ function App() {
         <a className="cursor-pointer" href="mailto:fgroener@asu.edu">
           fgroener@asu.edu
         </a>
-        <p>Last updated in April 2026</p>
+        <p>Last updated in May 2026</p>
       </footer>
     </div>
   )

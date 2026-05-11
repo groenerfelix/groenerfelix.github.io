@@ -1,129 +1,167 @@
 import type { FeaturedProject } from "@/types/content"
+import * as SVG from '@/components/svg';
 
 export type StackLogo = {
   label: string
-  imageName: string
+  logo: React.FC<React.SVGProps<SVGSVGElement>>
 }
 
 export const stackLogos: StackLogo[] = [
-  { label: "Python", imageName: "python" },
-  // { label: "FastAPI", imageName: "fastapi" },
-  { label: "TypeScript", imageName: "typescript" },
-  // { label: "Vite", imageName: "vite" },
-  { label: "React", imageName: "react" },
-  { label: "TailwindCSS", imageName: "tailwindcss" },
-  { label: "Shadcn/ui", imageName: "shadcnui" },
-  { label: "LangGraph", imageName: "langgraph" },
+  { label: "Python", logo: SVG.Python },
+  // { label: "FastAPI", logo: SVG.FastAPI },
+  { label: "TypeScript", logo: SVG.TypeScript },
+  // { label: "Vite", logo: SVG.Vite },
+  { label: "React", logo: SVG.React },
+  { label: "TailwindCSS", logo: SVG.TailwindCSS },
+  { label: "Shadcn/ui", logo: SVG.ShadcnUI },
+  { label: "LangGraph", logo: SVG.LangGraph },
 ]
 
 export const featuredProjects: FeaturedProject[] = [
   {
-    id: "paper-synth-2025",
+    id: "synthetic-participants",
     track: "researcher",
-    title: "Can LLM Simulations Replace Human Participants?",
-    eyebrow: "Dissertation Research",
-    summary:
-      "A case study of the potential of and issues with LLM simulations in place of experiment with human participants",
-    bullets: [
-      "Conducted the same experiment once with 76 human participants and once with LLMs simulating participants",
-      "Quantitative divergence of results would lead to different conclusions",
-      "Qualitative inspection revealed fundamental issues of LLM simulations",
-    ],
-    image: "/images/paper-synth-2025.jpg",
-    imageAlt: "Page from Gröner & Chiou, under review.",
-    links: [
-      // { label: "Project page", href: "#projects" },
-      // { label: "Read details", href: "#projects" },
+    title: "Can LLM simulations replace human participants?",
+    media: [
+      {
+        image: "/images/synthetic-participants2.jpg",
+        imageAlt: "Presentation slide on synthetic participants",
+        paragraph:
+          "What makes us human? In my dissertation, I identify cognitive differences between people and LLM systems, and derive how LLM agents need to be engineered to produce more humanlike experiment results.",
+      },
+      {
+        image: "/images/synthetic-participants.jpg",
+        imageAlt: "Presentation slide on synthetic participants",
+        paragraph:
+          "I replicate a broad range of experiments covering human factors and cognitive psychology, then evaluate how closely the responses of LLMs match those of human participants, quantitatively and qualitatively.",
+      },
+      {
+        image: "/images/synthetic-participants3.jpg",
+        imageAlt: "Presentation slide on synthetic participants",
+        paragraph:
+          "This case study (under review) compares how human (n=30) and synthetic (n=48) participants apply writing styles when editing summaries for a given target audience.",
+      },
     ],
   },
   {
-    id: "paper-comp-2025",
+    id: "llm-interaction-engineering",
     track: "researcher",
-    title: "Human-LLM Interaction Engineering",
-    eyebrow: "Literature Review",
-    summary:
-      "Reviewed 39 empirical studies to catalogue engineering approaches, and categorize them on three dimensions",
-    bullets: [
-      "Identified intervention purpose, step, and method as the dimensions of a new framework",
-      "Showed which approaches are popular and which ones are under-explored",
-      "Uncovered general issues of the the current literature",
-    ],
-    image: "/images/paper-comp-2025.jpg",
-    imageAlt: "Page of Gröner & Chiou, 2025",
-    links: [
-      { label: "Read the Preprint", href: "https://ssrn.com/abstract=6505859" },
+    title: "Human-LLM interaction engineering",
+    media: [
+      {
+        image: "/images/lit-rev.jpg",
+        imageAlt: "Poster presented at the ASU AI Pre-Summit",
+        paragraph:
+          "In this literature review, I cataloged 39 empirical studies and derived three dimensions of engineering: purpose, step, and method. I identify popular and under-explored approaches and point out systematic issues in the literature.",
+        link: { label: "Read the preprint", href: "https://ssrn.com/abstract=6505859" },
+      },
+      {
+        image: "/images/llm-mm-ui.jpg",
+        imageAlt: "Figures from Gröner and Chiou, 2024",
+        paragraph:
+          "In this study, participants (n=45) saw a range of prompts typed into one of three UI designs and indicated their confidence that the chatbot will produce a good response. Aesthetic maniupulations did not change people's expectations.",
+        link: { label: "Read the conference paper", href: "https://doi.org/10.1177/10711813241260399" }
+      },
+      {
+        image: "/images/megawatt-conditions.jpg",
+        imageAlt: "Experimental conditions of the LLM transparency study",
+        paragraph:
+          "In this sponsored project, we developed an LLM system through iterative prompt engineering to follow best practises of the intelligence analysis community. The increased transparency did not lead to more verification behavior or better performance.",
+      },
     ],
   },
-  {
-    id: "paper-hfes-2024",
-    track: "researcher",
-    title: "What do People Expect from LLMs?",
-    eyebrow: "Appropriate Reliance",
-    summary:
-      "Asked 45 participants for their confidence that a chatbot would be capable of 26 tasks, varying the UI design between subjects.",
-    bullets: [
-      "People have clear expectations for chatbots' capabilities",
-      "Drastic aesthetic differences in design did not produce systematically different expectations",
-    ],
-    image: "/images/paper-hfes-2024.jpg",
-    imageAlt: "Title page of Gröner & Chiou, 2024",
-    links: [
-      { label: "Read the Conference Paper", href: "https://doi.org/10.1177/10711813241260399" },
-    ],
-  },
+  // {
+  //   id: "paper-hfes-2024",
+  //   track: "researcher",
+  //   title: "What do People Expect from LLMs?",
+  //   media: [
+  //     {
+  //       image: "/images/paper-hfes-2024.jpg",
+  //       imageAlt: "Title page of Groener & Chiou, 2024",
+  //       paragraph:
+  //         "Asked 45 participants for their confidence that a chatbot would be capable of 26 tasks, varying the UI design between subjects.",
+  //       link: {
+  //         label: "Read the Conference Paper",
+  //         href: "https://doi.org/10.1177/10711813241260399",
+  //       },
+  //     },
+  //     {
+  //       image: "/images/paper-hfes-2024.jpg",
+  //       imageAlt: "Title page of Groener & Chiou, 2024",
+  //       paragraph:
+  //         "Participants had clear expectations for chatbot capabilities, suggesting that people bring structured assumptions into LLM use before an interaction begins.",
+  //     },
+  //     {
+  //       image: "/images/paper-hfes-2024.jpg",
+  //       imageAlt: "Title page of Groener & Chiou, 2024",
+  //       paragraph:
+  //         "Drastic aesthetic differences in chatbot design did not produce systematically different expectations in this study.",
+  //     },
+  //   ],
+  // },
   {
     id: "project-lern-2026",
     track: "developer",
-    title: "LLM Pipeline to Generate Interactive Tutorial Websites",
-    eyebrow: "LangChain",
-    summary:
-      "From a short topic prompt to a full, interactive tutorial page",
-    bullets: [
-      "LangGraph orchestrates workflow including tutorial draft, website generation, code review, visual review, pedagogical review, and code fixing",
-      "Prompt engineering informed by Learning Engineering science",
-      "Uses a combination of OpenAI's GPT-5 and Google's Gemini 3",
+    title: "LLM pipeline to generate interactive tutorial websites",
+    media: [
+      {
+        image: "/images/tutorial-generator-demo-2.mp4",
+        imageAlt: "Screenshot of tutorial generator",
+        paragraph:
+          "Students learn better from interactive experiments. This app generates tutorial pages, with prompts backed by learning science.",
+        link: { label: "Open the app", href: "https://tutorial-generator.felixgroener.de/" },
+      },
+      {
+        image: "/images/tutorial-generator-flow.jpg",
+        imageAlt: "Tutorial generator workflow",
+        paragraph:
+          "LangGraph orchestrates the workflow, including iterative refinement. It interfacees with the OpenAI and Gemini APIs for different tasks.",
+        link: {
+          label: "Read the conference paper",
+          href: "https://lern.edtechbooks.org/lern_2026/lwftkgxnbu",
+        },
+      },
+      {
+        image: "/images/tutorial-generator-demo-1.mp4",
+        imageAlt: "Screenshot of tutorial generator",
+        paragraph:
+          "The core UX challenges were to ensure generative AI code quality using linting and playwright, and making the loading process transparent to users.",
+        link: { label: "Check the code", href: "https://github.com/groenerfelix/tutorial-generator-v2" },
+      },
     ],
-    image: "/images/screenshot-tutorial-generator.jpg",
-    imageAlt: "Screenshot of tutorial generator",
-    links: [
-      { label: "Visit project page", href: "https://tutorial-generator.felixgroener.de/" },
-      { label: "Read the Conference Paper", href: "https://lern.edtechbooks.org/lern_2026/lwftkgxnbu" },
-      { label: "See on GitHub", href: "https://github.com/groenerfelix/tutorial-generator-v2" },
+  },
+  {
+    id: "project-mcsr-2026",
+    track: "developer",
+    title: "Player data analysis platform",
+    media: [
+      {
+        image: "/images/eyespy-demo-1.mp4",
+        imageAlt: "Screenshot of the player statistics analysis platform",
+        paragraph:
+          "Providing valuable insights for players into their performance data, this app interfaces with the official game API. It shows the most impactful information at a glance and provides more detailed breakdowns through progressive disclosure.",
+        link: { label: "Open the app", href: "https://eyespy.nikosiaphd.com/" },
+      },
+      {
+        image: "/images/eyespy-demo-2.mp4",
+        imageAlt: "Screenshot of the player statistics analysis platform",
+        paragraph:
+          "The primary UX challenges were to make data analyses and visualizations intuitive to understand (violin plots, Gantt chart, simplified labels), make the app memorable by adding delightful microinteractions, and keep polished aesthetics even during complex, staggered loading states.",
+          link: { label: "See on GitHub", href: "https://github.com/NikosiaPhD/mcsr-analysis" },
+      },
     ],
   },
   {
     id: "project-next-2026",
     track: "developer",
-    title: "Human-LLM Interaction Experimentation Platform with NextJS",
-    eyebrow: "Chatbot",
-    summary:
-      "We needed a custom solution to manipulate LLM behavior, have full control over the user experience, and record all interaction",
-    bullets: [
-      "Full-stack project using NextJS, React, Tailwind CSS, Postgres database",
-      "Tested in two experiments",
-      "Pages are dynamically built following a questionnaire json",
-    ],
-    image: "/images/screenshot-next.jpg",
-    imageAlt: "Screenshot of the chatbot experimentation platform",
-    links: [ ],
-  },
-  {
-    id: "project-mcsr-2026",
-    track: "developer",
-    title: "Data Analysis and Player Comparison App",
-    eyebrow: "Data Science",
-    summary:
-      "Fetching player and speedrun data from official game API, run calculations, provide insights",
-    bullets: [
-      "Identify players' strengths and weaknesses",
-      "Calculate outcome prediction for two players",
-      "Show improvement over time",
-    ],
-    image: "/images/screenshot-mcsr.jpg",
-    imageAlt: "Screenshot of the player statistics analysis platform",
-    links: [
-      { label: "Visit project page", href: "https://eyespy.nikosiaphd.com/" },
-      { label: "See on GitHub", href: "https://github.com/NikosiaPhD/mcsr-analysis" },
+    title: "Custom human-LLM interaction experimentation platform",
+    media: [
+      {
+        image: "/images/screenshot-llm-survey.jpg",
+        imageAlt: "Screenshot of the chatbot experimentation platform",
+        paragraph:
+          "For my experiments I needed to manipulate LLM behavior, control the user experience, and record behavioral data. The goal was to minimize friction for using a chatbot (e.g., copy-paste buttons). This app was built with NextJS with a PostgreSQL DB and used in two experiments so far.",
+      }
     ],
   },
 ]

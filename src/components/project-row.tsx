@@ -17,35 +17,34 @@ export function ProjectRow({ project }: ProjectRowProps) {
         }
       </div>
 
-      <div className="space-y-3">
-        <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
-          <h3 className="max-w-3xl text-2xl font-medium tracking-tight text-foreground">
-            {project.title}
-          </h3>
-        </div>
-
+      <div className="">
+        <h3 className="max-w-3xl text-2xl font-medium tracking-tight text-foreground leading-7 pb-1">
+          {project.title}
+        </h3>
+        {project.publication_info && 
+          <div className="text-sm text-foreground/56">
+            {project.publication_info}
+          </div>
+        }
         {project.authors && 
           <div className="text-sm text-foreground/56">
             {project.authors}
           </div>
         }
 
-        <p className="max-w-4xl text-base leading-7 text-foreground/72">
+
+        <p className="max-w-4xl pt-4 text-foreground/72">
           {project.summary}
         </p>
 
-        {project.publication_info && 
-          <div className="text-sm text-foreground/56">
-            {project.publication_info}
-          </div>
-        }
 
         <div className="flex flex-wrap gap-5 pt-1">
           {project.links.map((link) => (
             <a
               key={link.label}
-              className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-foreground"
+              className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary underline"
               href={link.href}
+              target="_blank"
             >
               {link.label}
               <ArrowUpRight className="size-4" />

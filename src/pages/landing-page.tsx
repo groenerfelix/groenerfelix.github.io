@@ -1,5 +1,5 @@
-import { ArrowRight } from "lucide-react"
-import { useState } from "react"
+import { ArrowRight, ArrowUp } from "lucide-react"
+import { useState, useRef } from "react"
 
 import { FeaturedWorkRow } from "@/components/featured-work-row"
 import { SegmentedToggle } from "@/components/segmented-toggle"
@@ -11,10 +11,10 @@ import { Separator } from "@/components/ui/separator"
 
 function HeroSection() {
   return (
-    <section className="min-h-[65vh] w-full flex flex-col gap-16 justify-center select-none">
+    <section className="min-h-[65vh] w-full flex flex-col gap-8 justify-center select-none">
 
       <div className="flex flex-col md:pt-0 lg:flex-row justify-center items-center gap-12">
-        <div className="w-82.5 aspect-square rounded-full border-[3px] border-primary/70 overflow-hidden relative after:absolute after:inset-0 after:bg-primary after:mix-blend-multiply after:opacity-10">
+        <div className="w-82.5 aspect-square rounded-full border-[3px] border-primary/70 overflow-hidden relative after:absolute after:inset-0 after:bg-background after:mix-blend-multiply after:opacity-10">
           <picture>
             <source srcSet="/images/portrait.avif" type="image/avif" />
             <img
@@ -45,24 +45,71 @@ function HeroSection() {
   )
 }
 
-type LandingPageProps = {
-  onNavigate: (route: RouteId) => void
-}
-
-import ResearchSVG from '@/components/svg/undraw_data-trends_kv5v.svg?react';
-import DesignSVG from '@/components/svg/undraw_approved-wireframe_odf4.svg?react';
-import DevelopmentSVG from '@/components/svg/undraw_code-sample_kpju.svg?react';
+import { 
+    ResearchSVG,
+    DesignSVG,
+    DevelopmentSVG
+} from '@/components/svg';
 
 const developmentCycleSvgClass =
-  "h-auto w-full max-w-full transition-colors duration-500 text-muted-foreground hover:text-primary"
+  "h-auto w-full max-w-full transition-colors duration-500 text-muted-foreground group-hover:text-primary"
+
+function LandingBackground() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute left-1/2 top-0 -z-10 h-svh w-full -translate-x-1/2 overflow-hidden"
+    >
+      <div
+        className="absolute inset-x-[-10%] top-0 h-[88svh] opacity-[0.16] bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-size-[72px_72px]"
+        style={{
+          WebkitMaskImage:
+            "linear-gradient(186deg, #000 0%, #000 42%, rgba(0,0,0,0.72) 62%, rgba(0,0,0,0.22) 82%, transparent 100%)",
+          maskImage:
+            "linear-gradient(186deg, #000 0%, #000 42%, rgba(0,0,0,0.72) 62%, rgba(0,0,0,0.22) 82%, transparent 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-x-[-10%] top-0 h-[88svh] opacity-70 bg-size-[72px_72px]"
+        style={{
+          backgroundImage:
+            "linear-gradient(color-mix(in oklch, var(--primary) 6%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklch, var(--primary) 6%, transparent) 1px, transparent 1px)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at 50% 33%, #000 0%, rgba(0,0,0,0.85) 19%, rgba(0,0,0,0.38) 38%, transparent 58%)",
+          maskImage:
+            "radial-gradient(ellipse at 50% 33%, #000 0%, rgba(0,0,0,0.85) 19%, rgba(0,0,0,0.38) 38%, transparent 58%)",
+        }}
+      />
+    </div>
+  )
+}
 
 
-export function LandingPage({ onNavigate }: LandingPageProps) {
+export function LandingPage({ onNavigate }: { onNavigate: (route: RouteId) => void }) {
   const [track, setTrack] = useState<LandingTrack>("developer")
   const trackProjects = featuredProjects.filter((project) => project.track === track)
+  const featuredSection = useRef<HTMLDivElement>(null)
+
+  const scrollToFeaturedSection = async () => {
+  return new Promise(() => {
+    // 1. Listen for the scrollend event
+    const handleScrollEnd = () => {
+      window.removeEventListener('scrollend', handleScrollEnd);
+      setTrack(track === "developer" ? "researcher" : "developer");
+      // resolve()
+    };
+    window.addEventListener('scrollend', handleScrollEnd);
+    
+    // 2. Start the scroll
+    featuredSection.current?.scrollIntoView({ behavior: 'smooth' });
+  });
+};
 
   return (
-    <div className="max-w-360 mx-auto flex flex-col px-4 md:px-16">
+    <>
+    <LandingBackground />
+    <div className="relative isolate max-w-360 mx-auto flex flex-col px-4 md:px-16">
+
       <HeroSection />
 
       <section className="space-y-16">
@@ -75,7 +122,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           </p>
         </div>
         <div className="grid w-full max-w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-4">
-          <div className="space-y-6 mx-auto">
+          <div className="space-y-6 mx-auto group">
             <ResearchSVG
               className={developmentCycleSvgClass}
             />
@@ -87,19 +134,19 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
             </div>
           </div>
           <Separator orientation={"vertical"} className="mx-4"/>
-          <div className="space-y-6 mx-auto">
+          <div className="space-y-6 mx-auto group">
             <DesignSVG
               className={developmentCycleSvgClass}
             />
             <div>
               <h3 className="px-2 leading-10">Intuitive Interaction Design</h3>
               <p className="px-2 text-muted-foreground text-balance">
-                Creating intuitive flows, enrichting experiences, respecting cognitive patterns, and guiding towards appropriate use. 
+                Creating seamless flows, enriching experiences, respecting cognitive patterns, and guiding towards appropriate use. 
               </p>
             </div>
           </div>
           <Separator orientation={"vertical"} className="mx-4"/>
-          <div className="space-y-6 mx-auto">
+          <div className="space-y-6 mx-auto group">
             <DevelopmentSVG
               className={developmentCycleSvgClass}
             />
@@ -114,7 +161,7 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
 
       </section>
 
-      <Separator orientation="horizontal" className="my-32" />
+      <Separator orientation="horizontal" className="my-32" ref={featuredSection} />
 
       <section className="space-y-8">
         <SegmentedToggle
@@ -127,31 +174,21 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
           value={track}
         />
 
-        <h2 className="font-semibold tracking-tight text-foreground text-5xl mt-32 mb-16 text-center text-balance">
-          {track === "researcher" ? "Human-LLM Interaction Researcher" : "Full-Stack Web Applications Featuring LLMs"}
+        <h2 className="font-semibold tracking-tight text-foreground text-5xl mt-32 mb-8 text-center text-balance">
+          {track === "researcher" ? "Quantitative and qualitative research at the intersection of Human Factors and AI" : "Full-Stack Web Applications Featuring LLMs"}
         </h2>
         {track === "researcher" ? 
-          <p className="text-base leading-8 text-foreground/72 sm:text-lg">
-            <p>Quantitative and qualitative science at the intersection of Human Factors and AI, currently researching:</p>
-            <ul className="list-disc pl-6 pt-1 space-y-1 text-md">
-              <li>What <b>expectations</b> do people have for LLM applications?</li>
-              <li>What <b>transparency</b> measures guide people to appropriate use?</li>
-              <li>Can we use <b>synthetic participants</b> in our research?</li>
-            </ul>
+          <p className="text-center text-muted-foreground text-2xl tracking-tight text-balance max-w-4xl mx-auto">
+            Innovative, impactful, and passionate science integrating system-level thinking and individuals. Understanding mental models, managing expectations, guiding attention, and ensuring appropriate reliance for generative AI consumer applications.
           </p>
           :
-          <div className="w-full flex items-center justify-center gap-x-16 gap-y-4 px-8 flex-wrap lg:flex-nowrap">
+          <div className="w-full flex items-center justify-center gap-x-16 gap-y-4 px-8 mt-16 flex-wrap lg:flex-nowrap">
             {stackLogos.map((logo) => (
               <span
                 className="inline-flex items-center gap-2 text-xl font-bold text-muted-foreground cursor-default select-none"
-                key={logo.imageName}
+                key={logo.label}
               >
-                <img
-                  alt=""
-                  aria-hidden="true"
-                  className="h-8 w-8 object-contain"
-                  src={`/logos/${logo.imageName}.svg`}
-                />
+                <logo.logo className="size-8"/>
                 {logo.label}
               </span>
             ))}
@@ -167,19 +204,38 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
         </div>
 
 
-        <div className="w-full flex flex-col items-center gap-2">
-          <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
+        <div className="w-full max-w-xl mx-auto grid grid-cols-[1fr_auto_1fr] justify-center gap-8">
+          <span className="mt-2 uppercase tracking-[0.2em] text-primary text-right">
             Next stop
           </span>
-          <Button
-            className="font-bold text-2xl px-8 py-6 underline transition-colors hover:text-foreground"
-            onClick={() => onNavigate("projects")}
-            variant="link"
-          >
-            See all projects <ArrowRight className="size-6" />
-          </Button>
+          <Separator orientation="vertical"/>
+          <div>
+            <Button
+              className="text-sm underline transition-colors text-muted-foreground hover:text-primary"
+              onClick={scrollToFeaturedSection}
+              variant="link"
+            >
+              <ArrowUp className="size-4" /> See featured {track === "developer" ? "research" : "software"} projects 
+            </Button>
+            <Button
+              className="underline transition-colors text-muted-foreground hover:text-primary"
+              onClick={() => onNavigate("projects")}
+              variant="link"
+              size={"sm"}
+            >
+              <ArrowRight className="size-4" /> See all projects 
+            </Button>
+            <Button
+              className="text-sm underline transition-colors text-muted-foreground hover:text-primary"
+              onClick={() => onNavigate("cv")}
+              variant="link"
+            >
+              <ArrowRight className="size-4" /> See my CV 
+            </Button>
+          </div>
         </div>
       </section>
     </div>
+    </>
   )
 }
