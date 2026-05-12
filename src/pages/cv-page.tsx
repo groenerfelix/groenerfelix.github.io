@@ -2,6 +2,7 @@ import { useState } from "react"
 import { SegmentedToggle } from "@/components/segmented-toggle"
 import { TimelineRow } from "@/components/timeline-row"
 import { educationEntries, workEntries, cvDownloadLink } from "@/data/cv"
+import { LinkButton } from "@/components/ui/button"
 
 type CvTrack = "degrees" | "work"
 
@@ -10,40 +11,21 @@ export function CvPage() {
   const entries = track === "degrees" ? educationEntries : workEntries
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-12 px-5 pt-12 pb-20 md:px-8 md:pt-16 md:pb-28">
-      <div className="flex flex-col gap-6 pt-24 pb-8 md:flex-row md:items-end md:justify-between">
-      <div className="max-w-3xl space-y-4">
-        <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+    <div className="mx-auto max-w-360 w-full flex flex-col space-y-32 py-32 px-4 md:px-16">
+      <div className="flex flex-col space-y-2 h-48">
+        <h1 className="font-semibold tracking-tight text-foreground text-5xl">
           Curriculum Vitae
-        </h2>
-        <p className="text-base leading-8 text-foreground/72 sm:text-lg">
-          A complete timeline of my academic background and professional experience.
+        </h1>
+        <p className="h-32 text-2xl tracking-tight leading-8 text-muted-foreground text-balance">
+          A timeline of my academic background and professional experience.
         </p>
-        <a 
-          href={cvDownloadLink.href}
-          target="_blank"
-          className="group text-primary hover:text-foreground transition-colors underline inline-flex items-center gap-1"
-          >
-            <span
-              aria-hidden="true"
-              className="inline-flex size-5 bg-primary group-hover:bg-foreground transition-colors"
-              style={{
-                WebkitMaskImage: `url(${cvDownloadLink.iconSrc})`,
-                WebkitMaskPosition: "center",
-                WebkitMaskRepeat: "no-repeat",
-                WebkitMaskSize: "contain",
-                maskImage: `url(${cvDownloadLink.iconSrc})`,
-                maskPosition: "center",
-                maskRepeat: "no-repeat",
-                maskSize: "contain",
-              }}
-            />
+        <p>
+          <LinkButton href={cvDownloadLink.href} iconClassName="size-5">
             Open my CV as a PDF
-          </a>
+          </LinkButton>
+        </p>
       </div>
-      
-    </div>
-      <section className="space-y-8">
+      <section className="space-y-32">
         <SegmentedToggle
           label="I'm interested in"
           onChange={setTrack}

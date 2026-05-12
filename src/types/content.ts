@@ -49,6 +49,6 @@ export type TimelineEntry = {
   title: string
   org: string
   timespan: [string, string]
-  bullets: string[]
+  bullets: React.ReactNode[]
   keywords: string[]
 }

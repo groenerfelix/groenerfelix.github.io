@@ -1,5 +1,6 @@
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
+import { ArrowRight, ArrowUpRight, ArrowUp, Download } from "lucide-react"
 import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
@@ -18,7 +19,7 @@ const buttonVariants = cva(
           "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline-offset-4 hover:underline",
+        link: "text-muted-foreground underline underline-offset-4 hover:text-primary",
       },
       size: {
         default:
@@ -62,4 +63,133 @@ function Button({
   )
 }
 
-export { Button, buttonVariants }
+type LinkButtonKind = "external" | "file" | "internal" | "same-page"
+
+const fileExtensions = [
+  "avif",
+  "csv",
+  "doc",
+  "docx",
+  "gif",
+  "jpeg",
+  "jpg",
+  "mov",
+  "mp3",
+  "mp4",
+  "pdf",
+  "png",
+  "ppt",
+  "pptx",
+  "rtf",
+  "svg",
+  "txt",
+  "wav",
+  "webp",
+  "xls",
+  "xlsx",
+  "zip",
+]
+
+function inferLinkButtonKind(href = ""): LinkButtonKind {
+
+  if(!href) {return "same-page"}
+
+  const pathname = href.split(/[?#]/)[0] ?? ""
+  const extension = pathname.split(".").pop()?.toLowerCase()
+
+  if (extension && fileExtensions.includes(extension)) {
+    return "file"
+  }
+
+  if (/^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(href) || /^[a-z][a-z0-9+.-]*:/i.test(href)) {
+    return "external"
+  }
+
+  return "internal"
+}
+
+function shouldOpenInNewTab(kind: LinkButtonKind, href = "") {
+  if (kind === "internal" || /^(mailto|tel):/i.test(href)) {
+    return false
+  }
+
+  return true
+}
+
+function LinkButtonIcon({
+  className,
+  icon,
+  kind,
+}: {
+  className?: string
+  icon?: React.ComponentType<React.SVGProps<SVGSVGElement>> | false
+  kind: LinkButtonKind
+}) {
+  if (icon === false) {
+    return null
+  }
+
+  if (icon) {
+    return React.createElement(icon, {
+      "aria-hidden": true,
+      className,
+    })
+  }
+
+  if (kind === "file") {
+    return <Download aria-hidden="true" className={className} />
+  }
+
+  if (kind === "external") {
+    return <ArrowUpRight aria-hidden="true" className={className} />
+  }
+
+  if (kind === "same-page") {
+    return <ArrowUp aria-hidden="true" className={className} />
+  }
+
+  return <ArrowRight aria-hidden="true" className={className} />
+}
+
+type LinkButtonProps = Omit<React.ComponentProps<"a">, "children"> &
+  VariantProps<typeof buttonVariants> & {
+    children: React.ReactNode
+    icon?: React.ComponentType<React.SVGProps<SVGSVGElement>> | false
+    iconClassName?: string
+    textClassName?: string
+  }
+
+function LinkButton({
+  className,
+  href,
+  icon,
+  iconClassName = "size-4",
+  rel,
+  target,
+  textClassName,
+  variant = "link",
+  size = "default",
+  children,
+  ...props
+}: LinkButtonProps) {
+  const kind = inferLinkButtonKind(href)
+  const linkTarget = target ?? (shouldOpenInNewTab(kind, href) ? "_blank" : undefined)
+  const linkRel = linkTarget === "_blank" ? (rel ?? "noreferrer") : rel
+
+  return (
+    <Button asChild className={cn("h-auto px-0 text-sm font-medium text-muted-foreground no-underline hover:text-primary gap-1", className)} size={size} variant={variant}>
+      <a
+        href={href}
+        rel={linkRel}
+        target={linkTarget}
+        {...props}
+      >
+        <span className={cn("underline underline-offset-4" , textClassName)}>{children}</span>
+        <LinkButtonIcon className={iconClassName} icon={icon} kind={kind} />
+      </a>
+    </Button>
+  )
+}
+
+
+export { Button, LinkButton, buttonVariants }

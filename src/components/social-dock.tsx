@@ -16,7 +16,6 @@ export function SocialDock() {
       onMouseMove={(event) => setPointerX(event.clientX)}
     >
       {socialLinks.map((link, index) => {
-        // const iconSrc = link.iconSrc ?? `/logos/${iconSrcMap[link.label]}`
         const rect = itemRefs.current[index]?.getBoundingClientRect()
         const itemCenter = rect ? rect.left + rect.width / 2 : null
         const distance =

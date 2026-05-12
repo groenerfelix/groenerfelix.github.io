@@ -137,27 +137,27 @@ export function ProjectsPage() {
   }
 
   return (
-    <div className="mx-auto flex max-w-7xl flex-col gap-12 px-5 pb-20 pt-12 md:px-8 md:pb-28 md:pt-16">
-      <div className="max-w-3xl space-y-4">
-        <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+    <div className="mx-auto max-w-360 w-full flex flex-col py-32 px-4 md:px-16">
+      <div className="flex flex-col space-y-2">
+        <h1 className="font-semibold tracking-tight text-foreground text-5xl">
           All my projects
-        </h2>
-        <p className="text-base leading-8 text-foreground/72 sm:text-lg">
+        </h1>
+        <p className="text-2xl tracking-tight leading-8 text-muted-foreground text-balance">
           Search through all my publications, talks, coding projects, and other experiments.
         </p>
       </div>
 
-      <InterestCheckboxGroup
-        onToggle={(type) =>
-          setTypeFilters((current) => ({
-            ...current,
-            [type]: !current[type],
-          }))
-        }
-        value={typeFilters}
-      />
 
-      <section className=" py-8">
+      <section className="pt-32 pb-16 space-y-16 w-full max-w-6xl mx-auto">
+        <InterestCheckboxGroup
+          onToggle={(type) =>
+            setTypeFilters((current) => ({
+              ...current,
+              [type]: !current[type],
+            }))
+          }
+          value={typeFilters}
+          />
         <div className="space-y-6">
           <FilterGroup
             label="Project type"
@@ -213,7 +213,7 @@ export function ProjectsPage() {
         </div>
       </section>
 
-      <section>
+      <section className="w-full max-w-6xl mx-auto">
         { filteredProjects.length === 0 && 
           <div className="pb-4 text-sm text-foreground/45">
             No matching entries; try adjusting the filters.

@@ -51,7 +51,7 @@ export function InterestCheckboxGroup({
                   "group flex min-h-0 cursor-pointer items-center justify-between gap-3 rounded-[1.25rem] border px-4 py-3 text-left transition-all duration-300",
                   isActive
                     ? "border-primary bg-primary text-primary-foreground hover:bg-primary/75"
-                    : "border-border bg-background/55 text-foreground hover:border-primary/45 hover:bg-muted/60"
+                    : "border-border bg-background/55 text-muted-foreground hover:border-primary/45 hover:bg-accent hover:text-foreground"
                 )}
                 onClick={() => onToggle(option.value)}
                 type="button"

@@ -1,13 +1,70 @@
-import { ArrowRight, ArrowUp } from "lucide-react"
 import { useState, useRef } from "react"
-
 import { FeaturedWorkRow } from "@/components/featured-work-row"
 import { SegmentedToggle } from "@/components/segmented-toggle"
 import { SocialDock } from "@/components/social-dock"
-import { Button } from "@/components/ui/button"
+import { LinkButton } from "@/components/ui/button"
 import { featuredProjects, stackLogos } from "@/data/featured"
 import type { RouteId, LandingTrack } from "@/types/content"
 import { Separator } from "@/components/ui/separator"
+import { ResearchSVG, DesignSVG, DevelopmentSVG } from '@/components/svg';
+
+
+function OverviewGraphics() {
+  
+  const developmentCycleSvgClass =
+    "h-auto w-full max-w-full transition-colors duration-500 text-muted-foreground group-hover:text-primary"
+
+  return (
+    <section className="space-y-16">
+      <div className="space-y-2">
+        <h2 className="text-5xl font-medium tracking-tighter text-balance">
+          Owning the entire development cycle
+        </h2>
+        <p className="text-muted-foreground text-2xl tracking-tight">
+          Bridging research, design, and technology; transforming abstract ideas into shippable products.
+        </p>
+      </div>
+      <div className="grid w-full max-w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-4">
+        <div className="space-y-6 mx-auto group">
+          <ResearchSVG
+            className={developmentCycleSvgClass}
+          />
+          <div>
+            <h3 className="px-2 leading-10">Human Factors Research</h3>
+            <p className="px-2 text-muted-foreground text-balance">
+              Identifying contextual user needs, defining evaluation metrics, and conceptualizing quantitative & qualitative experiments.
+            </p>
+          </div>
+        </div>
+        <Separator orientation={"vertical"} className="mx-4"/>
+        <div className="space-y-6 mx-auto group">
+          <DesignSVG
+            className={developmentCycleSvgClass}
+          />
+          <div>
+            <h3 className="px-2 leading-10">Intuitive Interaction Design</h3>
+            <p className="px-2 text-muted-foreground text-balance">
+              Creating seamless flows, enriching experiences, respecting cognitive patterns, and guiding towards appropriate use. 
+            </p>
+          </div>
+        </div>
+        <Separator orientation={"vertical"} className="mx-4"/>
+        <div className="space-y-6 mx-auto group">
+          <DevelopmentSVG
+            className={developmentCycleSvgClass}
+          />
+          <div>
+            <h3 className="px-2 leading-10">Iterative Prototype Development</h3>
+            <p className="px-2 text-muted-foreground text-balance">
+              Architecting end-to-end, shipping fast, planning strategic roadmaps, coordinating with stakeholders. 
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  )
+}
 
 function HeroSection() {
   return (
@@ -45,14 +102,7 @@ function HeroSection() {
   )
 }
 
-import { 
-    ResearchSVG,
-    DesignSVG,
-    DevelopmentSVG
-} from '@/components/svg';
 
-const developmentCycleSvgClass =
-  "h-auto w-full max-w-full transition-colors duration-500 text-muted-foreground group-hover:text-primary"
 
 function LandingBackground() {
   return (
@@ -112,54 +162,7 @@ export function LandingPage({ onNavigate }: { onNavigate: (route: RouteId) => vo
 
       <HeroSection />
 
-      <section className="space-y-16">
-        <div className="space-y-2">
-          <h2 className="text-5xl font-medium tracking-tighter text-balance">
-            Owning the entire development cycle
-          </h2>
-          <p className="text-muted-foreground text-2xl tracking-tight">
-            Bridging research, design, and technology; transforming abstract ideas into shippable products.
-          </p>
-        </div>
-        <div className="grid w-full max-w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-4">
-          <div className="space-y-6 mx-auto group">
-            <ResearchSVG
-              className={developmentCycleSvgClass}
-            />
-            <div>
-              <h3 className="px-2 leading-10">Human Factors Research</h3>
-              <p className="px-2 text-muted-foreground text-balance">
-                Identifying contextual user needs, defining evaluation metrics, and conceptualizing quantitative & qualitative experiments.
-              </p>
-            </div>
-          </div>
-          <Separator orientation={"vertical"} className="mx-4"/>
-          <div className="space-y-6 mx-auto group">
-            <DesignSVG
-              className={developmentCycleSvgClass}
-            />
-            <div>
-              <h3 className="px-2 leading-10">Intuitive Interaction Design</h3>
-              <p className="px-2 text-muted-foreground text-balance">
-                Creating seamless flows, enriching experiences, respecting cognitive patterns, and guiding towards appropriate use. 
-              </p>
-            </div>
-          </div>
-          <Separator orientation={"vertical"} className="mx-4"/>
-          <div className="space-y-6 mx-auto group">
-            <DevelopmentSVG
-              className={developmentCycleSvgClass}
-            />
-            <div>
-              <h3 className="px-2 leading-10">Iterative Prototype Development</h3>
-              <p className="px-2 text-muted-foreground text-balance">
-                Architecting end-to-end, shipping fast, planning strategic roadmaps, coordinating with stakeholders. 
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </section>
+      <OverviewGraphics />
 
       <Separator orientation="horizontal" className="my-32" ref={featuredSection} />
 
@@ -209,29 +212,30 @@ export function LandingPage({ onNavigate }: { onNavigate: (route: RouteId) => vo
             Next stop
           </span>
           <Separator orientation="vertical"/>
-          <div>
-            <Button
-              className="text-sm underline transition-colors text-muted-foreground hover:text-primary"
+          <div className="flex flex-col items-start gap-2">
+            <LinkButton
               onClick={scrollToFeaturedSection}
-              variant="link"
             >
-              <ArrowUp className="size-4" /> See featured {track === "developer" ? "research" : "software"} projects 
-            </Button>
-            <Button
-              className="underline transition-colors text-muted-foreground hover:text-primary"
-              onClick={() => onNavigate("projects")}
-              variant="link"
-              size={"sm"}
+              See featured {track === "developer" ? "research" : "software"} projects
+            </LinkButton>
+            <LinkButton
+              href="#projects"
+              onClick={(event) => {
+                event.preventDefault()
+                onNavigate("projects")
+              }}
             >
-              <ArrowRight className="size-4" /> See all projects 
-            </Button>
-            <Button
-              className="text-sm underline transition-colors text-muted-foreground hover:text-primary"
-              onClick={() => onNavigate("cv")}
-              variant="link"
+              See all projects 
+            </LinkButton>
+            <LinkButton
+              href="#cv"
+              onClick={(event) => {
+                event.preventDefault()
+                onNavigate("cv")
+              }}
             >
-              <ArrowRight className="size-4" /> See my CV 
-            </Button>
+              See my CV 
+            </LinkButton>
           </div>
         </div>
       </section>

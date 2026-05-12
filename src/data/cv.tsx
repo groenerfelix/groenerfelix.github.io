@@ -1,11 +1,14 @@
 import type { TimelineEntry, SocialLink } from "@/types/content"
 import { Download } from "@/components/svg"
+import { LinkButton } from "@/components/ui/button"
 
 export const cvDownloadLink: SocialLink = {
   label: "CV PDF",
   href: "/cv_felix_groener_2026_04.pdf",
   logo: Download
 }
+
+
 
 export const educationEntries: TimelineEntry[] = [
   {
@@ -15,7 +18,26 @@ export const educationEntries: TimelineEntry[] = [
     timespan: ["2023", "Fall 2026 (expected graduation)"],
     bullets: [
       "Status: Ph.D. candidate | GPA: 4.0",
-      "Committee: Erin K. Chiou (advisor), D. Vaughn Becker, Nancy J. Cooke",
+      <span>
+        Committee:{" "}
+        <LinkButton
+          href="https://search.asu.edu/profile/3015725"
+        >
+          Erin K. Chiou
+        </LinkButton>
+        ,{" "}
+        <LinkButton
+          href="https://search.asu.edu/profile/61858"
+        >
+          D. Vaughn Becker
+        </LinkButton>
+        ,{" "}
+        <LinkButton
+          href="https://search.asu.edu/profile/559491"
+        >
+          Nancy J. Cooke
+        </LinkButton>
+      </span>,
       "Dissertation: Validating LLM-simulated synthetic participants for Human Factors research",
     ],
     keywords: ["User-Centered Design", "AI Safety", "Human-Computer Interaction"],

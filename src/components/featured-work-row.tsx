@@ -1,6 +1,5 @@
 import type { CSSProperties } from "react"
 import { useEffect, useState } from "react"
-import { ArrowUpRight } from "lucide-react"
 
 import {
   Carousel,
@@ -12,7 +11,7 @@ import {
 } from "@/components/ui/carousel"
 import { cn, getAvifSource } from "@/lib/utils"
 import type { FeaturedProject, FeaturedProjectMedia } from "@/types/content"
-import { Button } from "@/components/ui/button"
+import { Button, LinkButton } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 
 
@@ -95,7 +94,6 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
   }
 
   const activeLink = activeMedia.link
-  const isExternalLink = activeLink?.href.startsWith("http")
 
   return (
     <article className="space-y-16 border-t border-border py-10 md:py-34">
@@ -104,22 +102,18 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
           {project.title}
         </h3>
 
-        <div className="flex h-48 flex-col justify-between overflow-hidden">
+        <div className="h-48 flex flex-col justify-between overflow-hidden">
           <p className="max-w-2xl text-xl leading-8 text-muted-foreground text-balance">
             {activeMedia.paragraph}
           </p>
 
           <div>
             {activeLink ? (
-              <a
-                className="inline-flex cursor-pointer items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary underline"
+              <LinkButton
                 href={activeLink.href}
-                rel={isExternalLink ? "noreferrer" : undefined}
-                target={isExternalLink ? "_blank" : "_self"}
               >
                 {activeLink.label}
-                {isExternalLink ? <ArrowUpRight className="size-4" /> : null}
-              </a>
+              </LinkButton>
             ) : null}
           </div>
         </div>

@@ -29,14 +29,14 @@ export function TimelineRow({ entry }: TimelineRowProps) {
         </div>
 
         <ul className="space-y-3 text-sm leading-7 text-muted-foreground">
-          {entry.bullets.map((bullet) => (
-            <li key={bullet} className="flex gap-3 mb-0">
-              <span className="mt-3 h-px w-3 shrink-0 bg-border" />
+          {entry.bullets.map((bullet, index) => (
+            <li key={`${entry.id}-bullet-${index}`} className="flex gap-2 mb-0">
+              <span className="mt-3 h-px w-2 shrink-0 bg-border" />
               <span>{bullet}</span>
             </li>
           ))}
-          <li className="flex gap-3 mb-0">
-            <span className="mt-3 h-px w-3 shrink-0 bg-border" />
+          <li className="flex gap-2 mb-0">
+            <span className="mt-3 h-px w-2 shrink-0 bg-border" />
             <span>Topics: {topics}</span>
           </li>
         </ul>
