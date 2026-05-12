@@ -33,7 +33,7 @@ function App() {
       </main>
 
       <footer className="relative z-10 text-muted-foreground border-t border-border w-full flex flex-col items-center py-4 mt-16 text-sm gap-2">
-        <a className="cursor-pointer" href="mailto:fgroener@asu.edu">
+        <a className="cursor-pointer hover:text-foreground transition-colors" href="mailto:fgroener@asu.edu">
           fgroener@asu.edu
         </a>
         <p>Last updated in May 2026</p>

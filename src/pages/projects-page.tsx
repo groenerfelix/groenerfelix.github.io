@@ -188,7 +188,7 @@ export function ProjectsPage() {
             }))}
           />
 
-          <label className="block space-y-3 rounded-4xl border border-primary/50 focus:border-primary p-3">
+          <label className="block space-y-3 rounded-full border border-primary/50 focus:border-primary p-3">
 
             <span className="relative block">
               <Search className="pointer-events-none absolute left-0 top-1/2 size-4 -translate-y-1/2 text-primary/75" />
