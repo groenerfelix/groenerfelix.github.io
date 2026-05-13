@@ -46,7 +46,7 @@ export function SocialDock({ delay = 0 }: { delay?: number }) {
   return (
     <motion.div
       animate={reducedMotion ? undefined : "visible"}
-      className="mx-auto flex max-w-[90vw] py-3 gap-10 flex-row"
+      className="mx-auto flex max-w-[90vw] py-3 gap-10 flex-wrap flex-row items-center justify-center"
       custom={delay}
       initial={reducedMotion ? false : "hidden"}
       onMouseLeave={() => setPointerX(null)}

@@ -4,7 +4,7 @@ import { stackLogos } from "@/data/featured"
 import { cn } from "@/lib/utils"
 
 const rowClassName =
-  "w-full flex items-center justify-center gap-x-16 gap-y-4 px-8 py-8 flex-wrap lg:flex-nowrap"
+  "w-full flex items-center justify-center gap-x-16 gap-y-4 px-8 py-8 flex-wrap "
 
 const itemClassName =
   "inline-flex items-center gap-2 text-xl font-bold cursor-default select-none"

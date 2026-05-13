@@ -90,13 +90,13 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
   const activeLink = activeMedia.link
 
   return (
-    <article className="space-y-16 border-t border-border py-10 md:py-34">
+    <article className="space-y-10 border-t border-border py-16 md:space-y-16 md:py-34">
       <div className="grid gap-x-8 gap-y-8 md:grid-cols-2">
-        <h3 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h3 className="text-2xl font-semibold tracking-tight text-foreground sm:text-4xl">
           {project.title}
         </h3>
 
-        <div className="h-48 overflow-hidden">
+        <div className="overflow-hidden md:min-h-48">
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
@@ -110,13 +110,13 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
                   : { duration: 0.45, ease: featuredCopyEase }
               }
             >
-              <p className="max-w-2xl text-xl leading-8 text-balance text-muted-foreground">
+              <p className="max-w-2xl text-base sm:text-xl leading-6 sm:leading-8 text-balance text-muted-foreground">
                 {activeMedia.paragraph}
               </p>
 
               <div>
                 {activeLink ? (
-                  <LinkButton href={activeLink.href}>
+                  <LinkButton href={activeLink.href} className="mt-2">
                     {activeLink.label}
                   </LinkButton>
                 ) : null}
@@ -145,8 +145,8 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
 
         {project.media.length > 1 ? (
           <>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
 
             <div className="absolute left-1/2 flex -translate-x-1/2 gap-2 rounded-full px-3 py-4">
               {project.media.map((_, index) => (

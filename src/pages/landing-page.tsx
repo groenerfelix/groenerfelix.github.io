@@ -10,54 +10,57 @@ import { LinkButton } from "@/components/ui/button"
 import { featuredProjects } from "@/data/featured"
 import type { RouteId, LandingTrack } from "@/types/content"
 import { Separator } from "@/components/ui/separator"
-import { ResearchSVG, DesignSVG, DevelopmentSVG } from '@/components/svg';
+import { ResearchSVG, DesignSVG, DevelopmentSVG } from "@/components/svg"
 import { useReducedMotion } from "@/lib/utils"
 
 const easeOut = [0.22, 1, 0.36, 1] as const
 
 function OverviewGraphics() {
-  
   const developmentCycleSvgClass =
-    "h-auto w-full max-w-full transition-colors duration-500 text-muted-foreground group-hover:text-primary"
+    "h-auto w-full max-w-[67vw] mx-auto transition-colors duration-500 text-muted-foreground group-hover:text-primary "
 
   return (
-    <section className="space-y-16">
+    <section className="space-y-10 md:space-y-16 pt-16 lg:pt-0">
       <Entrance className="space-y-2" delay={2} y={10}>
-        <h2 className="text-5xl font-medium tracking-tighter text-balance">
+        <h2 className="text-4xl font-medium tracking-tighter text-balance sm:text-5xl">
           Owning the entire development cycle
         </h2>
-        <p className="text-muted-foreground text-2xl tracking-tight">
-          Bridging research, design, and technology; transforming abstract ideas into shippable products.
+        <p className="text-muted-foreground text-xl tracking-tight sm:text-2xl">
+          Bridging research, design, and technology; transforming abstract
+          ideas into shippable products.
         </p>
       </Entrance>
       <Entrance className="space-y-2" delay={2.1} y={10}>
-        <div className="grid w-full max-w-full grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] gap-4">
-          <div className="space-y-6 mx-auto group">
+        <div className="grid w-full max-w-full grid-cols-1 gap-10 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)] md:gap-4">
+          <div className="group mx-auto space-y-6">
             <ResearchSVG className={developmentCycleSvgClass} />
             <div>
               <h3 className="px-2 leading-10">Human Factors Research</h3>
-              <p className="px-2 text-muted-foreground text-balance">
-                Identifying contextual user needs, defining evaluation metrics, and conceptualizing quantitative & qualitative experiments.
+              <p className="px-2 text-muted-foreground md:text-balance">
+                Identifying contextual user needs, defining evaluation metrics,
+                and conceptualizing quantitative & qualitative experiments.
               </p>
             </div>
           </div>
-          <Separator orientation={"vertical"} className="mx-4"/>
-          <div className="space-y-6 mx-auto group">
+          <Separator orientation={"vertical"} className="mx-4 hidden md:block" />
+          <div className="group mx-auto space-y-6">
             <DesignSVG className={developmentCycleSvgClass} />
             <div>
               <h3 className="px-2 leading-10">Intuitive Interaction Design</h3>
-              <p className="px-2 text-muted-foreground text-balance">
-                Creating seamless flows, enriching experiences, respecting cognitive patterns, and guiding towards appropriate use. 
+              <p className="px-2 text-muted-foreground md:text-balance">
+                Creating seamless flows, enriching experiences, respecting
+                cognitive patterns, and guiding towards appropriate use.
               </p>
             </div>
           </div>
-          <Separator orientation={"vertical"} className="mx-4"/>
-          <div className="space-y-6 mx-auto group">
+          <Separator orientation={"vertical"} className="mx-4 hidden md:block" />
+          <div className="group mx-auto space-y-6">
             <DevelopmentSVG className={developmentCycleSvgClass} />
             <div>
               <h3 className="px-2 leading-10">Iterative Prototype Development</h3>
-              <p className="px-2 text-muted-foreground text-balance">
-                Architecting end-to-end, shipping fast, planning strategic roadmaps, coordinating with stakeholders. 
+              <p className="px-2 text-muted-foreground md:text-balance">
+                Architecting end-to-end, shipping fast, planning strategic
+                roadmaps, coordinating with stakeholders.
               </p>
             </div>
           </div>
@@ -95,7 +98,7 @@ function HeroText() {
         </h1>
         <p className="text-primary text-xl leading-6">
           Human-LLM Interaction Researcher,
-          <br/>
+          <br />
           LLM Product Designer & Developer
         </p>
         <p className="text-xs uppercase text-muted-foreground">
@@ -108,10 +111,13 @@ function HeroText() {
 
 function HeroSection() {
   return (
-    <section className="min-h-[65vh] w-full flex flex-col gap-8 justify-center select-none">
-
-      <div className="flex flex-col md:pt-0 lg:flex-row justify-center items-center gap-12">
-        <Entrance className="w-82.5 aspect-square rounded-full border-[3px] border-primary/70 overflow-hidden relative after:absolute after:inset-0 after:bg-background after:mix-blend-multiply after:opacity-10" delay={0} y={12}>
+    <section className="flex min-h-[65vh] w-full select-none flex-col justify-center gap-8">
+      <div className="flex flex-col items-center justify-center gap-12 pt-8 md:pt-0 lg:flex-row">
+        <Entrance
+          className="relative aspect-square w-72 overflow-hidden rounded-full border-[3px] border-primary/70 after:absolute after:inset-0 after:bg-background after:opacity-10 after:mix-blend-multiply sm:w-82.5"
+          delay={0}
+          y={12}
+        >
           <picture>
             <source srcSet="/images/portrait.avif" type="image/avif" />
             <img
@@ -125,14 +131,12 @@ function HeroSection() {
         <HeroText />
       </div>
 
-      <div className="w-full flex flex-row justify-center">
+      <div className="flex w-full flex-row justify-center">
         <SocialDock delay={1.05} />
       </div>
     </section>
   )
 }
-
-
 
 function LandingBackground() {
   const reducedMotion = useReducedMotion()
@@ -172,7 +176,9 @@ function LandingBackground() {
 
 export function LandingPage({ onNavigate }: { onNavigate: (route: RouteId) => void }) {
   const [track, setTrack] = useState<LandingTrack>("developer")
-  const trackProjects = featuredProjects.filter((project) => project.track === track)
+  const trackProjects = featuredProjects.filter(
+    (project) => project.track === track
+  )
   const featuredSection = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotion()
 
@@ -202,91 +208,97 @@ export function LandingPage({ onNavigate }: { onNavigate: (route: RouteId) => vo
 
   return (
     <>
-    <LandingBackground />
-    <div className="relative isolate max-w-360 mx-auto flex flex-col px-4 md:px-16">
+      <LandingBackground />
+      <div className="relative isolate mx-auto flex max-w-360 flex-col px-4 md:px-16">
+        <HeroSection />
 
-      <HeroSection />
+        <OverviewGraphics />
 
-      <OverviewGraphics />
-
-      <Separator orientation="horizontal" className="my-32" ref={featuredSection} />
-
-      <section className="space-y-8">
-        <SegmentedToggle
-          label="I'm interested in"
-          onChange={setTrack}
-          options={[
-            { label: "Felix the developer", value: "developer" },
-            { label: "Felix the scientist", value: "researcher" },
-          ]}
-          value={track}
+        <Separator
+          orientation="horizontal"
+          className="my-20 md:my-32"
+          ref={featuredSection}
         />
-        <AnimatePresence initial={false} mode="wait">
-          <motion.div
-            animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-            className="space-y-8"
-            exit={reducedMotion ? undefined : { opacity: 0}}
-            initial={reducedMotion ? false : { opacity: 0}}
-            key={track}
-            transition={
-              reducedMotion
-                ? undefined
-                : { duration: 0.22, ease: "easeIn" }
-            }
-          >
-            <h2 className="font-semibold tracking-tight text-foreground text-5xl mt-32 mb-8 text-center text-balance">
-              {track === "researcher" ? "Quantitative and qualitative research at the intersection of Human Factors and AI" : "Full-Stack Web Applications Featuring LLMs"}
-            </h2>
-            {track === "researcher" ? 
-              <p className="text-center text-muted-foreground text-2xl tracking-tight text-balance max-w-4xl mx-auto">
-                Innovative, impactful, and passionate science integrating system-level thinking and individuals. Understanding mental models, managing expectations, guiding attention, and ensuring appropriate reliance for generative AI consumer applications.
-              </p>
-              :
-              <StackLogoRow />
-            }
 
-            <div className="mt-10 md:mt-34">
-              {trackProjects.map((project) => (
-                <FeaturedWorkRow key={project.id} project={project} />
-              ))}
+        <section className="space-y-8">
+          <SegmentedToggle
+            label="I'm interested in"
+            onChange={setTrack}
+            options={[
+              { label: "Felix the developer", value: "developer" },
+              { label: "Felix the scientist", value: "researcher" },
+            ]}
+            value={track}
+          />
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
+              className="space-y-8"
+              exit={reducedMotion ? undefined : { opacity: 0 }}
+              initial={reducedMotion ? false : { opacity: 0 }}
+              key={track}
+              transition={
+                reducedMotion
+                  ? undefined
+                  : { duration: 0.22, ease: "easeIn" }
+              }
+            >
+              <h2 className="mt-16 mb-6 text-center text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl md:mt-32 md:mb-8">
+                {track === "researcher"
+                  ? "Quantitative and qualitative research at the intersection of Human Factors and AI"
+                  : "Full-Stack Web Applications Featuring LLMs"}
+              </h2>
+              {track === "researcher" ? (
+                <p className="mx-auto max-w-4xl text-center text-xl tracking-tight text-balance text-muted-foreground sm:text-2xl">
+                  Innovative, impactful, and passionate science integrating
+                  system-level thinking and individuals. Understanding mental
+                  models, managing expectations, guiding attention, and ensuring
+                  appropriate reliance for generative AI consumer applications.
+                </p>
+              ) : (
+                <StackLogoRow />
+              )}
+
+              <div className="mt-10 md:mt-34">
+                {trackProjects.map((project) => (
+                  <FeaturedWorkRow key={project.id} project={project} />
+                ))}
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          <div className="mx-auto grid w-full max-w-xl grid-cols-1 justify-center gap-4 text-center sm:grid-cols-[1fr_auto_1fr] sm:gap-8 sm:text-left">
+            <span className="mt-2 text-primary uppercase tracking-[0.2em] sm:text-right">
+              Next stop
+            </span>
+            <Separator orientation="vertical" className="hidden sm:block" />
+            <div className="flex flex-col items-center gap-2 sm:items-start">
+              <LinkButton onClick={scrollToFeaturedSection}>
+                See featured{" "}
+                {track === "developer" ? "research" : "software"} projects
+              </LinkButton>
+              <LinkButton
+                href="#projects"
+                onClick={(event) => {
+                  event.preventDefault()
+                  onNavigate("projects")
+                }}
+              >
+                See all projects
+              </LinkButton>
+              <LinkButton
+                href="#cv"
+                onClick={(event) => {
+                  event.preventDefault()
+                  onNavigate("cv")
+                }}
+              >
+                See my CV
+              </LinkButton>
             </div>
-          </motion.div>
-        </AnimatePresence>
-
-
-        <div className="w-full max-w-xl mx-auto grid grid-cols-[1fr_auto_1fr] justify-center gap-8">
-          <span className="mt-2 uppercase tracking-[0.2em] text-primary text-right">
-            Next stop
-          </span>
-          <Separator orientation="vertical"/>
-          <div className="flex flex-col items-start gap-2">
-            <LinkButton
-              onClick={scrollToFeaturedSection}
-            >
-              See featured {track === "developer" ? "research" : "software"} projects
-            </LinkButton>
-            <LinkButton
-              href="#projects"
-              onClick={(event) => {
-                event.preventDefault()
-                onNavigate("projects")
-              }}
-            >
-              See all projects 
-            </LinkButton>
-            <LinkButton
-              href="#cv"
-              onClick={(event) => {
-                event.preventDefault()
-                onNavigate("cv")
-              }}
-            >
-              See my CV 
-            </LinkButton>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
     </>
   )
 }
