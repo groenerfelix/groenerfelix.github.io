@@ -1,6 +1,5 @@
 import { useState } from "react"
 
-// import { BackgroundField } from "@/components/background-field"
 import { SiteHeader } from "@/components/site-header"
 import { useHashRoute } from "@/hooks/use-hash-route"
 import { CvPage } from "@/pages/cv-page"
@@ -18,7 +17,6 @@ function App() {
 
   return (
     <div className="min-h-svh bg-background text-foreground">
-      {/* <BackgroundField /> */}
       <SiteHeader
         activeRoute={route}
         mobileMenuOpen={mobileMenuOpen}
@@ -32,8 +30,11 @@ function App() {
         {route === "cv" ? <CvPage /> : null}
       </main>
 
-      <footer className="relative z-10 text-muted-foreground border-t border-border w-full flex flex-col items-center py-4 mt-16 text-sm gap-2">
-        <a className="cursor-pointer hover:text-foreground transition-colors" href="mailto:fgroener@asu.edu">
+      <footer className="relative z-10 mt-16 flex w-full flex-col items-center gap-2 border-t border-border py-4 text-sm text-muted-foreground">
+        <a
+          className="cursor-pointer transition-colors hover:text-foreground"
+          href="mailto:fgroener@asu.edu"
+        >
           fgroener@asu.edu
         </a>
         <p>Last updated in May 2026</p>

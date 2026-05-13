@@ -1,19 +1,18 @@
 import { useId, useRef, useState, type PointerEvent } from "react"
-import { AnimatePresence, motion, useMotionValue, useSpring } from "motion/react"
-import { BriefcaseBusiness, GraduationCap, CodeXml, type LucideIcon } from "lucide-react"
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+} from "motion/react"
+import type { LucideIcon } from "lucide-react"
 
 import { cn, useReducedMotion } from "@/lib/utils"
 
 export type SegmentedOption<T extends string> = {
+  icon?: LucideIcon
   label: string
   value: T
-}
-
-const optionIcons: Record<string, LucideIcon> = {
-  developer: CodeXml,
-  degrees: GraduationCap,
-  researcher: GraduationCap,
-  work: BriefcaseBusiness,
 }
 
 type SegmentedToggleProps<T extends string> = {
@@ -52,7 +51,7 @@ function SegmentedToggleOption<T extends string>({
       ? { duration: 0 }
       : { stiffness: 520, damping: 42, mass: 0.24 }
   )
-  const Icon = optionIcons[option.value]
+  const Icon = option.icon
 
   const activeTransition = reducedMotion
     ? { duration: 0 }
@@ -79,12 +78,10 @@ function SegmentedToggleOption<T extends string>({
       )}
       onBlur={() => {
         onHoverChange(null)
-        // centerShine()
       }}
       onClick={() => onChange(option.value)}
       onFocus={() => {
         onHoverChange(option.value)
-        // centerShine()
       }}
       onPointerEnter={(event) => {
         onHoverChange(option.value)
@@ -92,14 +89,13 @@ function SegmentedToggleOption<T extends string>({
       }}
       onPointerLeave={() => {
         onHoverChange(null)
-        // centerShine()
       }}
       onPointerMove={moveShine}
       ref={buttonRef}
+      role="radio"
+      aria-checked={isActive}
       type="button"
-      whileTap={
-        reducedMotion || isActive ? undefined : { scale: 0.985, y: 1 }
-      }
+      whileTap={reducedMotion || isActive ? undefined : { scale: 0.985, y: 1 }}
     >
       <AnimatePresence>
         {!isActive && isHovered ? (
@@ -116,7 +112,7 @@ function SegmentedToggleOption<T extends string>({
             }}
           >
             <motion.span
-              className="pointer-events-none absolute left-0 top-1/2 h-[190%] w-24 -translate-x-1/2 -translate-y-1/2 rotate-12 bg-linear-to-r from-transparent via-white/25 to-transparent blur-md"
+              className="pointer-events-none absolute top-1/2 left-0 h-[190%] w-24 -translate-x-1/2 -translate-y-1/2 rotate-12 bg-linear-to-r from-transparent via-white/25 to-transparent blur-md"
               style={{ x: smoothShineX }}
             />
           </motion.span>
@@ -131,7 +127,7 @@ function SegmentedToggleOption<T extends string>({
           transition={activeTransition}
         >
           <motion.span
-            className="pointer-events-none absolute left-0 top-1/2 h-[220%] w-28 -translate-x-1/2 -translate-y-1/2 rotate-12 bg-linear-to-r from-transparent via-white/45 to-transparent blur-md"
+            className="pointer-events-none absolute top-1/2 left-0 h-[220%] w-28 -translate-x-1/2 -translate-y-1/2 rotate-12 bg-linear-to-r from-transparent via-white/45 to-transparent blur-md"
             initial={reducedMotion ? false : { opacity: 0 }}
             animate={{
               opacity: reducedMotion || isHovered ? 0.72 : 0,
@@ -188,9 +184,7 @@ function SegmentedToggleOption<T extends string>({
           </motion.span>
         ) : null}
         <motion.span
-          animate={
-            isActive && !reducedMotion ? { y: [1, -2, 1] } : { y: 1 }
-          }
+          animate={isActive && !reducedMotion ? { y: [1, -2, 1] } : { y: 1 }}
           transition={
             reducedMotion
               ? { duration: 0 }
@@ -211,18 +205,27 @@ export function SegmentedToggle<T extends string>({
   options,
 }: SegmentedToggleProps<T>) {
   const reducedMotion = useReducedMotion()
-  const activeLayoutId = `${useId().replace(/:/g, "")}-segmented-toggle-active`
-  const hoverLayoutId = `${useId().replace(/:/g, "")}-segmented-toggle-hover`
+  const id = useId().replace(/:/g, "")
+  const labelId = `${id}-segmented-toggle-label`
+  const activeLayoutId = `${id}-segmented-toggle-active`
+  const hoverLayoutId = `${id}-segmented-toggle-hover`
   const [hoveredValue, setHoveredValue] = useState<T | null>(null)
 
   return (
     <div className="space-y-5">
-      <div className="text-center uppercase tracking-[0.2em] text-muted-foreground">
+      <div
+        className="text-center tracking-[0.2em] text-muted-foreground uppercase"
+        id={labelId}
+      >
         {label}
       </div>
 
       <div className="mx-auto w-full max-w-4xl rounded-[30px] border border-border bg-card p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_22px_70px_rgba(0,0,0,0.18)] sm:rounded-full">
-        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div
+          aria-labelledby={labelId}
+          className="grid grid-cols-1 gap-2 sm:grid-cols-2"
+          role="radiogroup"
+        >
           {options.map((option) => {
             const isActive = option.value === value
             const isHovered = hoveredValue === option.value

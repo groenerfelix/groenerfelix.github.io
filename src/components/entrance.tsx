@@ -1,7 +1,6 @@
 import type { ReactNode } from "react"
 import { motion } from "motion/react"
-
-import { useReducedMotion } from "@/lib/utils"
+import { useReducedMotion, easeOut } from "@/lib/utils"
 
 type EntranceProps = {
   children: ReactNode
@@ -10,8 +9,6 @@ type EntranceProps = {
   duration?: number
   y?: number
 }
-
-const easeOut = [0.22, 1, 0.36, 1] as const
 
 export function Entrance({
   children,

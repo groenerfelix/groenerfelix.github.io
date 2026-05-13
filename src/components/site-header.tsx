@@ -23,16 +23,17 @@ export function SiteHeader({
   onToggleMenu,
   onNavigate,
 }: SiteHeaderProps) {
+  const mobileNavId = "site-mobile-navigation"
+
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-xl select-none">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-12 py-4">
         <button
-              
-              className="cursor-pointer text-left group"
-              onClick={() => onNavigate("home")}
-              type="button"
-            >
-          <div className="text-sm uppercase tracking-[0.2em] text-primary transition-all duration-300 group-hover:text-foreground leading-3">
+          className="group cursor-pointer text-left"
+          onClick={() => onNavigate("home")}
+          type="button"
+        >
+          <div className="text-sm leading-3 tracking-[0.2em] text-primary uppercase transition-all duration-300 group-hover:text-foreground">
             Felix Gr&ouml;ner
           </div>
           <div className="text-sm text-muted-foreground transition-all duration-300 group-hover:brightness-120">
@@ -44,9 +45,12 @@ export function SiteHeader({
           {links.map((link) => (
             <button
               key={link.route}
+              aria-current={activeRoute === link.route ? "page" : undefined}
               className={cn(
                 "text-sm transition-colors hover:text-primary",
-                activeRoute === link.route ? "cursor-default text-primary" : "cursor-pointer text-muted-foreground"
+                activeRoute === link.route
+                  ? "cursor-default text-primary"
+                  : "cursor-pointer text-muted-foreground"
               )}
               onClick={() => onNavigate(link.route)}
               type="button"
@@ -57,24 +61,36 @@ export function SiteHeader({
         </nav>
 
         <Button
+          aria-controls={mobileNavId}
+          aria-expanded={mobileMenuOpen}
           aria-label="Toggle navigation"
           className="inline-flex size-10 cursor-pointer items-center justify-center border border-white/10 text-foreground transition-colors hover:border-primary/50 hover:text-primary md:hidden"
           onClick={onToggleMenu}
-          variant={"ghost"}
+          variant="ghost"
         >
-          {mobileMenuOpen ? <X className="size-4" /> : <Menu className="size-4" />}
+          {mobileMenuOpen ? (
+            <X className="size-4" />
+          ) : (
+            <Menu className="size-4" />
+          )}
         </Button>
       </div>
 
       {mobileMenuOpen ? (
-        <div className="border-t border-white/8 px-5 py-3 md:hidden">
+        <div
+          className="border-t border-white/8 px-5 py-3 md:hidden"
+          id={mobileNavId}
+        >
           <nav className="flex flex-col gap-2">
             {links.map((link) => (
               <button
                 key={link.route}
+                aria-current={activeRoute === link.route ? "page" : undefined}
                 className={cn(
                   "border-b border-white/6 py-3 text-left text-sm transition-colors hover:text-primary",
-                  activeRoute === link.route ? "text-primary cursor-default" : "cursor-pointer text-muted-foreground"
+                  activeRoute === link.route
+                    ? "cursor-default text-primary"
+                    : "cursor-pointer text-muted-foreground"
                 )}
                 onClick={() => onNavigate(link.route)}
                 type="button"

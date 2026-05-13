@@ -6,7 +6,7 @@ import { Slot } from "radix-ui"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "font-bold cursor-pointer group/button inline-flex shrink-0 items-center justify-center rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/button inline-flex shrink-0 cursor-pointer items-center justify-center rounded-4xl border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   {
     variants: {
       variant: {
@@ -91,8 +91,9 @@ const fileExtensions = [
 ]
 
 function inferLinkButtonKind(href = ""): LinkButtonKind {
-
-  if(!href) {return "same-page"}
+  if (!href) {
+    return "same-page"
+  }
 
   const pathname = href.split(/[?#]/)[0] ?? ""
   const extension = pathname.split(".").pop()?.toLowerCase()
@@ -101,7 +102,10 @@ function inferLinkButtonKind(href = ""): LinkButtonKind {
     return "file"
   }
 
-  if (/^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(href) || /^[a-z][a-z0-9+.-]*:/i.test(href)) {
+  if (
+    /^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(href) ||
+    /^[a-z][a-z0-9+.-]*:/i.test(href)
+  ) {
     return "external"
   }
 
@@ -173,23 +177,28 @@ function LinkButton({
   ...props
 }: LinkButtonProps) {
   const kind = inferLinkButtonKind(href)
-  const linkTarget = target ?? (shouldOpenInNewTab(kind, href) ? "_blank" : undefined)
+  const linkTarget =
+    target ?? (shouldOpenInNewTab(kind, href) ? "_blank" : undefined)
   const linkRel = linkTarget === "_blank" ? (rel ?? "noreferrer") : rel
 
   return (
-    <Button asChild className={cn("h-auto px-0 text-sm font-medium text-muted-foreground no-underline hover:text-primary gap-1", className)} size={size} variant={variant}>
-      <a
-        href={href}
-        rel={linkRel}
-        target={linkTarget}
-        {...props}
-      >
-        <span className={cn("underline underline-offset-4" , textClassName)}>{children}</span>
+    <Button
+      asChild
+      className={cn(
+        "h-auto gap-1 px-0 text-sm font-medium text-muted-foreground no-underline hover:text-primary",
+        className
+      )}
+      size={size}
+      variant={variant}
+    >
+      <a href={href} rel={linkRel} target={linkTarget} {...props}>
+        <span className={cn("underline underline-offset-4", textClassName)}>
+          {children}
+        </span>
         <LinkButtonIcon className={iconClassName} icon={icon} kind={kind} />
       </a>
     </Button>
   )
 }
-
 
 export { Button, LinkButton, buttonVariants }

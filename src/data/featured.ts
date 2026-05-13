@@ -1,5 +1,5 @@
 import type { FeaturedProject } from "@/types/content"
-import * as SVG from '@/components/svg';
+import * as SVG from "@/components/svg"
 
 export type StackLogo = {
   label: string
@@ -8,9 +8,7 @@ export type StackLogo = {
 
 export const stackLogos: StackLogo[] = [
   { label: "Python", logo: SVG.Python },
-  // { label: "FastAPI", logo: SVG.FastAPI },
   { label: "TypeScript", logo: SVG.TypeScript },
-  // { label: "Vite", logo: SVG.Vite },
   { label: "React", logo: SVG.React },
   { label: "TailwindCSS", logo: SVG.TailwindCSS },
   { label: "Shadcn/ui", logo: SVG.ShadcnUI },
@@ -53,14 +51,20 @@ export const featuredProjects: FeaturedProject[] = [
         imageAlt: "Poster presented at the ASU AI Pre-Summit",
         paragraph:
           "In this literature review, I cataloged 39 empirical studies and derived three dimensions of engineering: purpose, step, and method. I identify popular and under-explored approaches and point out systematic issues in the literature.",
-        link: { label: "Read the preprint", href: "https://ssrn.com/abstract=6505859" },
+        link: {
+          label: "Read the preprint",
+          href: "https://ssrn.com/abstract=6505859",
+        },
       },
       {
         image: "/images/llm-mm-ui.jpg",
         imageAlt: "Figures from Gröner and Chiou, 2024",
         paragraph:
           "In this study, participants (n=45) saw a range of prompts typed into one of three UI designs and indicated their confidence that the chatbot will produce a good response. Aesthetic maniupulations did not change people's expectations.",
-        link: { label: "Read the conference paper", href: "https://doi.org/10.1177/10711813241260399" }
+        link: {
+          label: "Read the conference paper",
+          href: "https://doi.org/10.1177/10711813241260399",
+        },
       },
       {
         image: "/images/megawatt-conditions.jpg",
@@ -70,35 +74,6 @@ export const featuredProjects: FeaturedProject[] = [
       },
     ],
   },
-  // {
-  //   id: "paper-hfes-2024",
-  //   track: "researcher",
-  //   title: "What do People Expect from LLMs?",
-  //   media: [
-  //     {
-  //       image: "/images/paper-hfes-2024.jpg",
-  //       imageAlt: "Title page of Groener & Chiou, 2024",
-  //       paragraph:
-  //         "Asked 45 participants for their confidence that a chatbot would be capable of 26 tasks, varying the UI design between subjects.",
-  //       link: {
-  //         label: "Read the Conference Paper",
-  //         href: "https://doi.org/10.1177/10711813241260399",
-  //       },
-  //     },
-  //     {
-  //       image: "/images/paper-hfes-2024.jpg",
-  //       imageAlt: "Title page of Groener & Chiou, 2024",
-  //       paragraph:
-  //         "Participants had clear expectations for chatbot capabilities, suggesting that people bring structured assumptions into LLM use before an interaction begins.",
-  //     },
-  //     {
-  //       image: "/images/paper-hfes-2024.jpg",
-  //       imageAlt: "Title page of Groener & Chiou, 2024",
-  //       paragraph:
-  //         "Drastic aesthetic differences in chatbot design did not produce systematically different expectations in this study.",
-  //     },
-  //   ],
-  // },
   {
     id: "project-lern-2026",
     track: "developer",
@@ -109,7 +84,10 @@ export const featuredProjects: FeaturedProject[] = [
         imageAlt: "Screenshot of tutorial generator",
         paragraph:
           "Students learn better from interactive experiments. This app generates tutorial pages, with prompts backed by learning science.",
-        link: { label: "Open the app", href: "https://tutorial-generator.felixgroener.de/" },
+        link: {
+          label: "Open the app",
+          href: "https://tutorial-generator.felixgroener.de/",
+        },
       },
       {
         image: "/images/tutorial-generator-flow.jpg",
@@ -126,7 +104,10 @@ export const featuredProjects: FeaturedProject[] = [
         imageAlt: "Screenshot of tutorial generator",
         paragraph:
           "The core UX challenges were to ensure generative AI code quality using linting and playwright, and making the loading process transparent to users.",
-        link: { label: "Check the code", href: "https://github.com/groenerfelix/tutorial-generator-v2" },
+        link: {
+          label: "Check the code",
+          href: "https://github.com/groenerfelix/tutorial-generator-v2",
+        },
       },
     ],
   },
@@ -147,7 +128,10 @@ export const featuredProjects: FeaturedProject[] = [
         imageAlt: "Screenshot of the player statistics analysis platform",
         paragraph:
           "The primary UX challenges were to make data analyses and visualizations intuitive to understand (violin plots, Gantt chart, simplified labels), make the app memorable by adding delightful microinteractions, and keep polished aesthetics even during complex, staggered loading states.",
-          link: { label: "See on GitHub", href: "https://github.com/NikosiaPhD/mcsr-analysis" },
+        link: {
+          label: "See on GitHub",
+          href: "https://github.com/NikosiaPhD/mcsr-analysis",
+        },
       },
     ],
   },
@@ -161,7 +145,7 @@ export const featuredProjects: FeaturedProject[] = [
         imageAlt: "Screenshot of the chatbot experimentation platform",
         paragraph:
           "For my experiments I needed to manipulate LLM behavior, control the user experience, and record behavioral data. The goal was to minimize friction for using a chatbot (e.g., copy-paste buttons). This app was built with NextJS with a PostgreSQL DB and used in two experiments so far.",
-      }
+      },
     ],
   },
 ]

@@ -1,122 +1,72 @@
 import { Search, X } from "lucide-react"
-import { useDeferredValue, useEffect, useMemo, useState } from "react"
+import { useDeferredValue, useMemo, useState } from "react"
 
 import { Entrance } from "@/components/entrance"
 import { FilterGroup } from "@/components/filter-group"
-import { InterestCheckboxGroup, initialProjectTypeFilters } from "@/components/interest-checkbox-group"
+import { InterestCheckboxGroup } from "@/components/interest-checkbox-group"
 import { ProjectRow } from "@/components/project-row"
-import { projects } from "@/data/projects"
-import type { ProjectEntry, ProjectSubType } from "@/types/content"
-import { InputGroup, InputGroupAddon, InputGroupInput, } from "@/components/ui/input-group"
 import { Button } from "@/components/ui/button"
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
+import { projects } from "@/data/projects"
+import {
+  filterProjects,
+  getAvailableKeywords,
+  getAvailableProjectTypes,
+  getProjectYears,
+  groupProjectsByYear,
+  initialProjectTypeFilters,
+} from "@/lib/project-filters"
+import type { ProjectSubType } from "@/types/content"
 
 export function ProjectsPage() {
   const [query, setQuery] = useState("")
   const deferredQuery = useDeferredValue(query)
   const [typeFilters, setTypeFilters] = useState(initialProjectTypeFilters)
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([])
-  const [selectedProjectTypes, setSelectedProjectTypes] = useState<ProjectSubType[]>([])
+  const [selectedProjectTypes, setSelectedProjectTypes] = useState<
+    ProjectSubType[]
+  >([])
   const [firstAuthorOnly, setFirstAuthorOnly] = useState(false)
 
-  const availableProjectTypes = useMemo(() => {
-    return Array.from(
-      new Set(
-        projects
-          .filter((project) => typeFilters[project.type])
-          .map((project) => project.projectType)
-          .filter((value): value is ProjectSubType => Boolean(value))
-      )
-    ).sort()
-  }, [typeFilters])
+  const availableProjectTypes = useMemo(
+    () => getAvailableProjectTypes(projects, typeFilters),
+    [typeFilters]
+  )
 
-  const availableKeywords = useMemo(() => {
-    return Array.from(
-      new Set(
-        projects
-          .filter((project) => typeFilters[project.type])
-          .flatMap((project) => project.keywords)
-      )
-    ).sort()
-  }, [typeFilters])
+  const availableKeywords = useMemo(
+    () => getAvailableKeywords(projects, typeFilters),
+    [typeFilters]
+  )
 
-  useEffect(() => {
-    setSelectedKeywords((current) =>
-      current.filter((keyword) => availableKeywords.includes(keyword))
-    )
-  }, [availableKeywords])
+  const filteredProjects = useMemo(
+    () =>
+      filterProjects(projects, {
+        firstAuthorOnly,
+        query: deferredQuery,
+        selectedKeywords,
+        selectedProjectTypes,
+        typeFilters,
+      }),
+    [
+      deferredQuery,
+      firstAuthorOnly,
+      selectedKeywords,
+      selectedProjectTypes,
+      typeFilters,
+    ]
+  )
 
-  useEffect(() => {
-    setSelectedProjectTypes((current) =>
-      current.filter((projectType) => availableProjectTypes.includes(projectType))
-    )
-  }, [availableProjectTypes])
-
-  const filteredProjects = useMemo(() => {
-    const normalizedQuery = deferredQuery.trim().toLowerCase()
-
-    return projects.filter((project) => {
-      if (!typeFilters[project.type]) {
-        return false
-      }
-
-      if (
-        selectedKeywords.length > 0 &&
-        !selectedKeywords.every((keyword) => project.keywords.includes(keyword))
-      ) {
-        return false
-      }
-
-      if (
-        selectedProjectTypes.length > 0 &&
-        (!project.projectType || !selectedProjectTypes.includes(project.projectType))
-      ) {
-        return false
-      }
-
-      if (
-        firstAuthorOnly &&
-        project.type === "publication" &&
-        !project.firstAuthor
-      ) {
-        return false
-      }
-
-      if (!normalizedQuery) {
-        return true
-      }
-
-      const haystack = [
-        project.title,
-        project.summary,
-        project.authors,
-        project.projectType,
-        project.publication_info,
-        ...project.keywords,
-      ]
-        .filter(Boolean)
-        .join(" ")
-        .toLowerCase()
-
-      return haystack.includes(normalizedQuery)
-    })
-  }, [
-    deferredQuery,
-    firstAuthorOnly,
-    selectedKeywords,
-    selectedProjectTypes,
-    typeFilters,
-  ])
-
-  const groupedProjects = useMemo(() => {
-    return filteredProjects.reduce<Record<number, ProjectEntry[]>>((acc, project) => {
-      acc[project.year] ??= []
-      acc[project.year].push(project)
-      return acc
-    }, {})
-  }, [filteredProjects])
+  const groupedProjects = useMemo(
+    () => groupProjectsByYear(filteredProjects),
+    [filteredProjects]
+  )
 
   const years = useMemo(
-    () => Object.keys(groupedProjects).map(Number).sort((a, b) => b - a),
+    () => getProjectYears(groupedProjects),
     [groupedProjects]
   )
 
@@ -136,29 +86,49 @@ export function ProjectsPage() {
     )
   }
 
+  const toggleTypeFilter = (type: keyof typeof typeFilters) => {
+    const nextTypeFilters = {
+      ...typeFilters,
+      [type]: !typeFilters[type],
+    }
+    const nextAvailableKeywords = getAvailableKeywords(
+      projects,
+      nextTypeFilters
+    )
+    const nextAvailableProjectTypes = getAvailableProjectTypes(
+      projects,
+      nextTypeFilters
+    )
+
+    setTypeFilters(nextTypeFilters)
+    setSelectedKeywords((current) =>
+      current.filter((keyword) => nextAvailableKeywords.includes(keyword))
+    )
+    setSelectedProjectTypes((current) =>
+      current.filter((projectType) =>
+        nextAvailableProjectTypes.includes(projectType)
+      )
+    )
+  }
+
   return (
-    <div className="mx-auto max-w-360 w-full flex flex-col py-32 px-4 md:px-16">
+    <div className="mx-auto flex w-full max-w-360 flex-col px-4 py-32 md:px-16">
       <Entrance className="flex flex-col space-y-2" delay={0.06} y={12}>
-        <h1 className="font-semibold tracking-tight text-foreground text-5xl">
+        <h1 className="text-5xl font-semibold tracking-tight text-foreground">
           All my projects
         </h1>
-        <p className="text-2xl tracking-tight leading-8 text-muted-foreground text-balance">
-          Search through all my publications, talks, coding projects, and other experiments.
+        <p className="text-2xl leading-8 tracking-tight text-balance text-muted-foreground">
+          Search through all my publications, talks, coding projects, and other
+          experiments.
         </p>
       </Entrance>
 
-
-      <section className="pt-32 pb-16 space-y-16 w-full max-w-6xl mx-auto">
+      <section className="mx-auto w-full max-w-6xl space-y-16 pt-32 pb-16">
         <Entrance delay={0.18} y={10}>
           <InterestCheckboxGroup
-            onToggle={(type) =>
-              setTypeFilters((current) => ({
-                ...current,
-                [type]: !current[type],
-              }))
-            }
+            onToggle={toggleTypeFilter}
             value={typeFilters}
-            />
+          />
         </Entrance>
         <Entrance className="space-y-6" delay={0.28} y={10}>
           <FilterGroup
@@ -190,39 +160,42 @@ export function ProjectsPage() {
             }))}
           />
 
-          <InputGroup className="max-w-xl rounded-full bg-background border border-primary/50 px-1 py-6 mt-12 text-base text-foreground cursor-default">
-            <InputGroupAddon className="cursor-default px-2"><Search className="text-primary/75"/></InputGroupAddon>
-            <InputGroupInput 
-              placeholder="Search title, summary, keywords, authors..." 
-              className="text-base!"                 
+          <InputGroup className="mt-12 max-w-xl cursor-default rounded-full border border-primary/50 bg-background px-1 py-6 text-base text-foreground">
+            <InputGroupAddon className="cursor-default px-2">
+              <Search className="text-primary/75" />
+            </InputGroupAddon>
+            <InputGroupInput
+              placeholder="Search title, summary, keywords, authors..."
+              className="text-base!"
               onChange={(event) => setQuery(event.target.value)}
               value={query}
             />
-            {query && <InputGroupAddon align={"inline-end"}>
+            {query ? (
+              <InputGroupAddon align="inline-end">
                 <Button
                   aria-label="Clear search"
+                  className="bg-transparent hover:bg-transparent"
                   onClick={() => setQuery("")}
                   variant="ghost"
-                  className="bg-transparent hover:bg-transparent"
                 >
-                  <X className="size-4"/>
+                  <X className="size-4" />
                 </Button>
               </InputGroupAddon>
-            }
+            ) : null}
           </InputGroup>
         </Entrance>
       </section>
 
-      <section className="w-full max-w-6xl mx-auto">
+      <section className="mx-auto w-full max-w-6xl">
         <Entrance delay={0.38} y={10}>
-          { filteredProjects.length === 0 && 
+          {filteredProjects.length === 0 ? (
             <div className="pb-4 text-sm text-foreground/45">
               No matching entries; try adjusting the filters.
             </div>
-          }
+          ) : null}
           {years.map((year) => (
             <div key={year}>
-              <div className="pt-10 text-lg uppercase text-primary border-b border-primary/50">
+              <div className="border-b border-primary/50 pt-10 text-lg text-primary uppercase">
                 {year}
               </div>
               <div>

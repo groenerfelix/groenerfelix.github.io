@@ -1,14 +1,13 @@
-import { BookOpen, Check, Code2, FolderKanban, type LucideIcon } from "lucide-react"
+import {
+  BookOpen,
+  Check,
+  Code2,
+  FolderKanban,
+  type LucideIcon,
+} from "lucide-react"
 
+import type { ProjectTypeFilters } from "@/lib/project-filters"
 import { cn } from "@/lib/utils"
-
-export const initialProjectTypeFilters = {
-  publication: true,
-  coding: false,
-  other: false,
-}
-
-export type ProjectTypeFilters = typeof initialProjectTypeFilters
 
 type ProjectInterestOption = {
   icon: LucideIcon
@@ -33,7 +32,7 @@ export function InterestCheckboxGroup({
 }: InterestCheckboxGroupProps) {
   return (
     <div className="space-y-5">
-      <div className="text-center text-md uppercase tracking-[0.2em] text-muted-foreground">
+      <div className="text-center text-base tracking-[0.2em] text-muted-foreground uppercase">
         I&apos;m interested in
       </div>
 

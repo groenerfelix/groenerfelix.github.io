@@ -8,7 +8,15 @@ export const projects: ProjectEntry[] = [
     type: "coding",
     summary:
       "Fetching player data from the official game API, running analyses, and presenting informative visualizations.",
-    keywords: ["React", "Tailwind", "Shadcn", "Python", "Typescript", "Data Science", "API"],
+    keywords: [
+      "React",
+      "Tailwind",
+      "Shadcn",
+      "Python",
+      "Typescript",
+      "Data Science",
+      "API",
+    ],
     projectType: "Full Stack Web App",
     links: [
       { label: "Project Page", href: "https://eyespy.nikosiaphd.com" },
@@ -24,25 +32,35 @@ export const projects: ProjectEntry[] = [
       "An LLM agent that writes its own workflows and data in markdown files, which are mirrored in a discord server for transparency.",
     keywords: ["LLMs", "Agents", "Python", "API", "Generative AI"],
     projectType: "Backend",
-    links: [{ label: "Code", href: "https://github.com/groenerfelix/discord-assistant" }],
+    links: [
+      {
+        label: "Code",
+        href: "https://github.com/groenerfelix/discord-assistant",
+      },
+    ],
   },
   {
     id: "ui-designs-and-llm-expectations",
-    title: "Investigating the impact of UI designs on expectations about LLMs' capabilities",
+    title:
+      "Investigating the impact of UI designs on expectations about LLMs' capabilities",
     year: 2024,
     type: "publication",
-    summary: "Showed a variety of prompts in different user interface designs and queried people for their expectations.",
+    summary:
+      "Showed a variety of prompts in different user interface designs and queried people for their expectations.",
     keywords: ["LLMs", "Expectations", "UI Design", "Human Participants"],
     projectType: "Conference Paper",
     authors: "F. Gröner and E.K. Chiou",
     firstAuthor: true,
     publication_info:
       "Proceedings of the Human Factors and Ergonomics Society Annual Meeting 2024",
-    links: [{ label: "Paper", href: "https://doi.org/10.1177/10711813241260399" }],
+    links: [
+      { label: "Paper", href: "https://doi.org/10.1177/10711813241260399" },
+    ],
   },
   {
     id: "trust-repair-strategies-after-error",
-    title: "The tendency to anthropomorphize and technology affinity affect trust repair strategies after error",
+    title:
+      "The tendency to anthropomorphize and technology affinity affect trust repair strategies after error",
     year: 2023,
     type: "publication",
     summary:
@@ -62,12 +80,19 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "llm-transparency-and-verification-behavior",
-    title: "Increasing transparency of LLM systems does not always improve people's verification behavior",
+    title:
+      "Increasing transparency of LLM systems does not always improve people's verification behavior",
     year: 2026,
     type: "publication",
     summary:
       "Results from an empirical study of AI-assisted intelligence analysis reporting.",
-    keywords: ["LLMs", "Transparency", "Verification", "Intelligence Analysis", "Generative AI"],
+    keywords: [
+      "LLMs",
+      "Transparency",
+      "Verification",
+      "Intelligence Analysis",
+      "Generative AI",
+    ],
     projectType: "Under Review",
     authors: "F. Gröner, M.V. Mancenido, N. Kim, E. Summers, and E.K. Chiou",
     firstAuthor: true,
@@ -75,12 +100,18 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "llm-powered-simulated-users",
-    title: "Caveats of replacing human participants with LLM-powered simulated users",
+    title:
+      "Caveats of replacing human participants with LLM-powered simulated users",
     year: 2026,
     type: "publication",
     summary:
       "Comparing the results of the same experiment with human and synthetic participants produced useful qualitative insights.",
-    keywords: ["LLMs", "Simulations", "Synthetic Participants", "Generative AI"],
+    keywords: [
+      "LLMs",
+      "Simulations",
+      "Synthetic Participants",
+      "Generative AI",
+    ],
     projectType: "Under Review",
     authors: "F. Gröner and E.K. Chiou",
     firstAuthor: true,
@@ -111,28 +142,49 @@ export const projects: ProjectEntry[] = [
     authors: "F. Gröner and D.V. Becker",
     firstAuthor: true,
     links: [
-      {label: "Preprint", href: "https://ssrn.com/abstract=6482420"},
-      {label: "Interactive exploration", href: "https://felixgroener.de/abstract-art"}
+      { label: "Preprint", href: "https://ssrn.com/abstract=6482420" },
+      {
+        label: "Interactive exploration",
+        href: "https://felixgroener.de/abstract-art",
+      },
     ],
   },
   {
     id: "interactive-learning-experiences-agentic-pipeline",
-    title: "Automatically generating interactive learning experiences with an LLM-driven agentic pipeline",
+    title:
+      "Automatically generating interactive learning experiences with an LLM-driven agentic pipeline",
     year: 2026,
     type: "coding",
     summary:
       "Developed a pipeline from topic to tutorial website, with prompt engineering informed by learning science.",
-    keywords: ["LLMs", "Learning Engineering", "UI Design", "Prompt Engineering", "Generative AI", "Full Stack", "Python", "Typescript"],
+    keywords: [
+      "LLMs",
+      "Learning Engineering",
+      "UI Design",
+      "Prompt Engineering",
+      "Generative AI",
+      "Full Stack",
+      "Python",
+      "Typescript",
+    ],
     projectType: "Full Stack Web App",
     authors: "F. Gröner, A. Verma, and J. Bronowitz",
     firstAuthor: true,
     publication_info:
       "Proceedings of the Learning Engineering Research Network Convening (LERN 2026)",
     links: [
-      { label: "Project Page", href: "https://tutorial-generator.felixgroener.de" },
-      { label: "Conference Publication", href: "https://doi.org/10.59668/2551.25387" },
-      { label: "Code", href: "https://github.com/groenerfelix/tutorial-generator-v2" }
-
+      {
+        label: "Project Page",
+        href: "https://tutorial-generator.felixgroener.de",
+      },
+      {
+        label: "Conference Publication",
+        href: "https://doi.org/10.59668/2551.25387",
+      },
+      {
+        label: "Code",
+        href: "https://github.com/groenerfelix/tutorial-generator-v2",
+      },
     ],
   },
   {
@@ -142,7 +194,13 @@ export const projects: ProjectEntry[] = [
     type: "publication",
     summary:
       "Examines the theoretical obstacles that arise when using LLM agents to simulate synthetic participants.",
-    keywords: ["LLMs", "Simulations", "Agents", "Synthetic Participants", "Generative AI"],
+    keywords: [
+      "LLMs",
+      "Simulations",
+      "Agents",
+      "Synthetic Participants",
+      "Generative AI",
+    ],
     projectType: "In Preparation",
     authors: "F. Gröner and E.K. Chiou",
     firstAuthor: true,
@@ -150,7 +208,8 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "engineering-approaches-human-llm-interaction",
-    title: "Engineering approaches to improve human-LLM interaction: A scoping literature review",
+    title:
+      "Engineering approaches to improve human-LLM interaction: A scoping literature review",
     year: 2025,
     type: "publication",
     summary:
@@ -163,7 +222,8 @@ export const projects: ProjectEntry[] = [
   },
   {
     id: "semantic-leakage-synthetic-datasets",
-    title: "Semantic leakage is an issue when experimenting with synthetic datasets",
+    title:
+      "Semantic leakage is an issue when experimenting with synthetic datasets",
     year: 2025,
     type: "other",
     summary:
@@ -192,7 +252,13 @@ export const projects: ProjectEntry[] = [
     type: "other",
     summary:
       "Explores whether people can accurately calibrate expectations of LLMs across domains and whether LLMs can recognize when the human is more competent than the model.",
-    keywords: ["AI Safety", "Expectations", "Mental Models", "LLMs", "Human Participants"],
+    keywords: [
+      "AI Safety",
+      "Expectations",
+      "Mental Models",
+      "LLMs",
+      "Human Participants",
+    ],
     projectType: "Experiment",
     links: [],
   },
@@ -215,13 +281,19 @@ export const projects: ProjectEntry[] = [
     type: "other",
     summary:
       "Compared global and local explanations for AI recommendations and found that participants' self-perceived expertise mattered more than the explanation style.",
-    keywords: ["Explainable AI (XAI)", "Human Participants", "Transparency", "LIME"],
+    keywords: [
+      "Explainable AI (XAI)",
+      "Human Participants",
+      "Transparency",
+      "LIME",
+    ],
     projectType: "Experiment",
     links: [],
   },
   {
     id: "generative-ai-cognitive-psychology-poster",
-    title: "Two dimensions describe how we perceive original and AI generated abstract art",
+    title:
+      "Two dimensions describe how we perceive original and AI generated abstract art",
     year: 2026,
     type: "other",
     summary:
@@ -229,7 +301,8 @@ export const projects: ProjectEntry[] = [
     keywords: ["Cognitive Psychology", "Generative AI"],
     projectType: "Poster",
     links: [],
-    publication_info: "Cognitive Science Conclave at the University of Arizona, April 25, Tuscan, AZ"
+    publication_info:
+      "Cognitive Science Conclave at the University of Arizona, April 25, Tuscan, AZ",
   },
   {
     id: "caveats-llm-simulations-talk",
@@ -241,7 +314,8 @@ export const projects: ProjectEntry[] = [
     keywords: ["LLMs", "Simulations", "Synthetic Participants"],
     projectType: "Talk",
     links: [],
-    publication_info: "2026 IEEE Conference on Cognitive and Computational Aspects of Situation management (CogSIMA), March 9-12, Tempe, AZ"
+    publication_info:
+      "2026 IEEE Conference on Cognitive and Computational Aspects of Situation management (CogSIMA), March 9-12, Tempe, AZ",
   },
   {
     id: "engineering-approaches-human-llm-interaction-poster",
@@ -253,11 +327,12 @@ export const projects: ProjectEntry[] = [
     keywords: ["LLMs", "Human-AI", "Literature Review"],
     projectType: "Poster",
     links: [],
-    publication_info: "AI Impact Pre-Summit @ ASU, January 29, Mesa, AZ"
+    publication_info: "AI Impact Pre-Summit @ ASU, January 29, Mesa, AZ",
   },
   {
     id: "llm-transparency-verification-talk",
-    title: "Increasing transparency of LLM systems does not always improve people's verification behavior and performance",
+    title:
+      "Increasing transparency of LLM systems does not always improve people's verification behavior and performance",
     year: 2025,
     type: "other",
     summary:
@@ -265,11 +340,13 @@ export const projects: ProjectEntry[] = [
     keywords: ["LLMs", "Transparency", "Verification", "Intelligence Analysis"],
     projectType: "Talk",
     links: [],
-    publication_info: "69th HFES International Annual Meeting: ASPIRE, October 13-17, Chicago, IL"
+    publication_info:
+      "69th HFES International Annual Meeting: ASPIRE, October 13-17, Chicago, IL",
   },
   {
     id: "mast-project-update-talk",
-    title: "Multi-source AI Scorecard Table (MAST) for evaluating generative AI in worker-automation team tasks",
+    title:
+      "Multi-source AI Scorecard Table (MAST) for evaluating generative AI in worker-automation team tasks",
     year: 2024,
     type: "other",
     summary:
@@ -277,6 +354,6 @@ export const projects: ProjectEntry[] = [
     keywords: ["LLMs", "Generative AI"],
     projectType: "Talk",
     links: [],
-    publication_info: "CAOE Annual Meeting, April 8-9, Washington, DC"
+    publication_info: "CAOE Annual Meeting, April 8-9, Washington, DC",
   },
 ]

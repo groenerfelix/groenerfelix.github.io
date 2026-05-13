@@ -5,10 +5,8 @@ import { LinkButton } from "@/components/ui/button"
 export const cvDownloadLink: SocialLink = {
   label: "CV PDF",
   href: "/cv_felix_groener_2026_04.pdf",
-  logo: Download
+  logo: Download,
 }
-
-
 
 export const educationEntries: TimelineEntry[] = [
   {
@@ -21,27 +19,25 @@ export const educationEntries: TimelineEntry[] = [
       "Status: Ph.D. candidate | GPA: 4.0",
       <span>
         Committee:{" "}
-        <LinkButton
-          href="https://search.asu.edu/profile/3015725"
-        >
+        <LinkButton href="https://search.asu.edu/profile/3015725">
           Erin K. Chiou
         </LinkButton>
         ,{" "}
-        <LinkButton
-          href="https://search.asu.edu/profile/61858"
-        >
+        <LinkButton href="https://search.asu.edu/profile/61858">
           D. Vaughn Becker
         </LinkButton>
         ,{" "}
-        <LinkButton
-          href="https://search.asu.edu/profile/559491"
-        >
+        <LinkButton href="https://search.asu.edu/profile/559491">
           Nancy J. Cooke
         </LinkButton>
       </span>,
       "Dissertation: Validating LLM-simulated synthetic participants for Human Factors research",
     ],
-    keywords: ["User-Centered Design", "AI Safety", "Human-Computer Interaction"],
+    keywords: [
+      "User-Centered Design",
+      "AI Safety",
+      "Human-Computer Interaction",
+    ],
   },
   {
     id: "msc-cognitive-systems",
@@ -68,9 +64,7 @@ export const educationEntries: TimelineEntry[] = [
     title: "B.A. Political Science",
     org: "Kiel University, Germany",
     timespan: ["2019", "2020"],
-    bullets: [
-      "Thesis: NATO's strategy to deter cyber attacks",
-    ],
+    bullets: ["Thesis: NATO's strategy to deter cyber attacks"],
     keywords: ["Political Theory", "Comparative Politics", "NATO"],
   },
   {
@@ -81,7 +75,12 @@ export const educationEntries: TimelineEntry[] = [
     bullets: [
       "Thesis: Choosing the right project management technique for software development",
     ],
-    keywords: ["Programming", "Algorithms", "Project Management", "System Modeling"],
+    keywords: [
+      "Programming",
+      "Algorithms",
+      "Project Management",
+      "System Modeling",
+    ],
   },
 ]
 
@@ -95,7 +94,11 @@ export const workEntries: TimelineEntry[] = [
       "Developed a capstone class on full-stack web development",
       "Co-authored a handbook for students",
     ],
-    keywords: ["Full-Stack Web Development", "Curriculum Design", "Student Mentoring"],
+    keywords: [
+      "Full-Stack Web Development",
+      "Curriculum Design",
+      "Student Mentoring",
+    ],
   },
   {
     id: "graduate-research-assistant-2025",
@@ -120,7 +123,12 @@ export const workEntries: TimelineEntry[] = [
       "Wrote conference and journal submissions from research insights",
       "Planned and wrote project proposals for grant applications",
     ],
-    keywords: ["LLM Applications", "Human Subjects Research", "Conference Presentations", "Grant Writing"],
+    keywords: [
+      "LLM Applications",
+      "Human Subjects Research",
+      "Conference Presentations",
+      "Grant Writing",
+    ],
   },
   {
     id: "graduate-teaching-assistant-2023",

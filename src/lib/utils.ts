@@ -36,3 +36,5 @@ export function getAvifSource(image: string) {
 
   return `${image.slice(0, extensionStart)}.avif`
 }
+
+export const easeOut = [0.22, 1, 0.36, 1] as const

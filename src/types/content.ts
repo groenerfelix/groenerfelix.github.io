@@ -2,7 +2,6 @@ export type RouteId = "home" | "projects" | "cv"
 export type LandingTrack = "researcher" | "developer"
 
 export type SocialLink = {
-  download?: string
   href: string
   logo: React.FC<React.SVGProps<SVGSVGElement>>
   label: string
