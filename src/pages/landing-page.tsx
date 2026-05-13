@@ -125,7 +125,6 @@ export function LandingPage({
             <Separator orientation="vertical" className="hidden sm:block" />
             <div className="flex flex-col items-center gap-2 sm:items-start">
               <LinkButton
-                href="#featured-work"
                 onClick={(event) => {
                   event.preventDefault()
                   scrollToFeaturedSection()
