@@ -15,8 +15,9 @@ export const educationEntries: TimelineEntry[] = [
     id: "phd-human-systems-engineering",
     title: "Ph.D. Human Systems Engineering",
     org: "Arizona State University, USA",
-    timespan: ["2023", "Fall 2026 (expected graduation)"],
+    timespan: ["2023", "Fall 2026*"],
     bullets: [
+      "* Expected graduation in November 2026",
       "Status: Ph.D. candidate | GPA: 4.0",
       <span>
         Committee:{" "}

@@ -1,19 +1,17 @@
 import type { TimelineEntry } from "@/types/content"
 
-type TimelineRowProps = {
-  entry: TimelineEntry
-}
-
-export function TimelineRow({ entry }: TimelineRowProps) {
+export function TimelineRow({ entry }: { entry: TimelineEntry }) {
   const topics = entry.keywords.join(", ")
   const [start, end] = entry.timespan
 
   return (
-    <article className="grid gap-4 border-t border-border py-6 md:grid-cols-[180px_1fr] md:gap-8">
+    <article className="group grid gap-4 border-t border-border py-6 md:grid-cols-[180px_1fr] md:gap-8">
       <div className="flex min-h-full flex-row-reverse md:flex-col items-center justify-center self-stretch text-center text-sm text-primary">
         <span>{end}</span>
         <span className="mr-3 md:mr-0 md:mt-3 h-2 w-2 rounded-full bg-primary" />
-        <span className="mx-2 h-px max-w-10 md:mx-0 md:h-auto md:my-2 md:w-px flex-1 bg-border" />
+        <span className="relative mx-2 h-px max-w-10 md:mx-0 md:h-auto md:my-2 md:w-px flex-1 overflow-hidden bg-border">
+          <span className="absolute inset-y-0 -left-5 w-5 bg-linear-to-r from-transparent via-primary/70 to-transparent opacity-0 group-hover:animate-[timeline-streak-x_3s_ease-in-out_infinite] group-hover:opacity-100 md:inset-x-0 md:-top-5 md:left-auto md:h-5 md:w-full md:bg-linear-to-b md:group-hover:animate-[timeline-streak-y_3s_ease-in-out_infinite]" />
+        </span>
         <span className="h-2 w-2 rounded-full bg-primary" />
         <span className="mr-3 md:mr-0 md:mt-3">{start}</span>
       </div>

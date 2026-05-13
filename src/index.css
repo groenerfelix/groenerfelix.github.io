@@ -113,6 +113,49 @@
   perspective: 1800px;
 }
 
+@keyframes timeline-streak-x {
+  0% {
+    left: -1.25rem;
+    opacity: 0;
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  25% {
+    left: 100%;
+    opacity: 1;
+  }
+
+  30%,
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes timeline-streak-y {
+  0% {
+    top: 100%;
+    opacity: 0;
+  }
+
+  4% {
+    top: 100%;
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  30%,
+  100% {
+    top: -1.25rem;
+    opacity: 0;
+  }
+}
 
 b {
   color: var(--primary)

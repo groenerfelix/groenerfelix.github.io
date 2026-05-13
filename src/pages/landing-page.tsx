@@ -5,8 +5,9 @@ import { Entrance } from "@/components/entrance"
 import { FeaturedWorkRow } from "@/components/featured-work-row"
 import { SegmentedToggle } from "@/components/segmented-toggle"
 import { SocialDock } from "@/components/social-dock"
+import { StackLogoRow } from "@/components/stack-logo-row"
 import { LinkButton } from "@/components/ui/button"
-import { featuredProjects, stackLogos } from "@/data/featured"
+import { featuredProjects } from "@/data/featured"
 import type { RouteId, LandingTrack } from "@/types/content"
 import { Separator } from "@/components/ui/separator"
 import { ResearchSVG, DesignSVG, DevelopmentSVG } from '@/components/svg';
@@ -241,17 +242,7 @@ export function LandingPage({ onNavigate }: { onNavigate: (route: RouteId) => vo
                 Innovative, impactful, and passionate science integrating system-level thinking and individuals. Understanding mental models, managing expectations, guiding attention, and ensuring appropriate reliance for generative AI consumer applications.
               </p>
               :
-              <div className="w-full flex items-center justify-center gap-x-16 gap-y-4 px-8 mt-16 flex-wrap lg:flex-nowrap">
-                {stackLogos.map((logo) => (
-                  <span
-                    className="inline-flex items-center gap-2 text-xl font-bold text-muted-foreground cursor-default select-none"
-                    key={logo.label}
-                  >
-                    <logo.logo className="size-8"/>
-                    {logo.label}
-                  </span>
-                ))}
-              </div>
+              <StackLogoRow />
             }
 
             <div className="mt-10 md:mt-34">

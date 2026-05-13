@@ -3,11 +3,12 @@ import { useDeferredValue, useEffect, useMemo, useState } from "react"
 
 import { Entrance } from "@/components/entrance"
 import { FilterGroup } from "@/components/filter-group"
-import { InterestCheckboxGroup } from "@/components/interest-checkbox-group"
+import { InterestCheckboxGroup, initialProjectTypeFilters } from "@/components/interest-checkbox-group"
 import { ProjectRow } from "@/components/project-row"
-import { initialProjectTypeFilters } from "@/data/project-filters"
 import { projects } from "@/data/projects"
 import type { ProjectEntry, ProjectSubType } from "@/types/content"
+import { InputGroup, InputGroupAddon, InputGroupInput, } from "@/components/ui/input-group"
+import { Button } from "@/components/ui/button"
 
 export function ProjectsPage() {
   const [query, setQuery] = useState("")
@@ -189,28 +190,26 @@ export function ProjectsPage() {
             }))}
           />
 
-          <label className="block space-y-3 rounded-full border border-primary/50 focus:border-primary p-3">
-
-            <span className="relative block">
-              <Search className="pointer-events-none absolute left-0 top-1/2 size-4 -translate-y-1/2 text-primary/75" />
-              <input
-                className="w-full pl-7 pr-10 text-base text-foreground outline-none transition-colors placeholder:text-muted-foreground"
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search title, summary, keywords, authors..."
-                value={query}
-              />
-              {query ? (
-                <button
+          <InputGroup className="max-w-xl rounded-full bg-background border border-primary/50 px-1 py-6 mt-12 text-base text-foreground cursor-default">
+            <InputGroupAddon className="cursor-default px-2"><Search className="text-primary/75"/></InputGroupAddon>
+            <InputGroupInput 
+              placeholder="Search title, summary, keywords, authors..." 
+              className="text-base!"                 
+              onChange={(event) => setQuery(event.target.value)}
+              value={query}
+            />
+            {query && <InputGroupAddon align={"inline-end"}>
+                <Button
                   aria-label="Clear search"
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-foreground/45 transition-colors hover:text-primary cursor-pointer"
                   onClick={() => setQuery("")}
-                  type="button"
+                  variant="ghost"
+                  className="bg-transparent hover:bg-transparent"
                 >
-                  <X className="size-4" />
-                </button>
-              ) : null}
-            </span>
-          </label>
+                  <X className="size-4"/>
+                </Button>
+              </InputGroupAddon>
+            }
+          </InputGroup>
         </Entrance>
       </section>
 

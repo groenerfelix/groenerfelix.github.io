@@ -2,7 +2,7 @@ import { BookOpen, Check, Code2, FolderKanban, type LucideIcon } from "lucide-re
 
 import { cn } from "@/lib/utils"
 
-const initialProjectTypeFilters = {
+export const initialProjectTypeFilters = {
   publication: true,
   coding: false,
   other: false,
