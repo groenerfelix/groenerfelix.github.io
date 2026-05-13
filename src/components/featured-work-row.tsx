@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react"
 import { useEffect, useState } from "react"
+import { AnimatePresence, motion } from "motion/react"
 
 import {
   Carousel,
@@ -9,11 +10,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
-import { cn, getAvifSource } from "@/lib/utils"
+import { cn, getAvifSource, useReducedMotion } from "@/lib/utils"
 import type { FeaturedProject, FeaturedProjectMedia } from "@/types/content"
 import { Button, LinkButton } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-
 
 const mediaGradient = `
   linear-gradient(to bottom, #000 0%, #000 78%, rgba(0,0,0,0.58) 90%, transparent 100%), 
@@ -28,10 +28,10 @@ const mediaFadeMaskStyle = {
   maskComposite: "intersect",
 } as CSSProperties
 
+const featuredCopyEase = [0.22, 1, 0.36, 1] as const
+
 function FeaturedMediaImage({ item }: { item: FeaturedProjectMedia }) {
-
-  if(item.image.endsWith(".mp4")) {
-
+  if (item.image.endsWith(".mp4")) {
     return (
       <video
         className="aspect-video w-full object-cover object-top"
@@ -40,13 +40,11 @@ function FeaturedMediaImage({ item }: { item: FeaturedProjectMedia }) {
         loop
         playsInline
         style={mediaFadeMaskStyle}
-    >
+      >
         <source src={item.image} type="video/mp4" />
-    </video>
+      </video>
     )
-
   }
-
 
   const avifSource = getAvifSource(item.image)
 
@@ -66,11 +64,8 @@ function FeaturedMediaImage({ item }: { item: FeaturedProjectMedia }) {
 export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
   const [api, setApi] = useState<CarouselApi>()
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const reducedMotion = useReducedMotion()
   const activeMedia = project.media[selectedIndex] ?? project.media[0]
-
-  useEffect(() => {
-    setSelectedIndex(0)
-  }, [project.id])
 
   useEffect(() => {
     if (!api) return
@@ -79,7 +74,6 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
       setSelectedIndex(api.selectedScrollSnap())
     }
 
-    updateSelectedIndex()
     api.on("select", updateSelectedIndex)
     api.on("reInit", updateSelectedIndex)
 
@@ -102,20 +96,33 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
           {project.title}
         </h3>
 
-        <div className="h-48 flex flex-col justify-between overflow-hidden">
-          <p className="max-w-2xl text-xl leading-8 text-muted-foreground text-balance">
-            {activeMedia.paragraph}
-          </p>
+        <div className="h-48 overflow-hidden">
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              animate={reducedMotion ? undefined : { opacity: 1, x: 0 }}
+              className="flex h-full flex-col justify-between"
+              exit={reducedMotion ? undefined : { opacity: 0, x: -6 }}
+              initial={reducedMotion ? false : { opacity: 0, x: 8 }}
+              key={`${project.id}-${selectedIndex}`}
+              transition={
+                reducedMotion
+                  ? undefined
+                  : { duration: 0.45, ease: featuredCopyEase }
+              }
+            >
+              <p className="max-w-2xl text-xl leading-8 text-balance text-muted-foreground">
+                {activeMedia.paragraph}
+              </p>
 
-          <div>
-            {activeLink ? (
-              <LinkButton
-                href={activeLink.href}
-              >
-                {activeLink.label}
-              </LinkButton>
-            ) : null}
-          </div>
+              <div>
+                {activeLink ? (
+                  <LinkButton href={activeLink.href}>
+                    {activeLink.label}
+                  </LinkButton>
+                ) : null}
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
 
@@ -127,7 +134,10 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
         <CarouselContent>
           {project.media.map((item, index) => (
             <CarouselItem key={`${project.id}-${index}`}>
-              <Separator orientation={"horizontal"} className="my-2 max-w-[90%] mx-auto"/>
+              <Separator
+                orientation={"horizontal"}
+                className="mx-auto my-2 max-w-[90%]"
+              />
               <FeaturedMediaImage item={item} />
             </CarouselItem>
           ))}
@@ -135,17 +145,17 @@ export function FeaturedWorkRow({ project }: { project: FeaturedProject }) {
 
         {project.media.length > 1 ? (
           <>
-            <CarouselPrevious/>
-            <CarouselNext/>
-
+            <CarouselPrevious />
+            <CarouselNext />
 
             <div className="absolute left-1/2 flex -translate-x-1/2 gap-2 rounded-full px-3 py-4">
               {project.media.map((_, index) => (
                 <Button
                   aria-current={selectedIndex === index}
                   className={cn(
-                    "cursor-pointer size-2 rounded-full bg-muted transition-colors duration-300 hover:bg-muted-foreground",
-                    selectedIndex === index && "bg-primary hover:bg-primary cursor-default"
+                    "size-2 cursor-pointer rounded-full bg-muted transition-colors duration-300 hover:bg-muted-foreground",
+                    selectedIndex === index &&
+                      "cursor-default bg-primary hover:bg-primary"
                   )}
                   key={`${project.id}-media-dot-${index}`}
                   onClick={() => api?.scrollTo(index)}

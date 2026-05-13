@@ -1,12 +1,11 @@
 import { Search, X } from "lucide-react"
 import { useDeferredValue, useEffect, useMemo, useState } from "react"
 
+import { Entrance } from "@/components/entrance"
 import { FilterGroup } from "@/components/filter-group"
-import {
-  initialProjectTypeFilters,
-  InterestCheckboxGroup,
-} from "@/components/interest-checkbox-group"
+import { InterestCheckboxGroup } from "@/components/interest-checkbox-group"
 import { ProjectRow } from "@/components/project-row"
+import { initialProjectTypeFilters } from "@/data/project-filters"
 import { projects } from "@/data/projects"
 import type { ProjectEntry, ProjectSubType } from "@/types/content"
 
@@ -138,27 +137,29 @@ export function ProjectsPage() {
 
   return (
     <div className="mx-auto max-w-360 w-full flex flex-col py-32 px-4 md:px-16">
-      <div className="flex flex-col space-y-2">
+      <Entrance className="flex flex-col space-y-2" delay={0.06} y={12}>
         <h1 className="font-semibold tracking-tight text-foreground text-5xl">
           All my projects
         </h1>
         <p className="text-2xl tracking-tight leading-8 text-muted-foreground text-balance">
           Search through all my publications, talks, coding projects, and other experiments.
         </p>
-      </div>
+      </Entrance>
 
 
       <section className="pt-32 pb-16 space-y-16 w-full max-w-6xl mx-auto">
-        <InterestCheckboxGroup
-          onToggle={(type) =>
-            setTypeFilters((current) => ({
-              ...current,
-              [type]: !current[type],
-            }))
-          }
-          value={typeFilters}
-          />
-        <div className="space-y-6">
+        <Entrance delay={0.18} y={10}>
+          <InterestCheckboxGroup
+            onToggle={(type) =>
+              setTypeFilters((current) => ({
+                ...current,
+                [type]: !current[type],
+              }))
+            }
+            value={typeFilters}
+            />
+        </Entrance>
+        <Entrance className="space-y-6" delay={0.28} y={10}>
           <FilterGroup
             label="Project type"
             options={[
@@ -210,27 +211,29 @@ export function ProjectsPage() {
               ) : null}
             </span>
           </label>
-        </div>
+        </Entrance>
       </section>
 
       <section className="w-full max-w-6xl mx-auto">
-        { filteredProjects.length === 0 && 
-          <div className="pb-4 text-sm text-foreground/45">
-            No matching entries; try adjusting the filters.
-          </div>
-        }
-        {years.map((year) => (
-          <div key={year}>
-            <div className="pt-10 text-lg uppercase text-primary border-b border-primary/50">
-              {year}
+        <Entrance delay={0.38} y={10}>
+          { filteredProjects.length === 0 && 
+            <div className="pb-4 text-sm text-foreground/45">
+              No matching entries; try adjusting the filters.
             </div>
-            <div>
-              {groupedProjects[year].map((project) => (
-                <ProjectRow key={project.id} project={project} />
-              ))}
+          }
+          {years.map((year) => (
+            <div key={year}>
+              <div className="pt-10 text-lg uppercase text-primary border-b border-primary/50">
+                {year}
+              </div>
+              <div>
+                {groupedProjects[year].map((project) => (
+                  <ProjectRow key={project.id} project={project} />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </Entrance>
       </section>
     </div>
   )
