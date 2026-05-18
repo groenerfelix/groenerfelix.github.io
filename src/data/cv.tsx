@@ -4,7 +4,7 @@ import { LinkButton } from "@/components/ui/button"
 
 export const cvDownloadLink: SocialLink = {
   label: "CV PDF",
-  href: "/cv_felix_groener_2026_04.pdf",
+  href: "/cv_felix_groener_2026_05.pdf",
   logo: Download,
 }
 
@@ -143,7 +143,7 @@ export const workEntries: TimelineEntry[] = [
   {
     id: "graduate-research-assistant-ulm",
     title: "Graduate Research Assistant",
-    org: "Human Factors at Ulm University",
+    org: "Human Factors at Ulm University, Germany",
     timespan: ["2022", "2023"],
     bullets: [
       "Co-authored a research paper on the effects of trust repair strategies for robots",
@@ -152,13 +152,45 @@ export const workEntries: TimelineEntry[] = [
     keywords: ["Human Factors", "Robotics", "Trust Repair"],
   },
   {
+    id: "miller-meier",
+    title: "3-Month Internship",
+    org: "Miller & Meier Consulting, Germany",
+    timespan: ["2021", "2021"],
+    bullets: [
+      "Identified the workflows and user needs of political consultants",
+      "Built an NLP prototype to automate part of their daily tasks"
+    ],
+    keywords: ["NLP", "Political Communication", "Consulting"],
+  },
+  {
+    id: "embassy",
+    title: "3-Month Internship",
+    org: "German Embassy to Luxembourg",
+    timespan: ["2019", "2019"],
+    bullets: [
+      "Organized and attended events with politicians and industry partners",
+      "Coordinated with international governmental institutions"
+    ],
+    keywords: ["Project Management", "Political Communication", "Government"],
+  },
+  {
     id: "undergraduate-research-assistant-kiel",
     title: "Undergraduate Research Assistant",
-    org: "Web Science at Kiel University",
+    org: "Web Science at Kiel University, Germany",
     timespan: ["2019", "2019"],
     bullets: [
       "Set up an online survey for a research project investigating people's classification of political tweets",
     ],
     keywords: ["Survey Design", "Political Communication", "Web Science"],
+  },
+  {
+    id: "dataport",
+    title: "Assistant to the Project Management",
+    org: "Dataport, Germany",
+    timespan: ["2018", "2018"],
+    bullets: [
+      "Prepared material for stakeholder briefings",
+    ],
+    keywords: ["Project Management", "Scrum", "Government"],
   },
 ]
