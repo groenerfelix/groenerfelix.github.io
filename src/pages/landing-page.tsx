@@ -14,12 +14,26 @@ import { featuredProjects } from "@/data/featured"
 import { useReducedMotion } from "@/lib/utils"
 import type { RouteId, LandingTrack } from "@/types/content"
 
+function getInitialTrack(): LandingTrack {
+  if (typeof window === "undefined") {
+    return "developer"
+  }
+
+  const params = new URLSearchParams(window.location.search)
+
+  if (params.has("researcher")) {
+    return "researcher"
+  }
+
+  return "developer"
+}
+
 export function LandingPage({
   onNavigate,
 }: {
   onNavigate: (route: RouteId) => void
 }) {
-  const [track, setTrack] = useState<LandingTrack>("developer")
+  const [track, setTrack] = useState<LandingTrack>(getInitialTrack)
   const trackProjects = featuredProjects.filter(
     (project) => project.track === track
   )
