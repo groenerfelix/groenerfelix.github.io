@@ -153,7 +153,7 @@ export const workEntries: TimelineEntry[] = [
   },
   {
     id: "miller-meier",
-    title: "3-Month Internship",
+    title: "Internship, Political Consulting",
     org: "Miller & Meier Consulting, Germany",
     timespan: ["2021", "2021"],
     bullets: [
@@ -164,7 +164,7 @@ export const workEntries: TimelineEntry[] = [
   },
   {
     id: "embassy",
-    title: "3-Month Internship",
+    title: "Internship, Foreign Affairs",
     org: "German Embassy to Luxembourg",
     timespan: ["2019", "2019"],
     bullets: [

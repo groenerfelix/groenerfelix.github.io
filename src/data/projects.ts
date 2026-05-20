@@ -2,6 +2,27 @@ import type { ProjectEntry } from "@/types/content"
 
 export const projects: ProjectEntry[] = [
   {
+    id: "capstone-manual",
+    title: "Designing documentation for full-stack capstone class",
+    year: 2026,
+    type: "coding",
+    summary:
+      "Identified learners' needs and developed an interactive solution using MKDocs to guide graduate students through a full-stack capstone project including Flask, MySQL, and AWS deployment.",
+    keywords: [
+      "Documentation",
+      "Learning Engineering",
+      "Flask",
+      "Full Stack",
+      "Python",
+      "AWS",
+    ],
+    projectType: "Handbook",
+    links: [
+      { label: "Browse the handbook", href: "https://groenerfelix.github.io/capstone-project-handbook" },
+      { label: "Code", href: "https://github.com/groenerfelix/capstone-project-handbook" },
+    ],
+  },
+  {
     id: "mcsr-analysis",
     title: "Data analysis platform for speedrun statistics",
     year: 2026,
@@ -19,7 +40,7 @@ export const projects: ProjectEntry[] = [
     ],
     projectType: "Full Stack Web App",
     links: [
-      { label: "Project Page", href: "https://eyespy.nikosiaphd.com" },
+      { label: "Project page", href: "https://eyespy.nikosiaphd.com" },
       { label: "Code", href: "https://github.com/NikosiaPhD/mcsr-analysis" },
     ],
   },
