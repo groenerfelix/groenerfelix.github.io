@@ -5,6 +5,7 @@ export type SocialLink = {
   href: string
   logo: React.FC<React.SVGProps<SVGSVGElement>>
   label: string
+  hideOnSmallScreens?: boolean
 }
 
 export type ProjectLink = {

@@ -44,7 +44,7 @@ function HeroText() {
 
 export function HeroSection() {
   return (
-    <section className="flex min-h-[65vh] w-full flex-col justify-center gap-8 select-none">
+    <section className="flex min-h-[65vh] pt-16 pb-32 w-full flex-col justify-center gap-8 select-none">
       <div className="flex flex-col items-center justify-center gap-12 pt-8 md:pt-0 lg:flex-row">
         <Entrance
           className="relative aspect-square w-72 overflow-hidden rounded-full border-[3px] border-primary/70 after:absolute after:inset-0 after:bg-background after:opacity-10 after:mix-blend-multiply sm:w-82.5"

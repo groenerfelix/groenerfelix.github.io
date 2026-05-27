@@ -3,8 +3,10 @@ import { useRef, useState, type CSSProperties, type PointerEvent } from "react"
 import { stackLogos } from "@/data/featured"
 import { cn } from "@/lib/utils"
 
+// const rowClassName =
+//   "flex w-full flex-wrap items-center justify-center gap-x-16 gap-y-4 px-8 py-8"
 const rowClassName =
-  "flex w-full flex-wrap items-center justify-center gap-x-16 gap-y-4 px-8 py-8"
+  "mx-auto grid w-fit grid-cols-2 md:grid-cols-3 justify-items-center gap-x-8 gap-y-8 px-8 py-8 xl:grid-cols-6"
 
 const itemClassName =
   "inline-flex items-center gap-2 text-xl font-bold cursor-default select-none"

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import { motion } from "motion/react"
-import { useReducedMotion, easeOut } from "@/lib/utils"
+import { cn, useReducedMotion, easeOut } from "@/lib/utils"
 import { socialLinks } from "@/data/social"
 
 const dockVariants = {
@@ -71,7 +71,10 @@ export function SocialDock({ delay = 0 }: { delay?: number }) {
             ref={(element) => {
               itemRefs.current[index] = element
             }}
-            className="group flex cursor-pointer flex-col items-center justify-center gap-y-1 text-muted-foreground hover:text-primary"
+            className={cn(
+              "group cursor-pointer flex-col items-center justify-center gap-y-1 text-muted-foreground hover:text-primary",
+              link.hideOnSmallScreens ? "hidden sm:flex" : "flex"
+            )}
             href={link.href}
             rel={opensInNewTab ? "noreferrer" : undefined}
             target={opensInNewTab ? "_blank" : undefined}

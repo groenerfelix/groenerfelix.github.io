@@ -15,6 +15,11 @@ export const socialLinks: SocialLink[] = [
     logo: SVG.LinkedIn,
   },
   { label: "GitHub", href: "https://github.com/groenerfelix?tab=repositories", logo: SVG.GitHub },
-  { label: "Twitter", href: "https://x.com/felixgroener", logo: SVG.Twitter },
-  cvDownloadLink,
+  {
+    label: "Twitter",
+    href: "https://x.com/felixgroener",
+    logo: SVG.Twitter,
+    hideOnSmallScreens: true,
+  },
+  { ...cvDownloadLink, hideOnSmallScreens: true },
 ]
