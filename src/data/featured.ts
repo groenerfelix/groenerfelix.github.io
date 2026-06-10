@@ -93,7 +93,7 @@ export const featuredProjects: FeaturedProject[] = [
         image: "/images/tutorial-generator-flow.jpg",
         imageAlt: "Tutorial generator workflow",
         paragraph:
-          "LangGraph orchestrates the workflow, including iterative refinement. It interfacees with the OpenAI and Gemini APIs for different tasks.",
+          "LangGraph orchestrates the workflow, including iterative refinement. It interfaces with the OpenAI and Gemini APIs for different tasks.",
         link: {
           label: "Read the conference paper",
           href: "https://lern.edtechbooks.org/lern_2026/lwftkgxnbu",

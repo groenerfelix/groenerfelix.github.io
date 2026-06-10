@@ -159,7 +159,7 @@ export const projects: ProjectEntry[] = [
     summary:
       "A catalogue of computational metrics to model people's perception of AI-generated art.",
     keywords: ["AI Images", "Cognitive Psychology", "Generative AI"],
-    projectType: "Under Review",
+    projectType: "Preprint",
     authors: "F. Gröner and D.V. Becker",
     firstAuthor: true,
     links: [

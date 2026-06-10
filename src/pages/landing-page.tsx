@@ -148,7 +148,7 @@ export function LandingPage({
                 projects
               </LinkButton>
               <LinkButton
-                href="#projects"
+                href="/projects"
                 onClick={(event) => {
                   event.preventDefault()
                   onNavigate("projects")
@@ -157,7 +157,7 @@ export function LandingPage({
                 See all projects
               </LinkButton>
               <LinkButton
-                href="#cv"
+                href="/cv"
                 onClick={(event) => {
                   event.preventDefault()
                   onNavigate("cv")

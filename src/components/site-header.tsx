@@ -5,7 +5,7 @@ import type { RouteId } from "@/types/content"
 import { Button } from "./ui/button"
 
 type SiteHeaderProps = {
-  activeRoute: RouteId
+  activeRoute: RouteId | null
   mobileMenuOpen: boolean
   onToggleMenu: () => void
   onNavigate: (route: RouteId) => void

@@ -1,4 +1,8 @@
 export type RouteId = "home" | "projects" | "cv"
+export type AppRoute =
+  | { kind: RouteId }
+  | { kind: "story"; slug: string }
+  | { kind: "not-found" }
 export type LandingTrack = "researcher" | "developer"
 
 export type SocialLink = {
