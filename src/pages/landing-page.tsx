@@ -1,69 +1,18 @@
-import { useRef, useState } from "react"
-import { AnimatePresence, motion } from "motion/react"
-import { CodeXml, GraduationCap } from "lucide-react"
-
 import { FeaturedWorkRow } from "@/components/featured-work-row"
 import { LandingBackground } from "@/components/landing-background"
 import { HeroSection } from "@/components/landing-hero-section"
 import { OverviewGraphics } from "@/components/overview-graphics"
-import { SegmentedToggle } from "@/components/segmented-toggle"
 import { StackLogoRow } from "@/components/stack-logo-row"
-import { LinkButton } from "@/components/ui/button"
+import { StoryLinkButton } from "@/components/story-layout"
 import { Separator } from "@/components/ui/separator"
-import { featuredProjects } from "@/data/featured"
-import { useReducedMotion } from "@/lib/utils"
-import type { RouteId, LandingTrack } from "@/types/content"
-
-function getInitialTrack(): LandingTrack {
-  if (typeof window === "undefined") {
-    return "developer"
-  }
-
-  const params = new URLSearchParams(window.location.search)
-
-  if (params.has("researcher")) {
-    return "researcher"
-  }
-
-  return "developer"
-}
+import { stories } from "@/stories/registry"
+import type { RouteId } from "@/types/content"
 
 export function LandingPage({
   onNavigate,
 }: {
   onNavigate: (route: RouteId) => void
 }) {
-  const [track, setTrack] = useState<LandingTrack>(getInitialTrack)
-  const trackProjects = featuredProjects.filter(
-    (project) => project.track === track
-  )
-  const featuredSection = useRef<HTMLDivElement>(null)
-  const reducedMotion = useReducedMotion()
-
-  const scrollToFeaturedSection = () => {
-    const nextTrack = track === "developer" ? "researcher" : "developer"
-    const target = featuredSection.current
-
-    if (!target || reducedMotion) {
-      target?.scrollIntoView({ behavior: "auto" })
-      setTrack(nextTrack)
-      return
-    }
-
-    let handled = false
-    const handleScrollEnd = () => {
-      if (handled) return
-
-      handled = true
-      window.removeEventListener("scrollend", handleScrollEnd)
-      setTrack(nextTrack)
-    }
-
-    window.addEventListener("scrollend", handleScrollEnd, { once: true })
-    window.setTimeout(handleScrollEnd, 1200)
-    target.scrollIntoView({ behavior: "smooth" })
-  }
-
   return (
     <>
       <LandingBackground />
@@ -76,78 +25,33 @@ export function LandingPage({
           className="my-20 md:my-32"
           id="featured-work"
           orientation="horizontal"
-          ref={featuredSection}
         />
 
         <section className="space-y-8">
-          <SegmentedToggle
-            label="I'm interested in"
-            onChange={setTrack}
-            options={[
-              {
-                icon: CodeXml,
-                label: "Felix the developer",
-                value: "developer",
-              },
-              {
-                icon: GraduationCap,
-                label: "Felix the scientist",
-                value: "researcher",
-              },
-            ]}
-            value={track}
-          />
-          <AnimatePresence initial={false} mode="wait">
-            <motion.div
-              animate={reducedMotion ? undefined : { opacity: 1, y: 0 }}
-              className="space-y-8"
-              exit={reducedMotion ? undefined : { opacity: 0 }}
-              initial={reducedMotion ? false : { opacity: 0 }}
-              key={track}
-              transition={
-                reducedMotion ? undefined : { duration: 0.22, ease: "easeIn" }
-              }
-            >
-              <h2 className="mt-16 mb-6 text-center text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl md:mt-32 md:mb-8">
-                {track === "researcher"
-                  ? "Quantitative and qualitative research at the intersection of Human Factors and AI"
-                  : "Full-Stack Web Applications Featuring LLMs"}
-              </h2>
-              {track === "researcher" ? (
-                <p className="mx-auto max-w-4xl text-center text-xl tracking-tight text-balance text-muted-foreground sm:text-2xl">
-                  Innovative, impactful, and passionate science integrating
-                  system-level thinking and individuals. Understanding mental
-                  models, managing expectations, guiding attention, and ensuring
-                  appropriate reliance for generative AI consumer applications.
-                </p>
-              ) : (
-                <StackLogoRow />
-              )}
+          <div className="space-y-8">
+            <h2 className="mt-16 mb-6 text-center text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl md:mt-32 md:mb-8">
+              Selected project stories across LLM systems, research tools, and
+              data-rich UX
+            </h2>
+            <p className="mx-auto max-w-4xl text-center text-xl tracking-tight text-balance text-muted-foreground sm:text-2xl">
+              I build full-stack products that make complex systems useful, intuitive,
+              and delightful to work with.
+            </p>
+            <StackLogoRow />
 
-              <div className="mt-10 md:mt-34">
-                {trackProjects.map((project) => (
-                  <FeaturedWorkRow key={project.id} project={project} />
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+            <div className="mt-10 md:mt-34">
+              {stories.map((story) => (
+                <FeaturedWorkRow key={story.slug} story={story} />
+              ))}
+            </div>
+          </div>
 
-          <div className="mx-auto grid w-full max-w-xl grid-cols-1 justify-center gap-4 text-center sm:grid-cols-[1fr_auto_1fr] sm:gap-8 sm:text-left">
-            <span className="mt-2 tracking-[0.2em] text-primary uppercase sm:text-right">
-              Next stop
-            </span>
-            <Separator orientation="vertical" className="hidden sm:block" />
-            <div className="flex flex-col items-center gap-2 sm:items-start">
-              <LinkButton
-                onClick={(event) => {
-                  event.preventDefault()
-                  scrollToFeaturedSection()
-                }}
-              >
-                See featured {track === "developer" ? "research" : "software"}{" "}
-                projects
-              </LinkButton>
-              <LinkButton
+          <div className="mt-32 flex w-full flex-col items-stretch gap-8 sm:mx-auto sm:max-w-3xl sm:flex-row">
+            <div className="flex min-w-0 flex-1 flex-col items-center justify-end gap-4 px-4 text-center sm:gap-8">
+              <span className="text-lg text-balance text-muted-foreground">
+                Browse a complete list of my projects and publications.
+              </span>
+              <StoryLinkButton
                 href="/projects"
                 onClick={(event) => {
                   event.preventDefault()
@@ -155,16 +59,22 @@ export function LandingPage({
                 }}
               >
                 See all projects
-              </LinkButton>
-              <LinkButton
+              </StoryLinkButton>
+            </div>
+            <Separator orientation="vertical" className="hidden sm:block" />
+            <div className="flex min-w-0 flex-1 flex-col items-center justify-end gap-4 px-4 text-center sm:gap-8">
+              <span className="text-lg text-balance text-muted-foreground">
+                See my academic background and work history.
+              </span>
+              <StoryLinkButton
                 href="/cv"
                 onClick={(event) => {
                   event.preventDefault()
                   onNavigate("cv")
                 }}
               >
-                See my CV
-              </LinkButton>
+                Explore my CV
+              </StoryLinkButton>
             </div>
           </div>
         </section>

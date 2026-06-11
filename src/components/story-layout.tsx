@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react"
-import { useId, useState, type ReactNode } from "react"
+import { useId, useState, type ComponentProps, type ReactNode } from "react"
 import { AnimatePresence, motion } from "motion/react"
 
 import { Entrance } from "@/components/entrance"
@@ -51,14 +51,12 @@ export function StoryFrame({ children, metadata }: StoryFrameProps) {
         </div>
       </Entrance>
       <Entrance delay={0.32}>
-        <div className="mx-auto mt-20 w-full max-w-5xl space-y-20 md:space-y-36 md:mt-28">
+        <div className="mx-auto mt-20 w-full max-w-5xl space-y-20 md:mt-28 md:space-y-36">
           {children}
         </div>
       </Entrance>
 
-      {metadata.links && 
-      <StoryLinkBar links={metadata.links} />
-      }
+      {metadata.links && <StoryLinkBar links={metadata.links} />}
     </article>
   )
 }
@@ -133,7 +131,7 @@ export function StoryMedia({
         </picture>
       )}
       {medium.caption ? (
-        <figcaption className="text-sm leading-6 text-muted-foreground text-center">
+        <figcaption className="text-center text-sm leading-6 text-muted-foreground">
           {medium.caption}
         </figcaption>
       ) : null}
@@ -199,7 +197,10 @@ type StoryCalloutProps = {
   title?: string
 }
 
-export function StoryCallout({ children, title = "Learning" }: StoryCalloutProps) {
+export function StoryCallout({
+  children,
+  title = "Learning",
+}: StoryCalloutProps) {
   return (
     <aside className="border-l border-primary pl-5 text-base leading-7 text-foreground">
       <p className="mb-2 text-sm tracking-[0.2em] text-primary uppercase">
@@ -259,23 +260,46 @@ export function StoryTextPair({
 export function StoryLinkBar({ links }: { links: StoryLink[] }) {
   return (
     <div className="mt-32">
-      <div className="flex flex-col gap-8 sm:flex-row items-stretch w-full sm:max-w-6xl mx-auto">
+      <div className="mx-auto flex w-full flex-col items-stretch gap-8 sm:max-w-6xl sm:flex-row">
         {links.map((link, index) => (
           <div className="contents" key={link.href}>
             {index > 0 ? <Separator orientation="vertical" /> : null}
-            <div className="flex min-w-0 flex-1 flex-col items-center justify-end gap-4 sm:gap-8 px-4 text-center">
-              <span className="text-muted-foreground text-balance text-lg">
+            <div className="flex min-w-0 flex-1 flex-col items-center justify-end gap-4 px-4 text-center sm:gap-8">
+              <span className="text-lg text-balance text-muted-foreground">
                 {link.cta}
               </span>
-              <Button asChild className="rounded-full min-w-32 font-bold text-md px-4 py-4" size="sm">
-                <a href={link.href} rel="noreferrer" target="_blank" className="leading-3">
-                  {link.buttonText}
-                </a>
-              </Button>
+              <StoryLinkButton
+                href={link.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                {link.buttonText}
+              </StoryLinkButton>
             </div>
           </div>
         ))}
       </div>
     </div>
+  )
+}
+
+export function StoryLinkButton({
+  children,
+  className,
+  ...props
+}: ComponentProps<"a">) {
+  return (
+    <Button
+      asChild
+      className={cn(
+        "text-md min-w-32 rounded-full px-4 py-4 font-bold",
+        className
+      )}
+      size="sm"
+    >
+      <a className="leading-3" {...props}>
+        {children}
+      </a>
+    </Button>
   )
 }

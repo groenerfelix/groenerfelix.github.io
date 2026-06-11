@@ -34,8 +34,8 @@ function createStoryEntry(
 }
 
 export const stories = [
-  createStoryEntry(tutorialGeneratorData, TutorialGeneratorStory),
   createStoryEntry(zoteroExplorerData, ZoteroExplorerStory),
+  createStoryEntry(tutorialGeneratorData, TutorialGeneratorStory),
   createStoryEntry(speedrunAnalysisData, SpeedrunAnalysisStory)
 ]
 

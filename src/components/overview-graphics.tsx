@@ -10,11 +10,10 @@ export function OverviewGraphics() {
     <section className="space-y-10 pt-16 md:space-y-16 lg:pt-0">
       <Entrance className="space-y-2" delay={2} y={10}>
         <h2 className="text-4xl font-medium tracking-tighter text-balance sm:text-5xl">
-          Owning the entire development cycle
+          Tying together research, design, and prototyping
         </h2>
         <p className="text-xl tracking-tight text-muted-foreground sm:text-2xl">
-          Bridging research, design, and technology; transforming abstract ideas
-          into shippable products.
+          Designs that minimize friction between human intent and complex AI systems
         </p>
       </Entrance>
       <Entrance className="space-y-2" delay={2.1} y={10}>
@@ -48,7 +47,7 @@ export function OverviewGraphics() {
                 Iterative Prototype Development
               </h3>
               <p className="px-2 text-muted-foreground md:text-balance">
-                Architecting end-to-end, shipping fast, planning strategic
+                Architecting end-to-end, iterating fast, planning strategic
                 roadmaps, coordinating with stakeholders.
               </p>
             </div>

@@ -3,7 +3,6 @@ export type AppRoute =
   | { kind: RouteId }
   | { kind: "story"; slug: string }
   | { kind: "not-found" }
-export type LandingTrack = "researcher" | "developer"
 
 export type SocialLink = {
   href: string
@@ -15,20 +14,6 @@ export type SocialLink = {
 export type ProjectLink = {
   label: string
   href: string
-}
-
-export type FeaturedProjectMedia = {
-  image: string
-  imageAlt: string
-  paragraph: string
-  link?: ProjectLink
-}
-
-export type FeaturedProject = {
-  id: string
-  track: LandingTrack
-  title: string
-  media: FeaturedProjectMedia[]
 }
 
 export type ProjectType = "publication" | "coding" | "other"

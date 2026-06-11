@@ -99,7 +99,7 @@ export function SpeedrunAnalysisStory() {
             contents: (
               <div className="space-y-4">
                 <p>
-                  I also experiment with showing the same data as a Gantt chart by ordering the segments in the order they occur.
+                  I also experimented with showing the same data as a Gantt chart by ordering the segments in the order they occur.
                   I expected these to be more intuitive but people struggled to interpret them if they weren't familiar with Gantt charts.
                 </p>
                 <img
@@ -110,7 +110,7 @@ export function SpeedrunAnalysisStory() {
                 />
                 <p>
                   Testers further reported that they found the gradients indicating variance visually straining. 
-                  hus, I added toggles that let users switch between violin and Gantt views, with or without uncertainty.
+                  Thus, I added toggles that let users switch between violin and Gantt views, with or without uncertainty.
                 </p>
                 <img
                   alt="EyeSpy visualization toggles for uncertainty and chart type"
