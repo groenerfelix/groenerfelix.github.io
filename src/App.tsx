@@ -7,7 +7,7 @@ import { CvPage } from "@/pages/cv-page"
 import { LandingPage } from "@/pages/landing-page"
 import { ProjectsPage } from "@/pages/projects-page"
 import { getStoryBySlug } from "@/stories/registry"
-import type { RouteId } from "@/types/content"
+import type { NavigableRoute, RouteId } from "@/types/content"
 
 function NotFoundPage({ onNavigate }: { onNavigate: (route: RouteId) => void }) {
   return (
@@ -40,7 +40,7 @@ function App() {
   const { route, navigate } = usePathRoute()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  const handleNavigate = (nextRoute: RouteId) => {
+  const handleNavigate = (nextRoute: NavigableRoute) => {
     setMobileMenuOpen(false)
     navigate(nextRoute)
   }

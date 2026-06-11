@@ -6,12 +6,12 @@ import { StackLogoRow } from "@/components/stack-logo-row"
 import { StoryLinkButton } from "@/components/story-layout"
 import { Separator } from "@/components/ui/separator"
 import { stories } from "@/stories/registry"
-import type { RouteId } from "@/types/content"
+import type { NavigableRoute } from "@/types/content"
 
 export function LandingPage({
   onNavigate,
 }: {
-  onNavigate: (route: RouteId) => void
+  onNavigate: (route: NavigableRoute) => void
 }) {
   return (
     <>
@@ -41,7 +41,11 @@ export function LandingPage({
 
             <div className="mt-10 md:mt-34">
               {stories.map((story) => (
-                <FeaturedWorkRow key={story.slug} story={story} />
+                <FeaturedWorkRow
+                  key={story.slug}
+                  onOpenStory={(slug) => onNavigate({ kind: "story", slug })}
+                  story={story}
+                />
               ))}
             </div>
           </div>

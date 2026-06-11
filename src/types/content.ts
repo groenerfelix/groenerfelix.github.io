@@ -1,7 +1,9 @@
 export type RouteId = "home" | "projects" | "cv"
+export type StoryRoute = { kind: "story"; slug: string }
+export type NavigableRoute = RouteId | StoryRoute
 export type AppRoute =
   | { kind: RouteId }
-  | { kind: "story"; slug: string }
+  | StoryRoute
   | { kind: "not-found" }
 
 export type SocialLink = {

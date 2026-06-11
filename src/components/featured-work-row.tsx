@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react"
+import type { CSSProperties, MouseEvent } from "react"
 
 import { StoryLinkButton, type StoryMetadata } from "@/components/story-layout"
 import { getAvifSource, useReducedMotion } from "@/lib/utils"
@@ -20,6 +20,7 @@ const mediaFadeMaskStyle = {
 type FeaturedStory = {
   metadata: StoryMetadata
   path: `/stories/${string}`
+  slug: string
 }
 
 type FeaturedMedium = StoryMetadata["media"][number]
@@ -60,7 +61,24 @@ function FeaturedMedia({ medium }: { medium: FeaturedMedium }) {
   )
 }
 
-export function FeaturedWorkRow({ story }: { story: FeaturedStory }) {
+function shouldHandleClientNavigation(event: MouseEvent<HTMLAnchorElement>) {
+  return (
+    !event.defaultPrevented &&
+    event.button === 0 &&
+    !event.metaKey &&
+    !event.altKey &&
+    !event.ctrlKey &&
+    !event.shiftKey
+  )
+}
+
+export function FeaturedWorkRow({
+  onOpenStory,
+  story,
+}: {
+  onOpenStory: (slug: string) => void
+  story: FeaturedStory
+}) {
   const { metadata } = story
   const firstMedium = metadata.media[0]
 
@@ -85,7 +103,19 @@ export function FeaturedWorkRow({ story }: { story: FeaturedStory }) {
           </p>
 
           <div className="flex flex-wrap gap-3">
-            <StoryLinkButton href={story.path}>Read the story</StoryLinkButton>
+            <StoryLinkButton
+              href={story.path}
+              onClick={(event) => {
+                if (!shouldHandleClientNavigation(event)) {
+                  return
+                }
+
+                event.preventDefault()
+                onOpenStory(story.slug)
+              }}
+            >
+              Read the story
+            </StoryLinkButton>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/avif.mjs public/images",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && node scripts/pages-fallback.mjs",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",

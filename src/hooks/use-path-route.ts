@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 
 import { getStoryBySlug } from "@/stories/registry"
-import type { AppRoute, RouteId } from "@/types/content"
+import type { AppRoute, NavigableRoute, RouteId } from "@/types/content"
 
 const routePaths: Record<RouteId, string> = {
   home: "/",
@@ -47,7 +47,11 @@ function getCurrentRoute(): AppRoute {
   return { kind: "not-found" }
 }
 
-export function getRoutePath(route: RouteId) {
+export function getRoutePath(route: NavigableRoute) {
+  if (typeof route !== "string") {
+    return `/stories/${route.slug}`
+  }
+
   return routePaths[route]
 }
 
@@ -65,7 +69,7 @@ export function usePathRoute() {
     }
   }, [])
 
-  const navigate = (nextRoute: RouteId) => {
+  const navigate = (nextRoute: NavigableRoute) => {
     const nextPath = getRoutePath(nextRoute)
 
     if (window.location.pathname !== nextPath) {
